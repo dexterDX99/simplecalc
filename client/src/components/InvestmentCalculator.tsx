@@ -31,21 +31,17 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
       return;
     }
 
-    // Business profit estimated at 30-40% for 3 months (LED Bulb manufacturing)
-    // Using the defined profit rate range
-    const businessProfit = Number(investmentAmount) * MIN_PROFIT_RATE;
+    // Calculate number of bulbs based on investment proportion
+    const bulbsShare = Math.floor((Number(investmentAmount) / 1500000) * 12500);
+    
+    // Calculate profit using Rs. 110 profit per bulb
+    const totalProfit = Math.floor((Number(investmentAmount) / 1500000) * 825000);
 
-    // Investor gets 60% of the profit
-    const investorProfit = businessProfit * INVESTOR_SHARE;
-
-    // For the higher end of the range (40%)
-    const highEndBusinessProfit = Number(investmentAmount) * MAX_PROFIT_RATE;
-    const highEndInvestorProfit = highEndBusinessProfit * INVESTOR_SHARE;
-
-    // Set profit as an object with min and max values
     setProfit({
-      min: investorProfit,
-      max: highEndInvestorProfit
+      bulbsShare,
+      profitPerBulb: 110,
+      totalProfit,
+      finalPayout: Number(investmentAmount) + totalProfit
     });
   };
 
@@ -142,8 +138,18 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                   <p className="text-sm font-semibold">{selectedPool.name}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Investment Duration</p>
-                  <p className="text-sm font-semibold">3 Months</p>
+                  <p className="text-xs text-gray-500">Number of Bulbs (Your Share)</p>
+                  <p className="text-sm font-semibold">{profit.bulbsShare} bulbs</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Expected Profit Per Bulb</p>
+                  <p className="text-sm font-semibold">Rs. {profit.profitPerBulb}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Your Total Profit (60% Share)</p>
+                  <p className="text-sm font-semibold text-green-600">
+                    Rs. {profit.totalProfit.toLocaleString()}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Profit Sharing Split</p>
@@ -151,22 +157,10 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                     Investor {INVESTOR_SHARE * 100}% | Manager {(1 - INVESTOR_SHARE) * 100}%
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500">Estimated Total Profit (60% Share)</p>
-                  <p className="text-sm font-semibold text-green-600">
-                    Rs. {profit.min.toLocaleString()} - {profit.max.toLocaleString()}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Estimated Monthly Profit</p>
-                  <p className="text-sm font-semibold text-amber-600">
-                    Rs. {Math.round(profit.min / 3).toLocaleString()} - {Math.round(profit.max / 3).toLocaleString()}
-                  </p>
-                </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Payout After 3 Months (Capital + Profit)</p>
                   <p className="text-base font-semibold text-primary-600">
-                    Rs. {Math.round(Number(investmentAmount) + profit.min).toLocaleString()} - {Math.round(Number(investmentAmount) + profit.max).toLocaleString()}
+                    Rs. {profit.finalPayout.toLocaleString()}
                   </p>
                 </div>
               </div>
