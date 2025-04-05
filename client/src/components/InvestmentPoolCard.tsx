@@ -57,7 +57,7 @@ export default function InvestmentPoolCard({
                 Start investing with as little as Rs.5,000 only
               </p>
             </div>
-            <Link href="/company-profiles" className="text-xs text-primary-600 hover:underline">
+            <Link href="/company-profiles" className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white px-3 py-1 rounded-md hover:from-emerald-600 hover:to-green-700 transition-all">
               View Company Details →
             </Link>
           </div>
