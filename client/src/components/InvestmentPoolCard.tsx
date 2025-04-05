@@ -43,14 +43,27 @@ export default function InvestmentPoolCard({
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm mb-4 overflow-hidden">
       <div className="p-4" onClick={onToggleExpand}>
         <div className="flex justify-between items-start">
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
-            <p className="text-xs text-gray-500">
-              {pool.startDate} - {pool.endDate} ({pool.duration})
-            </p>
-            <p className="text-xs text-red-500 mt-1">
-              Last Date to Invest: {pool.closeDate}
-            </p>
+          <div className="flex items-start gap-2">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
+              <p className="text-xs text-gray-500">
+                {pool.startDate} - {pool.endDate} ({pool.duration})
+              </p>
+              <p className="text-xs text-red-500 mt-1">
+                Last Date to Invest: {pool.closeDate}
+              </p>
+            </div>
+            <Button 
+              className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onViewBusinessDetails) onViewBusinessDetails();
+              }}
+              variant="outline"
+              size="sm"
+            >
+              Business Details
+            </Button>
           </div>
           <span className={`px-2 py-1 ${badgeClasses} text-xs font-medium rounded-full`}>
             {fundingPercentage.toFixed(0)}% Funded
@@ -193,16 +206,7 @@ export default function InvestmentPoolCard({
               Invest Now
             </Button>
             
-            <Button 
-              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (onViewBusinessDetails) onViewBusinessDetails();
-              }}
-              variant="outline"
-            >
-              Business Details
-            </Button>
+            
           </div>
         </div>
       )}
