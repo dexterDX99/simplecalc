@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Pool } from '../../shared/schema';
 import { MIN_PROFIT_RATE, MAX_PROFIT_RATE, INVESTOR_SHARE } from "@/shared/constants";
 
-export default function InvestmentCalculator() { 
+export default function InvestmentCalculator() { // Cash Investment Calculator
   const [investmentAmount, setInvestmentAmount] = useState<string>("");
   const [selectedPoolId, setSelectedPoolId] = useState<string>("");
   const [profit, setProfit] = useState<{min: number, max: number} | null>(null);
@@ -52,9 +52,6 @@ export default function InvestmentCalculator() {
   return (
     <div className="mt-2">
       <div className="space-y-4">
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">
-          {selectedPool ? `${selectedPool.name} Investment Calculator` : 'Cash Investment Calculator'}
-        </h3>
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Investment Amount (Rs.)</label>
           <div className="relative">
