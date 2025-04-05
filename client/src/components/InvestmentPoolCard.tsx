@@ -57,17 +57,9 @@ export default function InvestmentPoolCard({
                 Start investing with as little as Rs.5,000 only
               </p>
             </div>
-            <Button 
-              className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (onViewBusinessDetails) onViewBusinessDetails();
-              }}
-              variant="outline"
-              size="sm"
-            >
-              Business Details
-            </Button>
+            <Link href="/company-profiles" className="text-xs text-primary-600 hover:underline">
+              View Company Details →
+            </Link>
           </div>
           <div className="flex flex-col items-end">
             <div className="flex flex-col items-end">
