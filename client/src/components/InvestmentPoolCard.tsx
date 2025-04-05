@@ -113,9 +113,14 @@ export default function InvestmentPoolCard({
           <div className="mb-4">
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-sm font-medium">Investment Amount</h4>
-              <Link href="/calculator" className="text-xs text-primary-600">
-                Calculate Potential Returns →
-              </Link>
+              <Button
+                variant="link"
+                size="sm"
+                className="text-xs text-primary-600 p-0"
+                onClick={() => window.location.href = '/calculator'}
+              >
+                Calculate Investments →
+              </Button>
             </div>
 
             <div className="relative">
