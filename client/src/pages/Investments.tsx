@@ -43,12 +43,19 @@ export default function Investments() {
       return;
     }
 
-    if (Number(investment) < 5000) {
+    const amount = Number(investment);
+    if (amount < 5000) {
       setWarningMessage('Minimum investment amount is Rs. 5,000');
       return;
     }
+    
+    // Check if amount is in valid increments of 5000
+    if (amount % 5000 !== 0 || amount > 500000) {
+      setWarningMessage('Investment amount must be in increments of Rs. 5,000 (from 5,000 to 500,000)');
+      return;
+    }
 
-    const calculatedSlots = Math.floor(Number(investment) / 5000);
+    const calculatedSlots = Math.floor(amount / 5000);
     if (calculatedSlots > 100) {
       setWarningMessage('Maximum investment amount is Rs. 500,000 (100 slots)');
       return;

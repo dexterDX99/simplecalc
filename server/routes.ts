@@ -41,6 +41,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const data = insertInvestmentSchema.parse(req.body);
       
+      // Validate investment amount
+      const amount = Number(data.amount);
+      if (amount < 5000 || amount > 500000 || amount % 5000 !== 0) {
+        return res.status(400).json({ message: "Investment amount must be in increments of Rs. 5,000 (from 5,000 to 500,000)" });
+      }
+      
       // Check if pool exists
       const pool = await storage.getPool(data.poolId);
       if (!pool) {
