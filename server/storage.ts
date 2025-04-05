@@ -146,7 +146,7 @@ export class MemStorage implements IStorage {
         ...pool,
         total: newTotal.toString(),
         investors: pool.investors + 1,
-        slots: pool.slots - Math.floor(Number(investment.amount) / 500000) * 100 //updated line
+        slots: pool.slots - Math.floor(Number(investment.amount) / 5000) // 5000 Rs = 1 slot
       };
       this.pools.set(pool.id, updatedPool);
     }

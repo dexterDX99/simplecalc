@@ -47,7 +47,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Investment pool not found" });
       }
       
-      // Calculate slots based on investment amount
+      // Calculate slots based on investment amount (5000 Rs = 1 slot)
       const calculatedSlots = Math.floor(Number(data.amount) / 5000);
       
       // Check if pool has enough slots

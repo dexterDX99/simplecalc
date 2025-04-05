@@ -31,7 +31,7 @@ export default function InvestmentPoolCard({
   // Calculate funding percentage
   const fundingPercentage = (Number(pool.total) / Number(pool.target)) * 100;
   const remainingAmount = Number(pool.target) - Number(pool.total);
-  const calculatedSlots = investment ? Math.floor(Number(investment) / 5000) : 0;
+  const calculatedSlots = investment ? Math.floor(Number(investment) / 5000) : 0; // 5000 Rs = 1 slot
   const isFull = Number(pool.total) >= Number(pool.target);
 
   // Determine badge and progress bar colors
