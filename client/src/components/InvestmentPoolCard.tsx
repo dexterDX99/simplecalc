@@ -57,17 +57,7 @@ export default function InvestmentPoolCard({
                 Start investing with as little as Rs.5,000 only
               </p>
             </div>
-            <Button 
-              className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (onViewBusinessDetails) onViewBusinessDetails();
-              }}
-              variant="outline"
-              size="sm"
-            >
-              Business Details
-            </Button>
+            <span className="text-xs text-green-600 font-medium">3 Month Investment Term</span>
           </div>
           <div className="flex flex-col items-end">
             <div className="flex flex-col items-end">
@@ -230,6 +220,35 @@ export default function InvestmentPoolCard({
             </Button>
 
 
+          </div>
+        </div>
+
+        {/* Business Details Section */}
+        <div className="border-t border-gray-200 bg-gray-50 p-4">
+          <h4 className="font-medium text-green-700 mb-3">Business Details</h4>
+          <div className="space-y-4 text-sm">
+            <div>
+              <h5 className="font-medium mb-2">Investment Contract Type</h5>
+              <p className="text-gray-600 mb-2">
+                This is a <span className="font-medium">Mudarabah</span> partnership where:
+              </p>
+              <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <li><span className="font-medium">Investors provide capital</span> for the business</li>
+                <li><span className="font-medium">Business manager handles operations</span> (manufacturing & sales)</li>
+                <li><span className="font-medium">Profits are shared</span> at 60% for investors, 40% for management</li>
+                <li>Investors participate in both profit and potential losses</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h5 className="font-medium mb-2">Business Operations</h5>
+              <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <li>Manufacturing and distribution of LED bulbs</li>
+                <li>Government incentives for energy-efficient products</li>
+                <li>Growing market demand for sustainable lighting</li>
+                <li>Established distribution networks with retailers</li>
+              </ul>
+            </div>
           </div>
         </div>
       )}
