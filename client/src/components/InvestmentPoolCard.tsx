@@ -165,24 +165,35 @@ export default function InvestmentPoolCard({
                     </span>
                   </div>
                   <div className="flex justify-between">
+                    <span>Number of Bulbs (Your Share):</span>
+                    <span className="font-medium">
+                      {Math.floor((Number(investment) / 1500000) * 12500)} bulbs
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Expected Profit Per Bulb:</span>
+                    <span className="font-medium">
+                      Rs. 110
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
                     <span>Your Total Profit ({INVESTOR_SHARE * 100}% Share):</span>
                     <span className="font-medium text-green-600">
-                      Rs. {(Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      Rs. {Math.floor((Number(investment) / 1500000) * 825000).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Total Payout (Capital + Profit):</span>
                     <span className="font-medium text-primary-600">
-                      Rs. {(Number(investment) + Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) + Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      Rs. {(Number(investment) + Math.floor((Number(investment) / 1500000) * 825000)).toLocaleString()}
                     </span>
                   </div>
                 </div>
                 <p className="mt-3 text-gray-500 text-[10px]">
-                  LED Bulb Manufacturing Business: This investment funds a factory producing energy-efficient
-                  LED bulbs. Following the Mudarabah model, investors provide capital while experienced managers
-                  handle operations. The business targets a {MIN_PROFIT_RATE * 100}%-{MAX_PROFIT_RATE * 100}% profit over 3 months, with {INVESTOR_SHARE * 100}% going to 
-                  investors proportional to their contributions. As with all Mudarabah investments, there is a 
-                  possibility of capital loss if the business underperforms.
+                  LED Bulb Manufacturing Business: Investment of Rs. 1.5M produces 12,500 bulbs at Rs. 120/bulb 
+                  with Rs. 110 profit per bulb. Total expected profit is Rs. 1.375M, split 60% (Rs. 825,000) for investors 
+                  and 40% (Rs. 550,000) for management. Profit is distributed proportionally to investment amount. 
+                  As with all Mudarabah investments, there is a possibility of capital loss if the business underperforms.
                 </p>
               </div>
             )}
