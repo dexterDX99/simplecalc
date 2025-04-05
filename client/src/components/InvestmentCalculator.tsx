@@ -59,13 +59,8 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               value={investmentAmount}
               onChange={(e) => {
                 const value = e.target.value.replace(/\D/g, '');
-                const amount = Number(value);
-                if (amount <= 500000) {
-                  setInvestmentAmount(value);
-                }
+                setInvestmentAmount(value);
               }}
-              min="5000"
-              max="500000"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <span className="text-xs text-gray-400">Min: Rs. 5,000</span>
@@ -125,7 +120,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
         <Button 
           onClick={handleCalculateProfit} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          disabled={!investmentAmount || Number(investmentAmount) < 5000 || Number(investmentAmount) > 500000 || !selectedPool}
+          disabled={!investmentAmount || Number(investmentAmount) <= 0 || !selectedPool}
         >
           Calculate Potential Returns
         </Button>

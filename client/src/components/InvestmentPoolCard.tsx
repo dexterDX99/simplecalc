@@ -40,24 +40,6 @@ export default function InvestmentPoolCard({
   if (fundingPercentage >= 80) badgeClasses = "bg-green-100 text-green-800";
   if (fundingPercentage >= 100) badgeClasses = "bg-red-100 text-red-800";
 
-  const handleInvestmentChange = (value: string) => {
-    const amount = Number(value);
-    if (amount > 500000) {
-      onInvestmentChange("500000");
-      return;
-    }
-    onInvestmentChange(value);
-    
-    let newWarningMessage = "";
-    if (amount < 5000) {
-      newWarningMessage = 'Minimum investment amount is Rs. 5,000';
-    } else if (amount > 500000) {
-      newWarningMessage = 'Maximum investment amount is Rs. 500,000';
-    }
-    setWarningMessage(newWarningMessage);
-  };
-
-
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm mb-4 overflow-hidden">
       <div className="p-4" onClick={onToggleExpand}>
@@ -152,7 +134,8 @@ export default function InvestmentPoolCard({
                 className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
                 value={investment}
                 onChange={(e) => {
-                  handleInvestmentChange(e.target.value.replace(/\D/g, ''));
+                  const value = e.target.value.replace(/\D/g, '');
+                  onInvestmentChange(value);
                 }}
                 onClick={(e) => e.stopPropagation()}
                 disabled={isFull}
