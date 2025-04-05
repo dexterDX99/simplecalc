@@ -42,15 +42,19 @@ export default function InvestmentPoolCard({
 
   const handleInvestmentChange = (value: string) => {
     const amount = Number(value);
+    if (amount > 500000) {
+      onInvestmentChange("500000");
+      return;
+    }
+    onInvestmentChange(value);
+    
     let newWarningMessage = "";
     if (amount < 5000) {
       newWarningMessage = 'Minimum investment amount is Rs. 5,000';
     } else if (amount > 500000) {
       newWarningMessage = 'Maximum investment amount is Rs. 500,000';
     }
-    onInvestmentChange(value);
-    //This line is added to update the warning message based on the validation.
-    onInvestmentChange(newWarningMessage);
+    setWarningMessage(newWarningMessage);
   };
 
 
