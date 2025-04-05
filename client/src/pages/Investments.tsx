@@ -97,9 +97,6 @@ export default function Investments() {
     <div className="px-4 py-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Investment Plans</h1>
       
-      {/* Show Business Details when toggled */}
-      {showDetails && <div className="mb-4"><InvestmentDetails /></div>}
-      
       <StatsOverview poolCount={pools ? pools.length : 0} availableSlots={availableSlots} />
       
       <div className="mt-6">
@@ -118,6 +115,7 @@ export default function Investments() {
               onViewBusinessDetails={() => setShowDetails(!showDetails)}
             />
           ))}
+          {showDetails && <div className="mt-4"><InvestmentDetails /></div>}
         </div>
       </div>
 

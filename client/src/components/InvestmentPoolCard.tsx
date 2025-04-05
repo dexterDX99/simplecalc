@@ -201,7 +201,7 @@ export default function InvestmentPoolCard({
               }}
               variant="outline"
             >
-              View Business Details
+              Business Details
             </Button>
           </div>
         </div>
