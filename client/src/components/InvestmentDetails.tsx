@@ -62,7 +62,7 @@ export default function InvestmentDetails() {
               <li><strong>Business buys materials, manufactures LED bulbs, and sells them</strong>.</li>
               <li><strong>After 3 months, total revenue = Rs. 3,000,000</strong>.</li>
               <li><strong>After deducting costs, the net profit = Rs. 750,000</strong>.</li>
-              <li><strong>Profit is split:</strong> {INVESTOR_SHARE * 100}% (₹450,000) for investors, {(1 - INVESTOR_SHARE) * 100}% (₹300,000) for the manager.</li>
+              <li><strong>Profit is split:</strong> {INVESTOR_SHARE * 100}% (Rs. 450,000) for investors, {(1 - INVESTOR_SHARE) * 100}% (Rs. 300,000) for the manager.</li>
               <li><strong>Each investor gets their capital back + their share of the profit</strong>.</li>
             </ol>
           </AccordionContent>
