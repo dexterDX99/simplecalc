@@ -14,7 +14,7 @@ export default function StatsOverview({ poolCount, availableSlots }: StatsOvervi
       </div>
       <div className="bg-green-50 p-3 rounded-lg border border-green-100">
         <p className="text-xs text-green-700 mb-1">Available Slots</p>
-        <p className="text-lg font-bold text-green-800">{availableSlots} Slots</p>
+        <p className="text-lg font-bold text-green-800">{availableSlots} Slots Available</p>
       </div>
     </div>
   );

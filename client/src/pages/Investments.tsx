@@ -86,9 +86,8 @@ export default function Investments() {
     }
   };
 
-  // Calculate total number of slots across all pools
-  const totalSlots = pools ? pools.reduce((acc: number, pool: Pool) => acc + pool.slots, 0) : 0;
-  const availableSlots = totalSlots;
+  // Get available slots from active pool
+  const availableSlots = pools?.length > 0 ? pools[0].slots : 0;
 
   // Calculate investment totals
   const totalInvested = userInvestments.reduce((acc, inv) => acc + Number(inv.amount), 0);
