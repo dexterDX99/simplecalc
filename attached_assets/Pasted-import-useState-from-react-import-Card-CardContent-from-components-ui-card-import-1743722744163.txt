@@ -1,0 +1,91 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
+export default function HalalTajirApp() {
+  const [activeCalculator, setActiveCalculator] = useState(null);
+
+  return (
+    <div className="p-2 max-w-xs mx-auto flex flex-col h-screen overflow-auto">
+      <h1 className="text-lg font-bold mb-2 text-center">Halal-Tajir</h1>
+      <Tabs defaultValue="gold">
+        <TabsList className="flex space-x-2">
+          <TabsTrigger value="gold">Gold Investment</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="gold">
+          <div className="mt-4 p-4 bg-white rounded shadow">
+            <h2 className="text-lg font-bold mb-2 cursor-pointer" onClick={() => setActiveCalculator(activeCalculator === "jewelry" ? null : "jewelry")}> 
+              Jewelry Investment {activeCalculator === "jewelry" ? "▲" : "▼"}
+            </h2>
+            {activeCalculator === "jewelry" && <GoldCalculator />}
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+
+function GoldCalculator() {
+  return (
+    <div className="mt-2">
+      <Input type="number" id="price-per-tola" placeholder="Gold Price per Tola (PKR)" className="w-full p-2 border rounded mt-2" />
+      <Input type="number" id="weight" placeholder="Gold Weight in grams" className="w-full p-2 border rounded mt-2" onInput={(e) => convertGramToTola(e.target.value)} />
+      <Input type="number" id="weight-tola" placeholder="Gold Weight in tolas" className="w-full p-2 border rounded mt-2" onInput={(e) => convertTolaToGram(e.target.value)} />
+      <select id="purity" className="w-full p-2 border rounded mt-2">
+        <option value="14">14K</option>
+        <option value="18">18K</option>
+        <option value="20">20K</option>
+        <option value="21">21K</option>
+        <option value="22">22K</option>
+      </select>
+      <Input type="number" id="wastage" placeholder="Total Weight & Wastage in grams" className="w-full p-2 border rounded mt-2" />
+      <Input type="number" id="making-cut" placeholder="Making Charges Deduction (%)" className="w-full p-2 border rounded mt-2" />
+      <Button onClick={calculatePrice} className="mt-2 w-full">Generate Estimate</Button>
+      <div id="result" className="mt-2 p-2 border rounded bg-gray-100"></div>
+    </div>
+  );
+}
+
+function convertGramToTola(value) {
+  const tolaInput = document.getElementById('weight-tola');
+  if (tolaInput) {
+    tolaInput.value = (parseFloat(value) / 11.664).toFixed(3);
+  }
+}
+
+function convertTolaToGram(value) {
+  const gramInput = document.getElementById('weight');
+  if (gramInput) {
+    gramInput.value = (parseFloat(value) * 11.664).toFixed(2);
+  }
+}
+
+function calculatePrice() {
+  let pricePerTola = parseFloat(document.getElementById('price-per-tola').value);
+  let weight = parseFloat(document.getElementById('weight').value);
+  let purity = parseFloat(document.getElementById('purity').value);
+  let wastage = parseFloat(document.getElementById('wastage').value) || 0;
+  let makingChargesDeduction = parseFloat(document.getElementById('making-cut').value) || 0;
+
+  let pricePerGram = (pricePerTola / 11.664) * (purity / 24);
+  let totalGoldValue = weight * pricePerGram;
+  let makingChargesAmount = (totalGoldValue * makingChargesDeduction) / 100;
+  let finalPrice = totalGoldValue - makingChargesAmount;
+  let wastageValue = wastage * pricePerGram;
+
+  document.getElementById('result').innerHTML = `
+    <p><strong>Market Gold Price(24k): PKR ${pricePerTola.toFixed(2)}</strong></p>
+    <p>Selected Jewelry Purity: ${purity}K</p>
+    <p>Gold Price Per Tola(${purity}K): PKR ${(pricePerTola * (purity / 24)).toFixed(2)}</p>
+    <p>Gold Price Per Gram (${purity}K): PKR ${pricePerGram.toFixed(2)}</p>
+    <p>Total Gold Weight: ${weight.toFixed(2)} grams (${(weight / 11.664).toFixed(3)} tolas)</p>
+    <p>Total Gold Value: PKR ${totalGoldValue.toFixed(2)}</p>
+    <p>Wastage Reminder: ${wastage.toFixed(2)} grams (PKR ${wastageValue.toFixed(2)})</p>
+    <p>Making Charges Deduction: ${makingChargesDeduction}% (PKR ${makingChargesAmount.toFixed(2)})</p>
+    <p>Final Price After Deduction: PKR ${finalPrice.toFixed(2)}</p>
+  `;
+}

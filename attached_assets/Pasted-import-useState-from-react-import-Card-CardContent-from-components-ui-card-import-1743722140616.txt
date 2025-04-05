@@ -1,0 +1,106 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
+export default function InvestmentAppMobile() {
+  const [investment, setInvestment] = useState("");
+  const [selectedPool, setSelectedPool] = useState(null);
+  const [showApology, setShowApology] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
+  const [expandedPool, setExpandedPool] = useState(null);
+  const [calcProfits, setCalcProfits] = useState({});
+
+  const poolsData = [
+    { id: 1, name: "Short-Term", startDate: "Mar 1, 2025", endDate: "Jun 1, 2025", duration: "3 Months", closeDate: "May 15, 2025", total: 500000, target: 1000000, investors: 10, slots: 20, profitRange: [0.15, 0.20] },
+    { id: 2, name: "Mid-Term", startDate: "Mar 1, 2025", endDate: "Sep 1, 2025", duration: "6 Months", closeDate: "Aug 15, 2025", total: 700000, target: 1500000, investors: 15, slots: 25, profitRange: [0.20, 0.25] },
+    { id: 3, name: "Long-Term", startDate: "Mar 1, 2025", endDate: "Mar 1, 2026", duration: "12 Months", closeDate: "Feb 15, 2026", total: 1200000, target: 2000000, investors: 20, slots: 30, profitRange: [0.25, 0.30] }
+  ];
+
+  const [pools, setPools] = useState(poolsData);
+
+  const handleInvest = () => {
+    if (investment > 0 && selectedPool) {
+      const remainingAmount = selectedPool.target - selectedPool.total;
+      if (Number(investment) > remainingAmount) {
+        setWarningMessage(`You can only invest up to PKR ${remainingAmount.toLocaleString()}.`);
+        return;
+      }
+      const updatedPools = pools.map(pool => {
+        if (pool.id === selectedPool.id) {
+          return {
+            ...pool,
+            total: pool.total + Number(investment),
+            investors: pool.investors + 1,
+            slots: pool.slots - 1
+          };
+        }
+        return pool;
+      });
+      setPools(updatedPools);
+      setInvestment("");
+      setWarningMessage("");
+      setSelectedPool(null);
+    }
+  };
+
+  const handleCalculate = () => {
+    if (investment > 0 && selectedPool) {
+      const profitPercentage = (Math.random() * (selectedPool.profitRange[1] - selectedPool.profitRange[0]) + selectedPool.profitRange[0]);
+      const investorProfitShare = 0.6; // 60% of profit goes to investors
+      setCalcProfits(prev => ({ ...prev, [selectedPool.id]: investment * profitPercentage * investorProfitShare }));
+    }
+  };
+
+  return (
+    <div className="p-2 max-w-xs mx-auto flex flex-col h-screen overflow-auto">
+      <h1 className="text-lg font-bold mb-2 text-center">Halal-Tajir</h1>
+      {pools.map(pool => (
+        <Card key={pool.id} className={`shadow-md p-2 mb-2 ${expandedPool === pool.id ? 'border border-blue-500' : ''}`}> 
+          <CardContent onClick={() => setExpandedPool(expandedPool === pool.id ? null : pool.id)}>
+            <h2 className="text-sm font-semibold">{pool.name}</h2>
+            <p className="text-xs text-gray-500">{pool.startDate} - {pool.endDate} ({pool.duration})</p>
+            <p className="text-xs text-red-500">Last Date to Invest: {pool.closeDate}</p>
+            <p className="text-xs">Investors: {pool.investors} / Slots: {pool.slots}</p>
+            <p className="text-xs">Needed: PKR {(pool.target - pool.total).toLocaleString()}</p>
+            <div className="mt-1">
+              <p className="text-sm font-bold">Covered: PKR {pool.total.toLocaleString()}</p>
+              <p className="text-sm font-bold">Target: PKR {pool.target.toLocaleString()}</p>
+            </div>
+            <Progress value={(pool.total / pool.target) * 100} className="mt-1" />
+            {pool.total >= pool.target && <p className="text-red-500 text-xs font-semibold">Investment Limit Reached</p>}
+          </CardContent>
+          {expandedPool === pool.id && pool.total < pool.target && (
+            <div className="mt-2 p-2 border-t" onClick={(e) => e.stopPropagation()}>
+              <h2 className="text-sm font-semibold">Invest in {pool.name}</h2>
+              <Input 
+                type="number" 
+                value={investment} 
+                onChange={(e) => setInvestment(e.target.value)} 
+                placeholder="Enter Amount" 
+                className="mt-1 w-full"
+                onClick={(e) => e.stopPropagation()} 
+              />
+              {warningMessage && <p className="text-red-500 text-xs mt-1">{warningMessage}</p>}
+              <Button onClick={() => { setSelectedPool(pool); handleInvest(); }} className="mt-2 w-full text-xs">Invest</Button>
+              <Button onClick={() => { setSelectedPool(pool); handleCalculate(); }} className="mt-1 w-full text-xs">Calculate Profit</Button>
+              <p className="mt-2 text-sm font-semibold">Estimated Profit: PKR {calcProfits[pool.id]?.toFixed(2) || 0}</p>
+            </div>
+          )}
+        </Card>
+      ))}
+
+      <Dialog open={showApology} onOpenChange={setShowApology}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Investment Limit Reached</DialogTitle>
+          </DialogHeader>
+          <p className="text-center text-xs">Sorry, this investment pool has reached its target amount. Please choose another pool.</p>
+          <Button onClick={() => setShowApology(false)} className="mt-2 w-full text-xs">OK</Button>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
