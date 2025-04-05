@@ -222,7 +222,7 @@ export default function InvestmentPoolCard({
 
           </div>
         </div>
-
+        
         {/* Business Details Section */}
         <div className="border-t border-gray-200 bg-gray-50 p-4">
           <h4 className="font-medium text-green-700 mb-3">Business Details</h4>
