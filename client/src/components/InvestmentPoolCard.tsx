@@ -183,7 +183,7 @@ export default function InvestmentPoolCard({
           
           <div className="grid grid-cols-1 gap-2">
             <Button 
-              className="w-full" 
+              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
               onClick={(e) => {
                 e.stopPropagation();
                 onInvest();
