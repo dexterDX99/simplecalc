@@ -39,13 +39,13 @@ export default function InvestmentDetails() {
           <AccordionContent>
             <ul className="list-disc pl-5 space-y-2 mb-4">
               <li>The business <strong>manufactures and sells LED bulbs</strong>.</li>
-              <li><strong>Investment required:</strong> <strong>₹1,500,000</strong> (from 15 investors).</li>
-              <li><strong>Profit generated after 3 months:</strong> <strong>₹750,000</strong>.</li>
+              <li><strong>Investment required:</strong> <strong>Rs. 1,500,000</strong> (from 15 investors).</li>
+              <li><strong>Profit generated after 3 months:</strong> <strong>Rs. 750,000</strong>.</li>
               <li>
                 <strong>Profit distribution:</strong>
                 <ul className="list-circle pl-5 mt-1">
-                  <li><strong>{INVESTOR_SHARE * 100}% to investors</strong> = <strong>₹450,000</strong></li>
-                  <li><strong>{(1 - INVESTOR_SHARE) * 100}% to the business manager</strong> = <strong>₹300,000</strong></li>
+                  <li><strong>{INVESTOR_SHARE * 100}% to investors</strong> = <strong>Rs. 450,000</strong></li>
+                  <li><strong>{(1 - INVESTOR_SHARE) * 100}% to the business manager</strong> = <strong>Rs. 300,000</strong></li>
                 </ul>
               </li>
             </ul>
@@ -58,10 +58,10 @@ export default function InvestmentDetails() {
           </AccordionTrigger>
           <AccordionContent>
             <ol className="list-decimal pl-5 space-y-2 mb-4">
-              <li><strong>Investors contribute money</strong> (total ₹1,500,000).</li>
+              <li><strong>Investors contribute money</strong> (total Rs. 1,500,000).</li>
               <li><strong>Business buys materials, manufactures LED bulbs, and sells them</strong>.</li>
-              <li><strong>After 3 months, total revenue = ₹3,000,000</strong>.</li>
-              <li><strong>After deducting costs, the net profit = ₹750,000</strong>.</li>
+              <li><strong>After 3 months, total revenue = Rs. 3,000,000</strong>.</li>
+              <li><strong>After deducting costs, the net profit = Rs. 750,000</strong>.</li>
               <li><strong>Profit is split:</strong> {INVESTOR_SHARE * 100}% (₹450,000) for investors, {(1 - INVESTOR_SHARE) * 100}% (₹300,000) for the manager.</li>
               <li><strong>Each investor gets their capital back + their share of the profit</strong>.</li>
             </ol>
