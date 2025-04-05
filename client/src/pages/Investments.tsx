@@ -43,8 +43,8 @@ export default function Investments() {
       return;
     }
 
-    if (Number(investment) < 50000) {
-      setWarningMessage('Minimum investment amount is Rs. 50,000');
+    if (Number(investment) < 5000) {
+      setWarningMessage('Minimum investment amount is Rs. 5,000');
       return;
     }
 
