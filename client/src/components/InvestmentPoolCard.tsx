@@ -90,7 +90,7 @@ export default function InvestmentPoolCard({
           <div className="flex justify-between mt-3 items-center">
             <div>
               <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded">
-                { (Number(pool.minProfitRate) * 100).toFixed(0) } - { (Number(pool.maxProfitRate) * 100).toFixed(0) }% Estimated Returns
+                30 - 40% Estimated Returns
               </span>
             </div>
             <Button 
