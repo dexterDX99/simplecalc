@@ -66,9 +66,9 @@ export default function GoldCalculator() {
     <div className="mt-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Price per Tola (PKR)</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Price per Tola (Rs.)</label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
             <Input 
               type="number" 
               placeholder="Enter current gold price" 
@@ -78,7 +78,7 @@ export default function GoldCalculator() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Tola)</label>
@@ -107,7 +107,7 @@ export default function GoldCalculator() {
             />
           </div>
         </div>
-        
+
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Purity</label>
           <Select value={purity} onValueChange={setPurity}>
@@ -124,7 +124,7 @@ export default function GoldCalculator() {
           </Select>
           <p className="text-xs text-gray-500 mt-1">Note: Jewelry cannot be made from pure 24K gold as it's too soft. Gold jewelry typically uses 22K or lower purity mixed with other metals for durability.</p>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block">Wastage (Grams)</label>
@@ -147,7 +147,7 @@ export default function GoldCalculator() {
             />
           </div>
         </div>
-        
+
         <Button 
           onClick={calculatePrice} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
@@ -155,7 +155,7 @@ export default function GoldCalculator() {
         >
           Generate Estimate
         </Button>
-        
+
         {calculationResult && (
           <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
             <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-3 px-4">
@@ -165,7 +165,7 @@ export default function GoldCalculator() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
                   <p className="text-xs text-gray-500">Market Gold Price (Pure 24K Reference)</p>
-                  <p className="text-sm font-semibold">PKR {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+                  <p className="text-sm font-semibold">Rs. {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Selected Jewelry Purity</p>
@@ -174,13 +174,13 @@ export default function GoldCalculator() {
                 <div>
                   <p className="text-xs text-gray-500">Gold Price Per Tola ({calculationResult.purityFloat}K)</p>
                   <p className="text-sm font-semibold">
-                    PKR {(calculationResult.pricePerTolaFloat * (calculationResult.purityFloat / 24)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {(calculationResult.pricePerTolaFloat * (calculationResult.purityFloat / 24)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Gold Price Per Gram ({calculationResult.purityFloat}K)</p>
                   <p className="text-sm font-semibold">
-                    PKR {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div>
@@ -192,32 +192,32 @@ export default function GoldCalculator() {
                 <div>
                   <p className="text-xs text-gray-500">Total Gold Value</p>
                   <p className="text-sm font-semibold text-green-600">
-                    PKR {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
-                
+
                 {calculationResult.wastageFloat > 0 && (
                   <div>
                     <p className="text-xs text-gray-500">Wastage Value</p>
                     <p className="text-sm font-semibold">
-                      {calculationResult.wastageFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams (PKR {calculationResult.wastageValue.toLocaleString(undefined, { maximumFractionDigits: 2 })})
+                      {calculationResult.wastageFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams (Rs. {calculationResult.wastageValue.toLocaleString(undefined, { maximumFractionDigits: 2 })})
                     </p>
                   </div>
                 )}
-                
+
                 {calculationResult.makingChargesDeduction > 0 && (
                   <div>
                     <p className="text-xs text-gray-500">Making Charges Deduction</p>
                     <p className="text-sm font-semibold">
-                      {calculationResult.makingChargesDeduction}% (PKR {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
+                      {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
                     </p>
                   </div>
                 )}
-                
+
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
                   <p className="text-base font-semibold text-primary-600">
-                    PKR {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
               </div>

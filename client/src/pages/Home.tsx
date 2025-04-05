@@ -18,7 +18,7 @@ export default function Home() {
     (acc, investment) => acc + Number(investment.amount), 
     0
   );
-  
+
   const totalProfit = totalInvested * 0.3 * 0.6; // 30% total profit with 60% investor share
 
   return (
@@ -29,7 +29,7 @@ export default function Home() {
           Shariah Compliant
         </div>
       </div>
-      
+
       {/* Welcome section */}
       <div className="bg-gradient-to-r from-emerald-500 to-green-600 rounded-lg shadow-md p-5 text-white mb-6">
         <h2 className="text-xl font-semibold mb-2">Welcome to Halal-Tajir</h2>
@@ -40,7 +40,7 @@ export default function Home() {
           Browse Investment Plans
         </Link>
       </div>
-      
+
       {/* Stats Cards */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-white rounded-lg shadow-sm p-4 border border-green-100">
@@ -48,7 +48,7 @@ export default function Home() {
           <p className="text-2xl font-bold text-gray-800">{pools ? pools.length : 0}</p>
           <p className="text-xs text-green-600 mt-1">LED Bulb Manufacturing</p>
         </div>
-        
+
         <div className="bg-white rounded-lg shadow-sm p-4 border border-green-100">
           <p className="text-xs text-gray-500 mb-1">Available Investment Slots</p>
           <p className="text-2xl font-bold text-gray-800">
@@ -57,17 +57,17 @@ export default function Home() {
           <p className="text-xs text-amber-600 mt-1">Limited Availability</p>
         </div>
       </div>
-      
+
       {/* Your Investment Summary */}
       <div className="bg-white rounded-lg shadow-md p-5 mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-3">Your Investment Summary</h2>
-        
+
         {userInvestments && userInvestments.length > 0 ? (
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <p className="text-xs text-gray-500">Total Invested</p>
-                <p className="text-lg font-semibold">PKR {totalInvested.toLocaleString()}</p>
+                <p className="text-lg font-semibold">Rs. {totalInvested.toLocaleString()}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">Active Investments</p>
@@ -75,14 +75,14 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-xs text-gray-500">Expected Profit (60% Share)</p>
-                <p className="text-lg font-semibold text-green-600">PKR {totalProfit.toLocaleString()}</p>
+                <p className="text-lg font-semibold text-green-600">Rs. {totalProfit.toLocaleString()}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-500">Monthly Returns</p>
-                <p className="text-lg font-semibold text-amber-600">PKR {(totalProfit / 3).toLocaleString()}</p>
+                <p className="text-lg font-semibold text-amber-600">Rs. {(totalProfit / 3).toLocaleString()}</p>
               </div>
             </div>
-            
+
             <Link href="/investments" className="block w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-center py-2 rounded-md text-sm font-medium mt-3 transition-colors">
               View All Investments
             </Link>
@@ -96,7 +96,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      
+
       {/* Mudarabah Explanation */}
       <div className="bg-white rounded-lg shadow-md p-5">
         <h2 className="text-lg font-semibold text-gray-800 mb-3">About Mudarabah Investment</h2>

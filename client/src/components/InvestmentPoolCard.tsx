@@ -32,13 +32,13 @@ export default function InvestmentPoolCard({
   const fundingPercentage = (Number(pool.total) / Number(pool.target)) * 100;
   const remainingAmount = Number(pool.target) - Number(pool.total);
   const isFull = Number(pool.total) >= Number(pool.target);
-  
+
   // Determine badge and progress bar colors
   let badgeClasses = "bg-blue-100 text-blue-800";
   if (fundingPercentage >= 60) badgeClasses = "bg-amber-100 text-amber-800";
   if (fundingPercentage >= 80) badgeClasses = "bg-green-100 text-green-800";
   if (fundingPercentage >= 100) badgeClasses = "bg-red-100 text-red-800";
-  
+
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm mb-4 overflow-hidden">
       <div className="p-4" onClick={onToggleExpand}>
@@ -69,24 +69,24 @@ export default function InvestmentPoolCard({
             {fundingPercentage.toFixed(0)}% Funded
           </span>
         </div>
-        
+
         <div className="mt-3">
           <div className="flex justify-between text-xs text-gray-500 mb-1">
             <span>Investors: {pool.investors}</span>
             <span>Remaining Slots: {pool.slots}</span>
           </div>
-          
+
           <Progress value={fundingPercentage} className="h-3" />
-          
+
           <div className="flex justify-between mt-2">
             <span className="text-xs font-medium">
-              Needed: <span className="text-red-600">PKR {remainingAmount.toLocaleString()}</span>
+              Needed: <span className="text-red-600">Rs. {remainingAmount.toLocaleString()}</span>
             </span>
             <span className="text-xs font-medium">
-              Target: PKR {Number(pool.target).toLocaleString()}
+              Target: Rs. {Number(pool.target).toLocaleString()}
             </span>
           </div>
-          
+
           <div className="flex justify-between mt-3 items-center">
             <div>
               <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded">
@@ -114,7 +114,7 @@ export default function InvestmentPoolCard({
           </div>
         </div>
       </div>
-      
+
       {expanded && (
         <div className="border-t border-gray-200 bg-gray-50 p-4">
           <div className="mb-4">
@@ -124,9 +124,9 @@ export default function InvestmentPoolCard({
                 Calculate Potential Returns →
               </Link>
             </div>
-            
+
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
               <Input 
                 type="number" 
                 placeholder="Enter investment amount" 
@@ -137,14 +137,14 @@ export default function InvestmentPoolCard({
                 disabled={isFull}
               />
             </div>
-            
+
             {investment && Number(investment) > 0 && (
               <div className="mt-3 text-xs border-t border-gray-200 pt-3">
                 <h5 className="font-medium mb-2">Investment Summary (Mudarabah Contract)</h5>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Your Investment:</span>
-                    <span className="font-medium">PKR {Number(investment).toLocaleString()}</span>
+                    <span className="font-medium">Rs. {Number(investment).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Investment Duration:</span>
@@ -169,13 +169,13 @@ export default function InvestmentPoolCard({
                   <div className="flex justify-between">
                     <span>Your Total Profit ({INVESTOR_SHARE * 100}% Share):</span>
                     <span className="font-medium text-green-600">
-                      PKR {(Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      Rs. {(Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Total Payout (Capital + Profit):</span>
                     <span className="font-medium text-primary-600">
-                      PKR {(Number(investment) + Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) + Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      Rs. {(Number(investment) + Number(investment) * MIN_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })} - {(Number(investment) + Number(investment) * MAX_PROFIT_RATE * INVESTOR_SHARE).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                     </span>
                   </div>
                 </div>
@@ -188,12 +188,12 @@ export default function InvestmentPoolCard({
                 </p>
               </div>
             )}
-            
+
             {warningMessage && (
               <p className="text-xs text-red-500 mt-2">{warningMessage}</p>
             )}
           </div>
-          
+
           <div className="grid grid-cols-1 gap-2">
             <Button 
               className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5" 
@@ -205,8 +205,8 @@ export default function InvestmentPoolCard({
             >
               Invest Now
             </Button>
-            
-            
+
+
           </div>
         </div>
       )}

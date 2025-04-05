@@ -12,7 +12,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
   const [investmentAmount, setInvestmentAmount] = useState<string>("");
   const [selectedPoolId, setSelectedPoolId] = useState<string>("");
   const [profit, setProfit] = useState<{min: number, max: number} | null>(null);
-  
+
   const { data: pools = [] } = useQuery<Pool[]>({
     queryKey: ['/api/pools'],
   });
@@ -23,25 +23,25 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
       setSelectedPoolId(String(pools[0].id));
     }
   }, [pools, selectedPoolId]);
-  
+
   const selectedPool = pools.find(pool => pool.id === Number(selectedPoolId));
-  
+
   const handleCalculateProfit = () => {
     if (!investmentAmount || Number(investmentAmount) <= 0 || !selectedPool) {
       return;
     }
-    
+
     // Business profit estimated at 30-40% for 3 months (LED Bulb manufacturing)
     // Using the defined profit rate range
     const businessProfit = Number(investmentAmount) * MIN_PROFIT_RATE;
-    
+
     // Investor gets 60% of the profit
     const investorProfit = businessProfit * INVESTOR_SHARE;
-    
+
     // For the higher end of the range (40%)
     const highEndBusinessProfit = Number(investmentAmount) * MAX_PROFIT_RATE;
     const highEndInvestorProfit = highEndBusinessProfit * INVESTOR_SHARE;
-    
+
     // Set profit as an object with min and max values
     setProfit({
       min: investorProfit,
@@ -53,9 +53,9 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
     <div className="mt-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Investment Amount (PKR)</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block">Investment Amount (Rs.)</label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
             <Input 
               type="number" 
               placeholder="Enter amount" 
@@ -64,11 +64,11 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               onChange={(e) => setInvestmentAmount(e.target.value)}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-              <span className="text-xs text-gray-400">Min: PKR 50,000</span>
+              <span className="text-xs text-gray-400">Min: Rs. 50,000</span>
             </div>
           </div>
         </div>
-        
+
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Available Investment Pools</label>
           <Select value={selectedPoolId} onValueChange={setSelectedPoolId}>
@@ -91,7 +91,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
             </SelectContent>
           </Select>
         </div>
-        
+
         {selectedPool && (
           <div className="bg-green-50 p-4 rounded-md">
             <h3 className="text-sm font-medium text-green-800 mb-2">{selectedPool.name} - Mudarabah Investment</h3>
@@ -117,7 +117,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
             </div>
           </div>
         )}
-        
+
         <Button 
           onClick={handleCalculateProfit} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
@@ -125,7 +125,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
         >
           Calculate Potential Returns
         </Button>
-        
+
         {profit !== null && selectedPool && (
           <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
             <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-3 px-4">
@@ -135,7 +135,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
                   <p className="text-xs text-gray-500">Investment Amount</p>
-                  <p className="text-sm font-semibold">PKR {Number(investmentAmount).toLocaleString()}</p>
+                  <p className="text-sm font-semibold">Rs. {Number(investmentAmount).toLocaleString()}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Investment Pool</p>
@@ -154,19 +154,19 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                 <div>
                   <p className="text-xs text-gray-500">Estimated Total Profit (60% Share)</p>
                   <p className="text-sm font-semibold text-green-600">
-                    PKR {profit.min.toLocaleString()} - {profit.max.toLocaleString()}
+                    Rs. {profit.min.toLocaleString()} - {profit.max.toLocaleString()}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Estimated Monthly Profit</p>
                   <p className="text-sm font-semibold text-amber-600">
-                    PKR {Math.round(profit.min / 3).toLocaleString()} - {Math.round(profit.max / 3).toLocaleString()}
+                    Rs. {Math.round(profit.min / 3).toLocaleString()} - {Math.round(profit.max / 3).toLocaleString()}
                   </p>
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Payout After 3 Months (Capital + Profit)</p>
                   <p className="text-base font-semibold text-primary-600">
-                    PKR {Math.round(Number(investmentAmount) + profit.min).toLocaleString()} - {Math.round(Number(investmentAmount) + profit.max).toLocaleString()}
+                    Rs. {Math.round(Number(investmentAmount) + profit.min).toLocaleString()} - {Math.round(Number(investmentAmount) + profit.max).toLocaleString()}
                   </p>
                 </div>
               </div>
