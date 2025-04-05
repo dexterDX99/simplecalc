@@ -113,11 +113,11 @@ export default function InvestmentPoolCard({
             </div>
             
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">PKR</span>
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
               <Input 
                 type="number" 
-                placeholder="Amount" 
-                className="pl-10 w-full"
+                placeholder="Enter investment amount" 
+                className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
                 value={investment}
                 onChange={(e) => onInvestmentChange(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
