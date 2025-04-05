@@ -34,9 +34,11 @@ export default function StatsOverview({ poolCount, availableSlots }: StatsOvervi
         <p className="text-xs text-blue-600">Across {poolCount} Investment Pools</p>
       </div>
       <div className="bg-green-50 p-3 rounded-lg border border-green-100">
-        <p className="text-xs text-green-700 mb-1">Total Platform Value</p>
-        <p className="text-lg font-bold text-green-800">Rs. {totalValue.toLocaleString()}</p>
-        <p className="text-xs text-green-600">Including Min. Expected Returns</p>
+        <p className="text-xs text-green-700 mb-1">Investment Pool Status</p>
+        <p className="text-lg font-bold text-green-800">{pools.length} Active</p>
+        <p className="text-xs text-green-600">
+          {pools.filter(p => Number(p.total) >= Number(p.target)).length} Fully Funded
+        </p>
       </div>
     </div>
   );
