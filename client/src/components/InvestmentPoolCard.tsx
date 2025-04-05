@@ -52,6 +52,9 @@ export default function InvestmentPoolCard({
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
               </p>
+              <p className="text-xs text-green-600 mt-1">
+                Start investing with as little as Rs.5,000 only
+              </p>
             </div>
             <Button 
               className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white"
