@@ -70,12 +70,14 @@ export default function InvestmentPoolCard({
             </Button>
           </div>
           <div className="flex flex-col items-end">
-            <span className={`px-2 py-1 ${badgeClasses} text-xs font-medium rounded-full mb-1`}>
-              {fundingPercentage.toFixed(0)}% Funded
-            </span>
-            <span className="text-xs text-gray-600">
-              {pool.slots} slots available
-            </span>
+            <div className="flex flex-col items-end">
+              <span className={`px-2 py-1 ${badgeClasses} text-xs font-medium rounded-full mb-1`}>
+                {fundingPercentage.toFixed(0)}% Funded (Rs. {Number(pool.total).toLocaleString()})
+              </span>
+              <span className="text-xs text-gray-600">
+                {pool.slots} slots available
+              </span>
+            </div>
           </div>
         </div>
 
