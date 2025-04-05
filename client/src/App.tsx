@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import Calculator from "@/pages/Calculator";
 import Investments from "@/pages/Investments";
 import Profile from "@/pages/Profile";
+import CompanyProfiles from "@/pages/CompanyProfiles";
 import BottomNavigation from "./components/BottomNavigation";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/calculator" component={Calculator} />
+          <Route path="/company-profiles" component={CompanyProfiles} />
           <Route path="/investments" component={Investments} />
           <Route path="/profile" component={Profile} />
           {/* Fallback to 404 */}
