@@ -86,9 +86,9 @@ export default function Investments() {
     }
   };
 
-  // Calculate total number of slots across all pools
-  const totalSlots = pools ? pools.reduce((acc: number, pool: Pool) => acc + pool.slots, 0) : 0;
-  const availableSlots = totalSlots;
+  // Calculate total and available slots
+  const totalSlots = 300; // Total slots for LED Bulb Manufacturing pool
+  const availableSlots = pools ? pools.reduce((acc: number, pool: Pool) => acc + pool.slots, 0) : 0;
 
   // Calculate investment totals
   const totalInvested = userInvestments.reduce((acc, inv) => acc + Number(inv.amount), 0);
