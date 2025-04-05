@@ -48,8 +48,14 @@ export default function Investments() {
       return;
     }
 
-    if (pool.slots <= 0) {
-      setWarningMessage('No investment slots available');
+    const calculatedSlots = Math.floor(Number(investment) / 5000);
+    if (calculatedSlots > 100) {
+      setWarningMessage('Maximum investment amount is Rs. 500,000 (100 slots)');
+      return;
+    }
+
+    if (pool.slots < calculatedSlots) {
+      setWarningMessage(`Not enough slots available. Required: ${calculatedSlots} slots`);
       return;
     }
 

@@ -31,6 +31,7 @@ export default function InvestmentPoolCard({
   // Calculate funding percentage
   const fundingPercentage = (Number(pool.total) / Number(pool.target)) * 100;
   const remainingAmount = Number(pool.target) - Number(pool.total);
+  const calculatedSlots = investment ? Math.floor(Number(investment) / 5000) : 0;
   const isFull = Number(pool.total) >= Number(pool.target);
 
   // Determine badge and progress bar colors
@@ -148,7 +149,7 @@ export default function InvestmentPoolCard({
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Your Investment:</span>
-                    <span className="font-medium">Rs. {Number(investment).toLocaleString()}</span>
+                    <span className="font-medium">Rs. {Number(investment).toLocaleString()} ({calculatedSlots} slots)</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Investment Duration:</span>
