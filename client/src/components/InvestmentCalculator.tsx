@@ -60,7 +60,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               onChange={(e) => setInvestmentAmount(e.target.value)}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-              <span className="text-xs text-gray-400">Min: Rs. 50,000</span>
+              <span className="text-xs text-gray-400">Min: Rs. 5,000</span>
             </div>
           </div>
         </div>
