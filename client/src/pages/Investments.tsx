@@ -49,8 +49,8 @@ export default function Investments() {
     }
 
     const calculatedSlots = Math.floor(Number(investment) / 5000);
-    if (calculatedSlots > 300) {
-      setWarningMessage('Maximum investment amount is Rs. 1,500,000 (300 slots)');
+    if (calculatedSlots > 100) {
+      setWarningMessage('Maximum investment amount is Rs. 500,000 (100 slots)');
       return;
     }
 
