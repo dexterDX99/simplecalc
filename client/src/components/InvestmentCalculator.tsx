@@ -57,7 +57,10 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               placeholder="Enter amount" 
               className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={investmentAmount}
-              onChange={(e) => setInvestmentAmount(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                setInvestmentAmount(value);
+              }}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <span className="text-xs text-gray-400">Min: Rs. 5,000</span>

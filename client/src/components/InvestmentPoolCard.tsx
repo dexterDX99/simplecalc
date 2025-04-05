@@ -130,7 +130,10 @@ export default function InvestmentPoolCard({
                 placeholder="Enter investment amount" 
                 className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
                 value={investment}
-                onChange={(e) => onInvestmentChange(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, '');
+                  onInvestmentChange(value);
+                }}
                 onClick={(e) => e.stopPropagation()}
                 disabled={isFull}
               />
