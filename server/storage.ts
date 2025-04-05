@@ -54,7 +54,7 @@ export class MemStorage implements IStorage {
         total: "0",
         target: "1500000",
         investors: 0,
-        slots: 15,
+        slots: 300,
         minProfitRate: "0.30",
         maxProfitRate: "0.30",
         returnRatio: "30-40%",
@@ -194,7 +194,7 @@ export class MemStorage implements IStorage {
         await this.updatePool(pool.id, {
           total: "0",
           investors: 0,
-          slots: 15 // Reset to original number of slots
+          slots: 300 // Reset to original number of slots
         });
       }
     }
