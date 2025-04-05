@@ -93,24 +93,17 @@ export default function InvestmentPoolCard({
                 {(Number(pool.minProfitRate) * 100).toFixed(0)}-{(Number(pool.maxProfitRate) * 100).toFixed(0)}% Returns
               </span>
             </div>
-            <button 
-              className="text-xs font-medium text-primary-600 flex items-center"
+            <Button 
+              className="text-xs bg-gradient-to-r from-emerald-500 to-green-600 text-white"
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleExpand();
               }}
+              variant="outline"
+              size="sm"
             >
               {expanded ? 'Hide Details' : 'Show Details'}
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className={`h-4 w-4 ml-1 transform ${expanded ? 'rotate-180' : ''}`} 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
