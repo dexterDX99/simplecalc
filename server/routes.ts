@@ -47,16 +47,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Investment pool not found" });
       }
       
-      // Check if pool is full
-      if (pool.slots <= 0 || Number(pool.total) >= Number(pool.target)) {
-        return res.status(400).json({ message: "Investment pool is full" });
+      // Calculate slots based on investment amount
+      const calculatedSlots = Math.floor(Number(data.amount) / 5000);
+      
+      // Check if pool has enough slots
+      if (pool.slots < calculatedSlots || Number(pool.total) >= Number(pool.target)) {
+        return res.status(400).json({ message: "Not enough slots available in the pool" });
       }
       
-      // Check if investment amount is valid
+      // Check if investment amount is valid and within slot limits
       const remainingAmount = Number(pool.target) - Number(pool.total);
-      if (Number(data.amount) > remainingAmount) {
+      if (Number(data.amount) > remainingAmount || calculatedSlots > 100) {
         return res.status(400).json({ 
-          message: `You can only invest up to PKR ${remainingAmount.toLocaleString()}` 
+          message: `You can only invest up to PKR ${Math.min(remainingAmount, 500000).toLocaleString()}` 
         });
       }
       
