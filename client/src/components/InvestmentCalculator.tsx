@@ -162,15 +162,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                     <p className="text-base font-semibold text-primary-600">
                       Rs. {profit.finalPayout.toLocaleString()}
                     </p>
-                    <Button 
-                      onClick={() => {
-                        window.location.href = `/investments?investment=${investmentAmount}&poolId=${selectedPoolId}`;
-                      }}
-                      size="sm"
-                      className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
-                    >
-                      Invest Now
-                    </Button>
+                    
                   </div>
                 </div>
               </div>
