@@ -22,7 +22,14 @@ export default function GoldDeposits() {
   const purity = params.get('purity') ? parseFloat(params.get('purity')) : null;
 
   const { data: deposits = [] } = useQuery<GoldDeposit[]>({
-    queryKey: ['/api/gold-deposits'],
+    queryKey: ['gold-deposits'],
+    queryFn: async () => {
+      const response = await fetch('/api/gold-deposits');
+      if (!response.ok) {
+        throw new Error('Failed to fetch deposits');
+      }
+      return response.json();
+    },
   });
 
   const saveDeposit = useMutation({
@@ -40,7 +47,7 @@ export default function GoldDeposits() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/gold-deposits'] });
+      queryClient.invalidateQueries({ queryKey: ['gold-deposits'] });
       toast({
         title: "Success",
         description: "Gold deposit saved successfully",
