@@ -18,7 +18,7 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/calculator" component={Calculator} />
           <Route path="/company-profiles" component={CompanyProfiles} />
-          <Route path="/investments" component={Investments} />
+          <Route path="/my-investments" component={Investments} /> {/* Updated route */}
           <Route path="/profile" component={Profile} />
           {/* Fallback to 404 */}
           <Route component={NotFound} />
