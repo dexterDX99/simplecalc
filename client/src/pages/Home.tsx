@@ -25,9 +25,12 @@ export default function Home() {
     <div className="px-4 py-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
-        <div className="text-sm text-green-600 font-medium bg-green-50 rounded-full px-3 py-1">
+        <button 
+          onClick={() => window.location.href = '/profile'} 
+          className="text-sm text-green-600 font-medium bg-green-50 hover:bg-green-100 transition-colors rounded-full px-3 py-1 cursor-pointer"
+        >
           Shariah Compliant
-        </div>
+        </button>
       </div>
 
       {/* Welcome section */}

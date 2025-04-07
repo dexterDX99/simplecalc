@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useLocation } from 'wouter';
 import { useToast } from "@/hooks/use-toast";
 
 export default function Profile() {
@@ -69,8 +71,16 @@ export default function Profile() {
             <div className="space-y-6">
               {/* Account Information */}
               <div className="border-t border-gray-100 pt-4">
-                <h3 className="text-md font-medium text-gray-700 mb-3">Account Information</h3>
-                <ul className="space-y-2">
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="account-info">
+                    <AccordionTrigger className="text-md font-medium text-gray-700">
+                      Account Information
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Your basic account details and verification status.
+                      </p>
+                      <ul className="space-y-2">
                   <li className="flex justify-between">
                     <span className="text-gray-500">Account Type</span>
                     <span className="font-medium">Investor</span>
@@ -88,12 +98,19 @@ export default function Profile() {
                     <span className="font-medium text-amber-600">Pending</span>
                   </li>
                 </ul>
-              </div>
+                    </AccordionContent>
+                  </AccordionItem>
 
-              {/* Shariah Compliance */}
-              <div className="border-t border-gray-100 pt-4">
-                <h3 className="text-md font-medium text-gray-700 mb-3">Shariah Compliance</h3>
-                <ul className="space-y-2">
+                  {/* Shariah Compliance */}
+                  <AccordionItem value="shariah-compliance">
+                    <AccordionTrigger className="text-md font-medium text-gray-700">
+                      Shariah Compliance
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Our commitment to Islamic financial principles and ethical investment practices.
+                      </p>
+                      <ul className="space-y-2">
                   <li className="flex items-start">
                     <span className="text-green-500 mr-2">✓</span>
                     <span>Mudarabah-based profit sharing model</span>
@@ -107,12 +124,19 @@ export default function Profile() {
                     <span>Transparent profit distribution</span>
                   </li>
                 </ul>
-              </div>
+                    </AccordionContent>
+                  </AccordionItem>
 
-              {/* Gold Investment Info */}
-              <div className="border-t border-gray-100 pt-4">
-                <h3 className="text-md font-medium text-gray-700 mb-3">Gold Investment Info</h3>
-                <ul className="space-y-2">
+                  {/* Gold Investment Info */}
+                  <AccordionItem value="gold-investment">
+                    <AccordionTrigger className="text-md font-medium text-gray-700">
+                      Gold Investment Info
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Details about our gold investment model and profit-sharing structure.
+                      </p>
+                      <ul className="space-y-2">
                   <li className="flex justify-between">
                     <span className="text-gray-500">Investment Model</span>
                     <span className="font-medium">Mudarabah</span>
@@ -126,6 +150,9 @@ export default function Profile() {
                     <span className="font-medium">Rs. 5,000</span>
                   </li>
                 </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
           </CardContent>
