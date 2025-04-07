@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import GoldCalculator from "../components/GoldCalculator";
 import InvestmentCalculator from "../components/InvestmentCalculator";
+import RawGoldCalculator from "../components/RawGoldCalculator";
 
 export default function Calculator() {
   // Default to showing the Halal Investment Calculator without dropdown functionality
