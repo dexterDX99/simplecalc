@@ -11,7 +11,7 @@ export default function RawGoldCalculator() {
     const handleStorageChange = () => {
       setPricePerTola(localStorage.getItem('goldPrice24K') || "");
     };
-    
+
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
@@ -46,7 +46,7 @@ export default function RawGoldCalculator() {
     const pricePerTolaFloat = parseFloat(pricePerTola);
     const weightGramFloat = parseFloat(weightGram);
     const purityFloat = parseFloat(purity);
-    
+
     // For raw gold, we calculate based on weight and purity without deductions
     const pricePerGram = (pricePerTolaFloat / 11.664) * (purityFloat / 24);
     const totalGoldValue = weightGramFloat * pricePerGram;
@@ -76,7 +76,7 @@ export default function RawGoldCalculator() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Tola)</label>
@@ -105,14 +105,14 @@ export default function RawGoldCalculator() {
             />
           </div>
         </div>
-        
+
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Purity</label>
           <div className="border border-green-100 rounded-md p-3 bg-gray-50">
             <p className="font-medium text-sm">24K <span className="text-amber-600 text-xs">(Pure Gold)</span></p>
           </div>
         </div>
-        
+
         <Button 
           onClick={calculatePrice} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
@@ -120,7 +120,7 @@ export default function RawGoldCalculator() {
         >
           Calculate Raw Gold Value
         </Button>
-        
+
         {calculationResult && (
           <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
             <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-3 px-4">
