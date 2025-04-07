@@ -216,17 +216,20 @@ export default function GoldCalculator() {
 
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
-                  <p className="text-base font-semibold text-primary-600">
-                    Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
-                  <Button 
-                    onClick={() => {
-                      window.location.href = `/investments?investment=${calculationResult.finalPrice}`;
-                    }}
-                    className="w-full mt-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
-                  >
-                    Invest This Amount
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <p className="text-base font-semibold text-primary-600">
+                      Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    </p>
+                    <Button 
+                      onClick={() => {
+                        window.location.href = `/investments?investment=${calculationResult.finalPrice}`;
+                      }}
+                      size="sm"
+                      className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
+                    >
+                      Invest
+                    </Button>
+                  </div>
                 </div>
               </div>
             </CardContent>
