@@ -159,16 +159,8 @@ export default function InvestmentPoolCard({
                     <span className="font-medium">Investors {INVESTOR_SHARE * 100}% - Manager {(1 - INVESTOR_SHARE) * 100}%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Total Business Profit Range:</span>
-                    <span className="font-medium text-green-600">
-                      {MIN_PROFIT_RATE * 100}%-{MAX_PROFIT_RATE * 100}% for 3 months (potential loss possible)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
                     <span>Business Type:</span>
-                    <span className="font-medium">
-                      LED Bulb Manufacturing
-                    </span>
+                    <span className="font-medium">LED Bulb Manufacturing</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Number of Bulbs (Your Share):</span>
@@ -178,14 +170,18 @@ export default function InvestmentPoolCard({
                   </div>
                   <div className="flex justify-between">
                     <span>Expected Profit Per Bulb:</span>
-                    <span className="font-medium">
-                      Rs. 110
+                    <span className="font-medium">Rs. 110</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Expected Total Profit:</span>
+                    <span className="font-medium text-green-600">
+                      Rs. {Math.floor((Number(investment) / 1500000) * 825000).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Your Total Profit ({INVESTOR_SHARE * 100}% Share):</span>
-                    <span className="font-medium text-green-600">
-                      Rs. {Math.floor((Number(investment) / 1500000) * 825000).toLocaleString()}
+                    <span>Monthly Expected Profit:</span>
+                    <span className="font-medium text-amber-600">
+                      Rs. {Math.floor((Number(investment) / 1500000) * 825000 / 3).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
