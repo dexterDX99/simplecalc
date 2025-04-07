@@ -6,6 +6,7 @@ import StatsOverview from '../components/StatsOverview';
 import InvestmentDetails from '../components/InvestmentDetails';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 // @ts-ignore - Import types directly from shared schema
 import type { Pool, Investment } from '../../shared/schema';
 
@@ -143,7 +144,7 @@ export default function Investments() {
         <TabsContent value="investments" className="mt-4">
           {userInvestments && userInvestments.length > 0 ? (
             <div className="bg-white rounded-lg shadow-md p-4">
-              <div className="space-y-4">
+              <Accordion type="single" collapsible className="space-y-4">
                 {userInvestments.map((userInvestment: Investment) => {
                   const investmentPool = pools && pools.find((p: Pool) => p.id === userInvestment.poolId);
                   const investmentAmount = Number(userInvestment.amount);
@@ -152,9 +153,12 @@ export default function Investments() {
                   const monthlyProfit = Math.floor(totalProfit / 6);
 
                   return investmentPool ? (
-                    <div key={userInvestment.id} className="border-b border-gray-100 pb-4 last:border-0">
-                      <h3 className="font-medium text-gray-800">{investmentPool.name}</h3>
-                      <div className="grid grid-cols-2 gap-2 mt-2">
+                    <AccordionItem key={userInvestment.id} value={`investment-${userInvestment.id}`} className="border-b border-gray-100 last:border-0">
+                      <AccordionTrigger className="hover:no-underline">
+                        <h3 className="font-medium text-gray-800 text-left">{investmentPool.name}</h3>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="grid grid-cols-2 gap-2 mt-2">
                         <div>
                           <p className="text-xs text-gray-500">Amount Invested</p>
                           <p className="text-sm font-medium">Rs. {investmentAmount.toLocaleString()}</p>
@@ -184,10 +188,11 @@ export default function Investments() {
                           </p>
                         </div>
                       </div>
-                    </div>
+                      </AccordionContent>
+                    </AccordionItem>
                   ) : null;
                 })}
-              </div>
+              </Accordion>
 
               <div className="mt-6 pt-4 border-t-2 border-green-100">
                 <h3 className="text-base font-semibold text-gray-800 mb-3">Investment Summary</h3>
