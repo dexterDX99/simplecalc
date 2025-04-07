@@ -78,62 +78,7 @@ export default function CompanyProfiles() {
           </AccordionContent>
         </AccordionItem>
 
-        {/* Gold Investment Profile */}
-        <AccordionItem value="gold-investment" className="border rounded-lg bg-white">
-          <AccordionTrigger className="px-6 hover:no-underline">
-            <h3 className="text-xl font-semibold text-green-700">Gold Investment</h3>
-          </AccordionTrigger>
-          <AccordionContent className="px-6">
-            <div className="space-y-6">
-              <section>
-                <h4 className="text-lg font-medium text-green-600 mb-2">Business Overview</h4>
-                <p className="text-gray-600">Investment in gold jewelry through a diversified portfolio, offering exposure to a stable and appreciating asset class.</p>
-              </section>
-
-              <section>
-                <h4 className="text-lg font-medium text-green-600 mb-2">Investment Strategy</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h5 className="font-medium mb-1">Portfolio Composition</h5>
-                    <ul className="list-disc pl-4 space-y-1">
-                      <li>70% Gold Jewelry</li>
-                      <li>20% Gold Coins</li>
-                      <li>10% Cash Reserve</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-1">Revenue Sources</h5>
-                    <ul className="list-disc pl-4">
-                      <li>Market price appreciation</li>
-                      <li>Wholesale to retail markup</li>
-                      <li>Craftsmanship premium</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-              <section>
-                <h4 className="text-lg font-medium text-green-600 mb-2">Investment Structure</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <ul className="list-disc pl-4 space-y-1">
-                    <li>Minimum Investment: Rs. 5,000</li>
-                    <li>Period: 6 months minimum</li>
-                  </ul>
-                  <ul className="list-disc pl-4 space-y-1">
-                    <li>Expected Returns: 25-35% annually</li>
-                    <li>Profit Distribution: Quarterly</li>
-                  </ul>
-                </div>
-              </section>
-              <section>
-                <h4 className="text-lg font-medium text-green-600 mb-2">Contact Information</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>Website: <a href="#" className="text-blue-600">www.goldinvest.com</a></div>
-                  <div>Phone: +92-300-7890123</div>
-                </div>
-              </section>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+        
       </Accordion>
     </div>
   );
