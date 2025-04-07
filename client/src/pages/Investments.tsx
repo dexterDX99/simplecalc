@@ -55,7 +55,7 @@ export default function Investments() {
       setWarningMessage('Minimum investment amount is Rs. 5,000');
       return;
     }
-    
+
     // Check if amount is in valid increments of 5000
     if (amount % 5000 !== 0 || amount > 500000) {
       setWarningMessage('Investment amount must be in increments of Rs. 5,000 (from 5,000 to 500,000)');
@@ -178,7 +178,7 @@ export default function Investments() {
                       <div className="col-span-2 mt-1 pt-1 border-t border-gray-100">
                         <p className="text-xs text-gray-500">Total Return (Capital + Profit)</p>
                         <p className="text-sm font-medium text-primary-600">
-                          Rs. {(investmentAmount + minExpectedProfit).toLocaleString()} - {(investmentAmount + maxExpectedProfit).toLocaleString()}
+                          Rs. {(investmentAmount + totalProfit).toLocaleString()}
                         </p>
                       </div>
                     </div>
