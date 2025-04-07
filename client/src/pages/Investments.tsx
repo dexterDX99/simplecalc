@@ -103,14 +103,12 @@ export default function Investments() {
   // Get available slots from active pool
   const availableSlots = pools?.length > 0 ? pools[0].slots : 0;
 
-  // Calculate investment totals
+  // Calculate investment totals using LED bulb manufacturing model
   const totalInvested = userInvestments.reduce((acc, inv) => acc + Number(inv.amount), 0);
-  const minTotalExpectedProfit = totalInvested * minProfitRate * investorShare;
-  const maxTotalExpectedProfit = totalInvested * maxProfitRate * investorShare;
-  const minMonthlyProfit = minTotalExpectedProfit / 3; // Monthly profit (3-month term)
-  const maxMonthlyProfit = maxTotalExpectedProfit / 3;
-  const minTotalReturn = totalInvested + minTotalExpectedProfit;
-  const maxTotalReturn = totalInvested + maxTotalExpectedProfit;
+  const totalBulbsShare = Math.floor((totalInvested / 1500000) * 12500);
+  const totalExpectedProfit = Math.floor((totalInvested / 1500000) * 825000);
+  const monthlyProfit = Math.floor(totalExpectedProfit / 3);
+  const totalReturn = totalInvested + totalExpectedProfit;
 
   return (
     <div className="px-4 py-6">
@@ -145,10 +143,11 @@ export default function Investments() {
             <div className="space-y-4">
               {userInvestments.map((userInvestment: Investment) => {
                 const investmentPool = pools && pools.find((p: Pool) => p.id === userInvestment.poolId);
-                // Calculate individual investment profits
+                // Calculate profits based on LED bulb manufacturing model
                 const investmentAmount = Number(userInvestment.amount);
-                const minExpectedProfit = investmentAmount * minProfitRate * investorShare;
-                const maxExpectedProfit = investmentAmount * maxProfitRate * investorShare;
+                const bulbsShare = Math.floor((investmentAmount / 1500000) * 12500);
+                const totalProfit = Math.floor((investmentAmount / 1500000) * 825000);
+                const monthlyProfit = Math.floor(totalProfit / 3);
 
                 return investmentPool ? (
                   <div key={userInvestment.id} className="border-b border-gray-100 pb-4 last:border-0">
@@ -163,9 +162,13 @@ export default function Investments() {
                         <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Expected Profit (3 Months)</p>
+                        <p className="text-xs text-gray-500">Expected Total Profit (3 Months)</p>
                         <p className="text-sm font-medium text-green-600">
-                          Rs. {minExpectedProfit.toLocaleString()} - {maxExpectedProfit.toLocaleString()}
+                          Rs. {totalProfit.toLocaleString()}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">Monthly Profit</p>
+                        <p className="text-sm font-medium text-amber-600">
+                          Rs. {monthlyProfit.toLocaleString()}
                         </p>
                       </div>
                       <div>
@@ -200,13 +203,13 @@ export default function Investments() {
                   <div>
                     <p className="text-xs text-gray-600">Total Expected Profit</p>
                     <p className="text-base font-semibold text-green-600">
-                      Rs. {minTotalExpectedProfit.toLocaleString()} - {maxTotalExpectedProfit.toLocaleString()}
+                      Rs. {totalExpectedProfit.toLocaleString()}
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-600">Monthly Profit (Estimated)</p>
                     <p className="text-base font-semibold text-amber-600">
-                      Rs. {minMonthlyProfit.toLocaleString()} - {maxMonthlyProfit.toLocaleString()}
+                      Rs. {monthlyProfit.toLocaleString()}
                     </p>
                   </div>
                 </div>
@@ -214,7 +217,7 @@ export default function Investments() {
                   <div className="flex justify-between items-center">
                     <p className="text-sm text-gray-700">Total Return (Capital + Profit)</p>
                     <p className="text-lg font-bold text-primary-600">
-                      Rs. {minTotalReturn.toLocaleString()} - {maxTotalReturn.toLocaleString()}
+                      Rs. {totalReturn.toLocaleString()}
                     </p>
                   </div>
                 </div>
