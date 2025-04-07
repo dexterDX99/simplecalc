@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,10 +14,7 @@ export default function Profile() {
     setResetSuccess(false);
 
     try {
-      // Clear all existing investments from local storage
       window.localStorage.clear();
-      
-      // Call the API to reset backend data
       const res = await fetch('/api/users/1/reset', {
         method: 'POST',
         headers: {
@@ -28,17 +26,13 @@ export default function Profile() {
         throw new Error('Failed to reset application data');
       }
       
-      // Show success state
       setResetSuccess(true);
-      
-      // Show notification
       toast({
         title: "Reset Successful",
         description: "All investment data has been reset successfully.",
         variant: "success",
       });
       
-      // Refresh the page after a short delay
       setTimeout(() => {
         window.location.reload();
       }, 1500);
@@ -62,7 +56,7 @@ export default function Profile() {
         {/* User Information Card */}
         <Card className="bg-white shadow-md border border-gray-100">
           <CardContent className="p-5">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center text-white text-xl font-bold">
                 T
               </div>
@@ -72,25 +66,66 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="mt-5 pt-5 border-t border-gray-100">
-              <h3 className="text-md font-medium text-gray-700 mb-2">Account Information</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="text-gray-500">Account Type</p>
-                  <p className="font-medium">Investor</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Joined</p>
-                  <p className="font-medium">April 2025</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Status</p>
-                  <p className="font-medium text-green-600">Active</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">KYC Status</p>
-                  <p className="font-medium text-amber-600">Pending</p>
-                </div>
+            <div className="space-y-6">
+              {/* Account Information */}
+              <div className="border-t border-gray-100 pt-4">
+                <h3 className="text-md font-medium text-gray-700 mb-3">Account Information</h3>
+                <ul className="space-y-2">
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Account Type</span>
+                    <span className="font-medium">Investor</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Joined</span>
+                    <span className="font-medium">April 2025</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Status</span>
+                    <span className="font-medium text-green-600">Active</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">KYC Status</span>
+                    <span className="font-medium text-amber-600">Pending</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Shariah Compliance */}
+              <div className="border-t border-gray-100 pt-4">
+                <h3 className="text-md font-medium text-gray-700 mb-3">Shariah Compliance</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Mudarabah-based profit sharing model</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Interest-free investments</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Transparent profit distribution</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Gold Investment Info */}
+              <div className="border-t border-gray-100 pt-4">
+                <h3 className="text-md font-medium text-gray-700 mb-3">Gold Investment Info</h3>
+                <ul className="space-y-2">
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Investment Model</span>
+                    <span className="font-medium">Mudarabah</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Profit Share Ratio</span>
+                    <span className="font-medium">60:40</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-gray-500">Minimum Investment</span>
+                    <span className="font-medium">Rs. 5,000</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </CardContent>
