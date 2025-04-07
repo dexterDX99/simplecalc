@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-const METAL_API_KEY = "goldapi-2cetbk8gkl7dz9-io";  // You should move this to environment variables
-const PKR_TO_USD = 279; // Average conversion rate, can be made dynamic
 
 export default function RawGoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>("");
@@ -13,36 +10,6 @@ export default function RawGoldCalculator() {
   const [weightTola, setWeightTola] = useState<string>("");
   const [purity, setPurity] = useState<string>("24");
   const [calculationResult, setCalculationResult] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchGoldPrice = async () => {
-      try {
-        const response = await fetch('https://www.goldapi.io/api/XAU/USD', {
-          method: 'GET',
-          headers: {
-            'x-access-token': 'goldapi-2cetbk8gkl7dz9-io'
-          }
-        });
-        const data = await response.json();
-        // Convert USD/oz to PKR/tola
-        const pricePerOunce = data.price;
-        const pricePerTola = ((pricePerOunce * PKR_TO_USD) / 31.1035) * 11.664;
-        setPricePerTola(pricePerTola.toFixed(2));
-      } catch (error) {
-        console.error('Error fetching gold price:', error);
-        // Fallback price if API fails
-        setPricePerTola("220000");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchGoldPrice();
-    // Refresh price every 5 minutes
-    const interval = setInterval(fetchGoldPrice, 300000);
-    return () => clearInterval(interval);
-  }, []);
 
   const convertGramToTola = (value: string) => {
     if (!value) {
@@ -93,14 +60,11 @@ export default function RawGoldCalculator() {
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
             <Input 
               type="number" 
-              placeholder="Loading gold price..." 
+              placeholder="Enter current gold price" 
               className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={pricePerTola}
-              disabled={true}
-              readOnly={true}
+              onChange={(e) => setPricePerTola(e.target.value)}
             />
-          {isLoading && <p className="text-xs text-gray-500 mt-1">Fetching latest gold price...</p>}
-          <p className="text-xs text-gray-500 mt-1">Live 24K gold price, updates every 5 minutes</p>
           </div>
         </div>
         
