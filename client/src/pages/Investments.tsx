@@ -8,7 +8,11 @@ import { Button } from '@/components/ui/button';
 import type { Pool, Investment } from '../../shared/schema';
 
 export default function Investments() {
-  const [expandedPoolId, setExpandedPoolId] = useState<number | null>(null);
+  const [expandedPoolId, setExpandedPoolId] = useState<number | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const poolId = params.get('poolId');
+    return poolId ? Number(poolId) : null;
+  });
   const [investment, setInvestment] = useState<string>(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('investment') || '';
