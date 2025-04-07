@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import GoldCalculator from "../components/GoldCalculator";
 import InvestmentCalculator from "../components/InvestmentCalculator";
-import RawGoldCalculator from "../components/RawGoldCalculator";
 
 export default function Calculator() {
   // Default to showing the Halal Investment Calculator without dropdown functionality
@@ -40,17 +38,7 @@ export default function Calculator() {
           </div>
         </TabsContent>
         
-        <TabsContent value="gold">
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mb-4 p-4">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Jewelry Investment Calculator</h3>
-            <GoldCalculator />
-          </div>
-
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden p-4">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Raw Gold Calculator</h3>
-            <RawGoldCalculator />
-          </div>
-        </TabsContent>
+        
       </Tabs>
     </div>
   );
