@@ -1,57 +1,65 @@
 import { useState } from "react";
-import { useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MIN_PROFIT_RATE, MAX_PROFIT_RATE, INVESTOR_SHARE } from "@/shared/constants";
-// @ts-ignore - Import types directly from shared schema
-import type { Pool } from '../../shared/schema';
 
 export default function GoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>("");
-  const [weightInTola, setWeightInTola] = useState<string>("");
+  const [weightGram, setWeightGram] = useState<string>("");
+  const [weightTola, setWeightTola] = useState<string>("");
   const [purity, setPurity] = useState<string>("22");
-  const [selectedPoolId, setSelectedPoolId] = useState<string>("");
-
-  const { data: pools = [] } = useQuery<Pool[]>({
-    queryKey: ['/api/pools'],
-  });
-
+  const [wastage, setWastage] = useState<string>("");
+  const [makingCut, setMakingCut] = useState<string>("");
   const [calculationResult, setCalculationResult] = useState<any>(null);
 
-  const handleCalculate = () => {
-    const pricePerTolaFloat = parseFloat(pricePerTola);
-    const weightInTolaFloat = parseFloat(weightInTola);
-    const purityFloat = parseFloat(purity);
-    const weightInGrams = weightInTolaFloat * 11.664;
-
-    const selectedPool = pools.find(pool => pool.id === Number(selectedPoolId));
-
-    if (!isNaN(pricePerTolaFloat) && !isNaN(weightInTolaFloat) && !isNaN(purityFloat)) {
-      const goldValue = pricePerTolaFloat * weightInTolaFloat * (purityFloat / 24);
-      const deductedValue = goldValue * 0.9; // 10% deduction for processing
-
-      let projectedProfit = 0;
-      let duration = "3 months";
-
-      if (selectedPool) {
-        projectedProfit = deductedValue * MIN_PROFIT_RATE * INVESTOR_SHARE;
-        duration = selectedPool.duration;
-      }
-
-      setCalculationResult({
-        pricePerTolaFloat,
-        weightInTolaFloat,
-        weightInGrams,
-        purityFloat,
-        goldValue,
-        deductedValue,
-        projectedProfit,
-        finalValue: deductedValue + projectedProfit,
-        duration
-      });
+  const convertGramToTola = (value: string) => {
+    if (!value) {
+      setWeightTola("");
+      return;
     }
+    const tolaValue = (parseFloat(value) / 11.664).toFixed(3);
+    setWeightTola(tolaValue);
+  };
+
+  const convertTolaToGram = (value: string) => {
+    if (!value) {
+      setWeightGram("");
+      return;
+    }
+    const gramValue = (parseFloat(value) * 11.664).toFixed(2);
+    setWeightGram(gramValue);
+  };
+
+  const calculatePrice = () => {
+    if (!pricePerTola || (!weightGram && !weightTola) || !purity) {
+      return;
+    }
+
+    const pricePerTolaFloat = parseFloat(pricePerTola);
+    const weightGramFloat = parseFloat(weightGram);
+    const purityFloat = parseFloat(purity);
+    const wastageFloat = parseFloat(wastage) || 0;
+    const makingChargesDeduction = parseFloat(makingCut) || 0;
+
+    const pricePerGram = (pricePerTolaFloat / 11.664) * (purityFloat / 24);
+    const totalGoldValue = weightGramFloat * pricePerGram;
+    const makingChargesAmount = (totalGoldValue * makingChargesDeduction) / 100;
+    const finalPrice = totalGoldValue - makingChargesAmount;
+    const wastageValue = wastageFloat * pricePerGram;
+
+    setCalculationResult({
+      pricePerTolaFloat,
+      purityFloat,
+      pricePerGram,
+      weightGramFloat,
+      wastageFloat,
+      makingChargesDeduction,
+      totalGoldValue,
+      makingChargesAmount,
+      finalPrice,
+      wastageValue
+    });
   };
 
   return (
@@ -61,57 +69,91 @@ export default function GoldCalculator() {
           <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Price per Tola (Rs.)</label>
           <div className="relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
-            <Input
-              type="number"
-              className="pl-12"
+            <Input 
+              type="number" 
+              placeholder="Enter current gold price" 
+              className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={pricePerTola}
               onChange={(e) => setPricePerTola(e.target.value)}
             />
           </div>
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Tola)</label>
-          <Input
-            type="number"
-            value={weightInTola}
-            onChange={(e) => setWeightInTola(e.target.value)}
-          />
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Tola)</label>
+            <Input 
+              type="number" 
+              placeholder="Enter tola weight" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={weightTola}
+              onChange={(e) => {
+                setWeightTola(e.target.value);
+                convertTolaToGram(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Grams)</label>
+            <Input 
+              type="number" 
+              placeholder="Enter gram weight" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={weightGram}
+              onChange={(e) => {
+                setWeightGram(e.target.value);
+                convertGramToTola(e.target.value);
+              }}
+            />
+          </div>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Purity (Karat)</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Purity</label>
           <Select value={purity} onValueChange={setPurity}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
               <SelectValue placeholder="Select purity" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="24">24K (Pure Gold)</SelectItem>
-              <SelectItem value="22">22K</SelectItem>
-              <SelectItem value="21">21K</SelectItem>
-              <SelectItem value="18">18K</SelectItem>
+            <SelectContent className="bg-white border border-green-100 shadow-md rounded-md">
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="22">22K <span className="ml-2 text-amber-600 text-xs">(Standard)</span></SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="21">21K</SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="20">20K</SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="18">18K</SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="14">14K</SelectItem>
             </SelectContent>
           </Select>
+          <p className="text-xs text-gray-500 mt-1">Note: Jewelry cannot be made from pure 24K gold as it's too soft. Gold jewelry typically uses 22K or lower purity mixed with other metals for durability.</p>
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Investment Pool</label>
-          <Select value={selectedPoolId} onValueChange={setSelectedPoolId}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select investment pool" />
-            </SelectTrigger>
-            <SelectContent>
-              {pools.map((pool) => (
-                <SelectItem key={pool.id} value={String(pool.id)}>
-                  {pool.name} ({pool.duration})
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">Wastage (Grams)</label>
+            <Input 
+              type="number" 
+              placeholder="Enter wastage" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={wastage}
+              onChange={(e) => setWastage(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">Making Charges (%)</label>
+            <Input 
+              type="number" 
+              placeholder="Enter making charges" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={makingCut}
+              onChange={(e) => setMakingCut(e.target.value)}
+            />
+          </div>
         </div>
 
-        <Button onClick={handleCalculate} className="w-full bg-gradient-to-r from-emerald-500 to-green-600">
-          Calculate Investment Value
+        <Button 
+          onClick={calculatePrice} 
+          className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+          disabled={!pricePerTola || (!weightGram && !weightTola) || !purity}
+        >
+          Generate Estimate
         </Button>
 
         {calculationResult && (
@@ -123,36 +165,59 @@ export default function GoldCalculator() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
                   <p className="text-xs text-gray-500">Market Gold Price (Pure 24K Reference)</p>
-                  <p className="text-sm font-semibold">Rs. {calculationResult.pricePerTolaFloat.toLocaleString()}</p>
+                  <p className="text-sm font-semibold">Rs. {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Selected Jewelry Purity</p>
                   <p className="text-sm font-semibold">{calculationResult.purityFloat}K Gold</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Weight</p>
+                  <p className="text-xs text-gray-500">Gold Price Per Tola ({calculationResult.purityFloat}K)</p>
                   <p className="text-sm font-semibold">
-                    {calculationResult.weightInTolaFloat} tola ({calculationResult.weightInGrams.toFixed(2)} grams)
+                    Rs. {(calculationResult.pricePerTolaFloat * (calculationResult.purityFloat / 24)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Gold Price Per Gram ({calculationResult.purityFloat}K)</p>
+                  <p className="text-sm font-semibold">
+                    Rs. {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Total Gold Weight</p>
+                  <p className="text-sm font-semibold">
+                    {calculationResult.weightGramFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams ({(calculationResult.weightGramFloat / 11.664).toLocaleString(undefined, { maximumFractionDigits: 3 })} tola)
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Total Gold Value</p>
-                  <p className="text-sm font-semibold">Rs. {calculationResult.goldValue.toLocaleString()}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Value After Processing Fee (90%)</p>
-                  <p className="text-sm font-semibold">Rs. {calculationResult.deductedValue.toLocaleString()}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Expected Profit ({calculationResult.duration})</p>
                   <p className="text-sm font-semibold text-green-600">
-                    Rs. {calculationResult.projectedProfit.toLocaleString()}
+                    Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
+
+                {calculationResult.wastageFloat > 0 && (
+                  <div>
+                    <p className="text-xs text-gray-500">Wastage Value</p>
+                    <p className="text-sm font-semibold">
+                      {calculationResult.wastageFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams (Rs. {calculationResult.wastageValue.toLocaleString(undefined, { maximumFractionDigits: 2 })})
+                    </p>
+                  </div>
+                )}
+
+                {calculationResult.makingChargesDeduction > 0 && (
+                  <div>
+                    <p className="text-xs text-gray-500">Making Charges Deduction</p>
+                    <p className="text-sm font-semibold">
+                      {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
+                    </p>
+                  </div>
+                )}
+
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
-                  <p className="text-xs text-gray-500">Total Return After {calculationResult.duration}</p>
+                  <p className="text-xs text-gray-500">Final Price After Deductions</p>
                   <p className="text-base font-semibold text-primary-600">
-                    Rs. {calculationResult.finalValue.toLocaleString()}
+                    Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
               </div>
