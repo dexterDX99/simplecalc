@@ -133,23 +133,66 @@ export default function Profile() {
                       Gold Investment Info
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p className="text-sm text-gray-600 mb-3">
-                        Details about our gold investment model and profit-sharing structure.
-                      </p>
-                      <ul className="space-y-2">
-                  <li className="flex justify-between">
-                    <span className="text-gray-500">Investment Model</span>
-                    <span className="font-medium">Mudarabah</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-500">Profit Share Ratio</span>
-                    <span className="font-medium">60:40</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-500">Minimum Investment</span>
-                    <span className="font-medium">Rs. 5,000</span>
-                  </li>
-                </ul>
+                      <div className="space-y-4">
+                        <section>
+                          <p className="text-sm text-gray-600 mb-3">
+                            Details about our gold investment model and profit-sharing structure.
+                          </p>
+                          <ul className="space-y-2">
+                            <li className="flex justify-between">
+                              <span className="text-gray-500">Investment Model</span>
+                              <span className="font-medium">Mudarabah</span>
+                            </li>
+                            <li className="flex justify-between">
+                              <span className="text-gray-500">Profit Share Ratio</span>
+                              <span className="font-medium">60:40</span>
+                            </li>
+                            <li className="flex justify-between">
+                              <span className="text-gray-500">Minimum Investment</span>
+                              <span className="font-medium">Rs. 5,000</span>
+                            </li>
+                          </ul>
+                        </section>
+                        
+                        <section>
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">Investment Strategy</h4>
+                          <div className="grid gap-4">
+                            <div>
+                              <h5 className="text-xs text-gray-500 mb-1">Portfolio Composition</h5>
+                              <ul className="list-disc pl-4 text-sm space-y-1">
+                                <li>70% Gold Jewelry</li>
+                                <li>20% Gold Coins</li>
+                                <li>10% Cash Reserve</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h5 className="text-xs text-gray-500 mb-1">Revenue Sources</h5>
+                              <ul className="list-disc pl-4 text-sm space-y-1">
+                                <li>Market price appreciation</li>
+                                <li>Wholesale to retail markup</li>
+                                <li>Craftsmanship premium</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section>
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">Investment Structure</h4>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <h5 className="text-xs text-gray-500 mb-1">Terms</h5>
+                              <ul className="text-sm space-y-1">
+                                <li>Period: 6 months minimum</li>
+                                <li>Expected Returns: 25-35% annually</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h5 className="text-xs text-gray-500 mb-1">Distribution</h5>
+                              <p className="text-sm">Quarterly profit distribution</p>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
