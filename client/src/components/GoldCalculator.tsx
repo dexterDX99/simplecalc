@@ -285,6 +285,7 @@ const { data: pools = [] } = useQuery<Pool[]>({
                   )}
                 </>
               )}
+              </div>
             </CardContent>
           </Card>
         )}
