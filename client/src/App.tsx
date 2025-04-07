@@ -20,6 +20,7 @@ function Router() {
           <Route path="/company-profiles" component={CompanyProfiles} />
           <Route path="/investments" component={Investments} />
           <Route path="/profile" component={Profile} />
+          <Route path="/gold-deposits" component={GoldDeposits} />
           {/* Fallback to 404 */}
           <Route component={NotFound} />
         </Switch>
