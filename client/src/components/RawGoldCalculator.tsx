@@ -70,9 +70,10 @@ export default function RawGoldCalculator() {
             <Input 
               type="number" 
               placeholder="Enter current gold price" 
-              className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              className="pl-12 w-full border border-green-100 bg-gray-50 cursor-not-allowed"
               value={pricePerTola}
-              onChange={(e) => setPricePerTola(e.target.value)}
+              disabled
+              readOnly
             />
           </div>
         </div>
