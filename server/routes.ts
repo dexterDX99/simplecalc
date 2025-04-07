@@ -113,30 +113,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Gold Deposits endpoints
-  app.get("/api/gold-deposits", async (req, res) => {
-    try {
-      const deposits = await storage.getGoldDeposits();
-      res.json(deposits);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch gold deposits" });
-    }
-  });
-
-  app.post("/api/gold-deposits", async (req, res) => {
-    try {
-      const deposit = req.body;
-      const savedDeposit = await storage.createGoldDeposit({
-        ...deposit,
-        depositDate: new Date().toISOString()
-      });
-      res.status(201).json(savedDeposit);
-    } catch (error) {
-      console.error("Create deposit error:", error);
-      res.status(500).json({ message: "Failed to create gold deposit" });
-    }
-  });
-
   const httpServer = createServer(app);
   return httpServer;
 }

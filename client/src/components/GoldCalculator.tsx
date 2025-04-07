@@ -221,9 +221,6 @@ export default function GoldCalculator() {
 
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
-                  <p className="text-xs text-gray-600 mt-1 mb-2">
-                    Choose to calculate investment returns or deposit your jewelry for safekeeping and potential investment opportunities
-                  </p>
                   <div className="flex items-center gap-2">
                     <p className="text-base font-semibold text-primary-600">
                       Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
@@ -236,20 +233,6 @@ export default function GoldCalculator() {
                       className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
                     >
                       Calculate Investment
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        const params = new URLSearchParams({
-                          amount: calculationResult.finalPrice.toString(),
-                          weight: calculationResult.weightGramFloat.toString(),
-                          purity: calculationResult.purityFloat.toString()
-                        });
-                        window.location.href = `/gold-deposits?${params.toString()}`;
-                      }}
-                      size="sm"
-                      className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 transition-all"
-                    >
-                      Deposit Jewelry
                     </Button>
                   </div>
                 </div>

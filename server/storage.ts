@@ -21,10 +21,6 @@ export interface IStorage {
   createInvestment(investment: InsertInvestment): Promise<Investment>;
   getInvestmentsByUser(userId: number): Promise<Investment[]>;
 
-  // Gold deposit methods
-  getGoldDeposits(): Promise<any[]>;
-  createGoldDeposit(deposit: any): Promise<any>;
-
   // Reset method for testing purposes
   resetForUser(userId: number): Promise<void>;
 }
@@ -33,7 +29,6 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private pools: Map<number, Pool>;
   private investments: Map<number, Investment>;
-  private goldDeposits: any[];
 
   private userCurrentId: number;
   private poolCurrentId: number;
@@ -43,7 +38,6 @@ export class MemStorage implements IStorage {
     this.users = new Map();
     this.pools = new Map();
     this.investments = new Map();
-    this.goldDeposits = [];
 
     this.userCurrentId = 1;
     this.poolCurrentId = 1;
@@ -183,19 +177,6 @@ export class MemStorage implements IStorage {
     return Array.from(this.investments.values()).filter(
       (investment) => investment.userId === userId
     );
-  }
-
-  async getGoldDeposits(): Promise<any[]> {
-    return this.goldDeposits;
-  }
-
-  async createGoldDeposit(deposit: any): Promise<any> {
-    const newDeposit = {
-      id: this.goldDeposits.length + 1,
-      ...deposit
-    };
-    this.goldDeposits.push(newDeposit);
-    return newDeposit;
   }
 
   async resetForUser(userId: number): Promise<void> {
