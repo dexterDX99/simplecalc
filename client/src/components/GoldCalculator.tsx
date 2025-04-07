@@ -12,6 +12,10 @@ export default function GoldCalculator() {
   const [wastage, setWastage] = useState<string>("");
   const [makingCut, setMakingCut] = useState<string>("");
   const [calculationResult, setCalculationResult] = useState<any>(null);
+const [selectedPoolId, setSelectedPoolId] = useState<string>("");
+const { data: pools = [] } = useQuery<Pool[]>({
+  queryKey: ['/api/pools'],
+});
 
   const convertGramToTola = (value: string) => {
     if (!value) {
@@ -48,6 +52,14 @@ export default function GoldCalculator() {
     const finalPrice = totalGoldValue - makingChargesAmount;
     const wastageValue = wastageFloat * pricePerGram;
 
+    const selectedPool = pools.find(pool => pool.id === Number(selectedPoolId));
+    const poolProfit = selectedPool ? {
+      minProfit: finalPrice * parseFloat(selectedPool.minProfitRate),
+      maxProfit: finalPrice * parseFloat(selectedPool.maxProfitRate),
+      minPayout: finalPrice * (1 + parseFloat(selectedPool.minProfitRate)),
+      maxPayout: finalPrice * (1 + parseFloat(selectedPool.maxProfitRate))
+    } : null;
+
     setCalculationResult({
       pricePerTolaFloat,
       purityFloat,
@@ -58,7 +70,8 @@ export default function GoldCalculator() {
       totalGoldValue,
       makingChargesAmount,
       finalPrice,
-      wastageValue
+      wastageValue,
+      poolProfit
     });
   };
 
@@ -220,6 +233,58 @@ export default function GoldCalculator() {
                     Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
+              </div>
+
+              {pools.length > 0 && (
+                <>
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <label className="text-sm font-medium text-gray-700 mb-2 block">Investment Pool Selection</label>
+                    <Select value={selectedPoolId} onValueChange={setSelectedPoolId}>
+                      <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
+                        <SelectValue placeholder="Select an investment pool" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-green-100 shadow-md rounded-md">
+                        {pools.map((pool) => (
+                          <SelectItem 
+                            key={pool.id} 
+                            value={String(pool.id)} 
+                            className="hover:bg-green-50 cursor-pointer transition-colors"
+                          >
+                            {pool.name}
+                            {pool.slots > 0 && (
+                              <span className="ml-2 text-green-600 text-xs">({pool.slots} slots available)</span>
+                            )}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {calculationResult.poolProfit && (
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">Expected Returns (3 Months)</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs text-gray-500">Initial Investment</p>
+                          <p className="text-sm font-semibold">Rs. {calculationResult.finalPrice.toLocaleString()}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">Potential Profit Range</p>
+                          <p className="text-sm font-semibold">
+                            Rs. {calculationResult.poolProfit.minProfit.toLocaleString()} - {calculationResult.poolProfit.maxProfit.toLocaleString()}
+                          </p>
+                        </div>
+                        <div className="col-span-2">
+                          <p className="text-xs text-gray-500">Total Payout Range (Capital + Profit)</p>
+                          <p className="text-sm font-semibold text-green-600">
+                            Rs. {calculationResult.poolProfit.minPayout.toLocaleString()} - {calculationResult.poolProfit.maxPayout.toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
               </div>
             </CardContent>
           </Card>
