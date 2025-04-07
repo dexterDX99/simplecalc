@@ -15,10 +15,10 @@ interface GoldDeposit {
 
 export default function GoldDeposits() {
   const [location] = useLocation();
-  const params = new URLSearchParams(location.split('?')[1]);
-  const amount = params.get('amount');
-  const weight = params.get('weight');
-  const purity = params.get('purity');
+  const params = new URLSearchParams(location.split('?')[1] || '');
+  const amount = params.get('amount') ? parseFloat(params.get('amount')!) : null;
+  const weight = params.get('weight') ? parseFloat(params.get('weight')!) : null;
+  const purity = params.get('purity') ? parseFloat(params.get('purity')!) : null;
 
   const { data: deposits = [] } = useQuery<GoldDeposit[]>({
     queryKey: ['/api/gold-deposits'],
