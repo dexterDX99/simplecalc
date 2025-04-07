@@ -63,25 +63,6 @@ export class MemStorage implements IStorage {
         companySocial: "@ledpakistan",
         companyContact: "+92-300-1234567",
         businessModel: "Manufacturing and wholesale distribution of LED lighting products to retailers and construction companies. Our business benefits from government incentives for energy-efficient products and growing consumer awareness about energy conservation."
-      },
-      {
-        name: "Gold Jewelry Investment",
-        startDate: "Jun 1, 2025",
-        endDate: "Sep 1, 2025",
-        duration: "3 Months",
-        closeDate: "Aug 15, 2025",
-        total: "0",
-        target: "2000000",
-        investors: 0,
-        slots: 400,
-        minProfitRate: "0.25",
-        maxProfitRate: "0.35",
-        returnRatio: "25-35%",
-        companyDescription: "Invest in a diversified portfolio of gold jewelry, benefiting from gold's inherent value and potential for appreciation.  This investment offers exposure to a precious metal market with a long history of stability and growth.",
-        companyWebsite: "www.goldinvest.com", // Placeholder
-        companySocial: "@goldinvest",       // Placeholder
-        companyContact: "+92-300-7890123", // Placeholder
-        businessModel: "Investment in gold jewelry through a diversified portfolio, offering exposure to a stable and appreciating asset class.",
       }
     ];
 
