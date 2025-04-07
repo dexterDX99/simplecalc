@@ -151,6 +151,7 @@ export default function Investments() {
                   const bulbsShare = Math.floor((investmentAmount / 1500000) * 12500);
                   const totalProfit = Math.floor((investmentAmount / 1500000) * 825000);
                   const monthlyProfit = Math.floor(totalProfit / 6);
+                  const investmentDuration = "6 months";
 
                   return investmentPool ? (
                     <AccordionItem key={userInvestment.id} value={`investment-${userInvestment.id}`} className="border-b border-gray-100 last:border-0">
@@ -168,8 +169,8 @@ export default function Investments() {
                           <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500">Investment Cycle</p>
-                          <p className="text-sm font-medium">{investmentPool.duration}</p>
+                          <p className="text-xs text-gray-500">Investment Duration</p>
+                          <p className="text-sm font-medium">{investmentDuration}</p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500">Start Date</p>
