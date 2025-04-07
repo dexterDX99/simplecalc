@@ -100,7 +100,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               <div>
                 <p className="text-gray-600">Expected Business Profit Range:</p>
                 <p className="font-medium text-green-700">
-                  {MIN_PROFIT_RATE * 100}%-{MAX_PROFIT_RATE * 100}% for 3 months (potential loss possible)
+                  {MIN_PROFIT_RATE * 100}%-{MAX_PROFIT_RATE * 100}% for 6 months (potential loss possible)
                 </p>
               </div>
               <div>

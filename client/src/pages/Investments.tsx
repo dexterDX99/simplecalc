@@ -162,7 +162,7 @@ export default function Investments() {
                         <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Expected Total Profit (3 Months)</p>
+                        <p className="text-xs text-gray-500">Expected Total Profit (6 Months)</p>
                         <p className="text-sm font-medium text-green-600">
                           Rs. {totalProfit.toLocaleString()}
                         </p>
