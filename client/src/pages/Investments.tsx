@@ -9,7 +9,10 @@ import type { Pool, Investment } from '../../shared/schema';
 
 export default function Investments() {
   const [expandedPoolId, setExpandedPoolId] = useState<number | null>(null);
-  const [investment, setInvestment] = useState<string>('');
+  const [investment, setInvestment] = useState<string>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('investment') || '';
+  });
   const [warningMessage, setWarningMessage] = useState<string>('');
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
