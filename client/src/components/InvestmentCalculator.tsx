@@ -31,7 +31,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
 
     // Calculate number of bulbs based on investment proportion
     const bulbsShare = Math.floor((Number(amount) / 1500000) * 12500);
-    
+
     // Calculate profit using Rs. 110 profit per bulb
     const totalProfit = Math.floor((Number(amount) / 1500000) * 825000);
 
@@ -119,7 +119,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
           </div>
         )}
 
-        
+
 
         {profit !== null && selectedPool && (
           <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
@@ -145,9 +145,15 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                   <p className="text-sm font-semibold">Rs. {profit.profitPerBulb}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Your Total Profit (60% Share)</p>
+                  <p className="text-xs text-gray-500">Your Total Profit - 6 months (60% Share)</p>
                   <p className="text-sm font-semibold text-green-600">
                     Rs. {profit.totalProfit.toLocaleString()}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Monthly Profit</p>
+                  <p className="text-sm font-semibold text-amber-600">
+                    Rs. {Math.floor(profit.totalProfit / 6).toLocaleString()}
                   </p>
                 </div>
                 <div>
@@ -157,12 +163,12 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                   </p>
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
-                  <p className="text-xs text-gray-500">Total Payout After 3 Months (Capital + Profit)</p>
+                  <p className="text-xs text-gray-500">Total Payout After 6 Months (Capital + Profit)</p>
                   <div className="flex items-center gap-2">
                     <p className="text-base font-semibold text-primary-600">
                       Rs. {profit.finalPayout.toLocaleString()}
                     </p>
-                    
+
                   </div>
                 </div>
               </div>

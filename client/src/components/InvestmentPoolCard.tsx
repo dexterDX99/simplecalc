@@ -152,7 +152,7 @@ export default function InvestmentPoolCard({
                   </div>
                   <div className="flex justify-between">
                     <span>Investment Duration:</span>
-                    <span className="font-medium">{pool.duration === '3 months' ? '6 months' : pool.duration}</span>
+                    <span className="font-medium">6 months</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Profit Sharing Ratio:</span>
