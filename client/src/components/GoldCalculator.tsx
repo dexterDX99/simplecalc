@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function GoldCalculator() {
-  const [pricePerTola, setPricePerTola] = useState<string>("");
+  const [pricePerTola, setPricePerTola] = useState<string>(localStorage.getItem('goldPrice24K') || "");
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setPricePerTola(localStorage.getItem('goldPrice24K') || "");
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
   const [weightGram, setWeightGram] = useState<string>("");
   const [weightTola, setWeightTola] = useState<string>("");
   const [purity, setPurity] = useState<string>("22");
@@ -72,9 +81,10 @@ export default function GoldCalculator() {
             <Input 
               type="number" 
               placeholder="Enter current gold price" 
-              className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              className="pl-12 w-full border border-green-100 bg-gray-50 cursor-not-allowed"
               value={pricePerTola}
-              onChange={(e) => setPricePerTola(e.target.value)}
+              disabled
+              readOnly
               required
             />
           </div>
