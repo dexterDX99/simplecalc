@@ -66,7 +66,7 @@ export default function GoldCalculator() {
     <div className="mt-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Price per Tola (Rs.)</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Price per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
           <div className="relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
             <Input 
@@ -75,13 +75,14 @@ export default function GoldCalculator() {
               className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={pricePerTola}
               onChange={(e) => setPricePerTola(e.target.value)}
+              required
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Tola)</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Tola)<span className="text-red-500 ml-1">*</span></label>
             <Input 
               type="number" 
               placeholder="Enter tola weight" 
@@ -91,10 +92,11 @@ export default function GoldCalculator() {
                 setWeightTola(e.target.value);
                 convertTolaToGram(e.target.value);
               }}
+              required
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Weight (Grams)</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Grams)<span className="text-red-500 ml-1">*</span></label>
             <Input 
               type="number" 
               placeholder="Enter gram weight" 
@@ -104,12 +106,13 @@ export default function GoldCalculator() {
                 setWeightGram(e.target.value);
                 convertGramToTola(e.target.value);
               }}
+              required
             />
           </div>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Gold Purity</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Purity<span className="text-red-500 ml-1">*</span></label>
           <Select value={purity} onValueChange={setPurity}>
             <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
               <SelectValue placeholder="Select purity" />
