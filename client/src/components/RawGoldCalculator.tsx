@@ -148,9 +148,20 @@ export default function RawGoldCalculator() {
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Raw Gold Value</p>
-                  <p className="text-base font-semibold text-primary-600">
-                    PKR {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-base font-semibold text-primary-600">
+                      PKR {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    </p>
+                    <Button 
+                      onClick={() => {
+                        window.location.href = `/calculator?tab=investment&amount=${calculationResult.totalGoldValue}`;
+                      }}
+                      size="sm"
+                      className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
+                    >
+                      Calculate Investment
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div className="mt-3 pt-2 border-t border-gray-100">
