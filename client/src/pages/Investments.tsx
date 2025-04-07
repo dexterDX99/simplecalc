@@ -111,55 +111,7 @@ export default function Investments() {
 
   return (
     <div className="px-4 py-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Investments</h1>
-
-      {userInvestments && userInvestments.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Investment History</h2>
-          <div className="bg-white rounded-lg shadow-md p-4">
-            <div className="space-y-4">
-              {userInvestments.map((userInvestment: Investment) => {
-                const investmentPool = pools && pools.find((p: Pool) => p.id === userInvestment.poolId);
-                const investmentAmount = Number(userInvestment.amount);
-                const minExpectedProfit = investmentAmount * minProfitRate * investorShare;
-                const maxExpectedProfit = investmentAmount * maxProfitRate * investorShare;
-
-                return investmentPool ? (
-                  <div key={userInvestment.id} className="border-b border-gray-100 pb-4 last:border-0">
-                    <h3 className="font-medium text-gray-800">{investmentPool.name}</h3>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                      <div>
-                        <p className="text-xs text-gray-500">Amount Invested</p>
-                        <p className="text-sm font-medium">Rs. {investmentAmount.toLocaleString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Investment Date</p>
-                        <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Expected Profit (3 Months)</p>
-                        <p className="text-sm font-medium text-green-600">
-                          Rs. {minExpectedProfit.toLocaleString()} - {maxExpectedProfit.toLocaleString()}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Maturity Date</p>
-                        <p className="text-sm font-medium text-amber-600">{investmentPool.endDate}</p>
-                      </div>
-                      <div className="col-span-2 mt-1 pt-1 border-t border-gray-100">
-                        <p className="text-xs text-gray-500">Total Return (Capital + Profit)</p>
-                        <p className="text-sm font-medium text-primary-600">
-                          Rs. {(investmentAmount + minExpectedProfit).toLocaleString()} - {(investmentAmount + maxExpectedProfit).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ) : null;
-              })}
-            </div>
-          </div>
-        </div>
-      )}
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Investment Plans</h1>
 
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">Available Investment Plans</h2>
