@@ -48,7 +48,7 @@ export default function InvestmentPoolCard({
             <div>
               <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
               <p className="text-xs text-gray-500">
-                {pool.startDate} - {pool.endDate} ({pool.duration === '3 months' ? '6 months' : pool.duration})
+                {pool.startDate} - {pool.endDate} (6 months)
               </p>
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
