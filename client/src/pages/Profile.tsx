@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,18 +23,18 @@ export default function Profile() {
           'Content-Type': 'application/json'
         }
       });
-      
+
       if (!res.ok) {
         throw new Error('Failed to reset application data');
       }
-      
+
       setResetSuccess(true);
       toast({
         title: "Reset Successful",
         description: "All investment data has been reset successfully.",
         variant: "success",
       });
-      
+
       setTimeout(() => {
         window.location.reload();
       }, 1500);
@@ -54,7 +53,7 @@ export default function Profile() {
   return (
     <div className="px-4 py-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">User Profile</h1>
-      
+
       <div className="grid gap-6">
         {/* User Information Card */}
         <Card className="bg-white shadow-md border border-gray-100">
@@ -154,7 +153,7 @@ export default function Profile() {
                             </li>
                           </ul>
                         </section>
-                        
+
                         <section>
                           <h4 className="text-sm font-medium text-gray-700 mb-2">Investment Strategy</h4>
                           <div className="grid gap-4">
@@ -209,7 +208,7 @@ export default function Profile() {
             <p className="text-sm text-gray-500 mb-4">
               Set the current market price for 24K gold. This will be used as reference across all calculators.
             </p>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-gray-700 mb-1 block">24K Gold Price per Tola (PKR)</label>
@@ -241,7 +240,7 @@ export default function Profile() {
             <p className="text-sm text-gray-500 mb-4">
               Use these controls for testing purposes. Resetting will clear all local data and refresh the application.
             </p>
-            
+
             <Button
               onClick={handleReset}
               disabled={isResetting}
@@ -250,7 +249,7 @@ export default function Profile() {
             >
               {isResetting ? 'Resetting...' : 'Reset Parameters'}
             </Button>
-            
+
             {resetSuccess && (
               <p className="mt-3 text-sm text-green-600">
                 Reset successful! Refreshing application...
