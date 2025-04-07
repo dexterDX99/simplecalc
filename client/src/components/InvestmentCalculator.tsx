@@ -165,9 +165,20 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Payout After 3 Months (Capital + Profit)</p>
-                  <p className="text-base font-semibold text-primary-600">
-                    Rs. {profit.finalPayout.toLocaleString()}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-base font-semibold text-primary-600">
+                      Rs. {profit.finalPayout.toLocaleString()}
+                    </p>
+                    <Button 
+                      onClick={() => {
+                        window.location.href = `/investments?investment=${profit.finalPayout}`;
+                      }}
+                      size="sm"
+                      className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
+                    >
+                      Invest Now
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div className="mt-3 pt-2 border-t border-gray-100">
