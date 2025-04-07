@@ -168,6 +168,18 @@ export default function Investments() {
                           <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
                         </div>
                         <div>
+                          <p className="text-xs text-gray-500">Investment Cycle</p>
+                          <p className="text-sm font-medium">{investmentPool.duration}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">Start Date</p>
+                          <p className="text-sm font-medium text-green-600">{investmentPool.startDate}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">End Date</p>
+                          <p className="text-sm font-medium text-amber-600">{investmentPool.endDate}</p>
+                        </div>
+                        <div>
                           <p className="text-xs text-gray-500">Expected Total Profit (6 Months)</p>
                           <p className="text-sm font-medium text-green-600">
                             Rs. {totalProfit.toLocaleString()}
