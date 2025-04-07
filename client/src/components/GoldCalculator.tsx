@@ -156,7 +156,7 @@ export default function GoldCalculator() {
         <Button 
           onClick={calculatePrice} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          disabled={!pricePerTola || (!weightGram && !weightTola) || !purity}
+          disabled={!pricePerTola || (!weightGram && !weightTola) || !purity || !wastage || !makingCut}
         >
           Generate Estimate
         </Button>
