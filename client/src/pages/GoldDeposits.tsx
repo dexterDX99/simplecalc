@@ -1,4 +1,3 @@
-
 import { useLocation } from 'wouter';
 import { Card, CardContent } from "@/components/ui/card";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,12 +15,11 @@ interface GoldDeposit {
 
 export default function GoldDeposits() {
   const [location] = useLocation();
-  const queryClient = useQueryClient();
-  const { toast } = useToast();
-  const params = new URLSearchParams(location.split('?')[1] || '');
-  const amount = params.get('amount') ? parseFloat(params.get('amount')!) : null;
-  const weight = params.get('weight') ? parseFloat(params.get('weight')!) : null;
-  const purity = params.get('purity') ? parseFloat(params.get('purity')!) : null;
+  const queryString = location.includes('?') ? location.split('?')[1] : '';
+  const params = new URLSearchParams(queryString);
+  const amount = params.get('amount') ? parseFloat(params.get('amount')) : null;
+  const weight = params.get('weight') ? parseFloat(params.get('weight')) : null;
+  const purity = params.get('purity') ? parseFloat(params.get('purity')) : null;
 
   const { data: deposits = [] } = useQuery<GoldDeposit[]>({
     queryKey: ['/api/gold-deposits'],
@@ -71,7 +69,7 @@ export default function GoldDeposits() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Gold Deposits</h1>
-      
+
       {amount && weight && purity && (
         <Card className="mb-6 border-green-100">
           <CardContent className="p-6">
