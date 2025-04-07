@@ -20,20 +20,14 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
     queryKey: ['/api/pools'],
   });
 
-  // Set the first pool as default when data is loaded
-  useEffect(() => {
-    if (pools && pools.length > 0 && !selectedPoolId) {
-      setSelectedPoolId(String(pools[0].id));
-    }
-  }, [pools, selectedPoolId]);
-
   const selectedPool = pools.find(pool => pool.id === Number(selectedPoolId));
 
   const calculateProfit = (amount: string, pool: Pool | undefined) => {
-    if (!amount || Number(amount) <= 0 || !pool) {
+    if (!amount || Number(amount) <= 0) {
       setProfit(null);
       return;
     }
+    if (!pool) return;
 
     // Calculate number of bulbs based on investment proportion
     const bulbsShare = Math.floor((Number(amount) / 1500000) * 12500);
@@ -75,7 +69,10 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
 
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Available Investment Pools</label>
-          <Select value={selectedPoolId} onValueChange={setSelectedPoolId}>
+          <Select value={selectedPoolId} onValueChange={(value) => {
+            setSelectedPoolId(value);
+            if (investmentAmount) calculateProfit(investmentAmount, pools.find(pool => pool.id === Number(value)));
+          }}>
             <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
               <SelectValue placeholder="Select an investment pool" />
             </SelectTrigger>
