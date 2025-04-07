@@ -147,7 +147,7 @@ export default function Investments() {
                 const investmentAmount = Number(userInvestment.amount);
                 const bulbsShare = Math.floor((investmentAmount / 1500000) * 12500);
                 const totalProfit = Math.floor((investmentAmount / 1500000) * 825000);
-                const monthlyProfit = Math.floor(totalProfit / 3);
+                const monthlyProfit = Math.floor(totalProfit / 6);
 
                 return investmentPool ? (
                   <div key={userInvestment.id} className="border-b border-gray-100 pb-4 last:border-0">
@@ -226,7 +226,7 @@ export default function Investments() {
               <div className="mt-4 bg-white border border-gray-200 rounded-lg p-3">
                 <h4 className="text-sm font-medium text-gray-700 mb-2">Profit Calculation Method</h4>
                 <p className="text-xs text-gray-600">
-                  Investments follow the Mudarabah model with a 30-40% profit rate range over 3 months. 
+                  Investments follow the Mudarabah model with a 30-40% profit rate range over 6 months. 
                   As an investor, you receive 60% of the generated profits. The business operators receive 
                   the remaining 40% of profits for managing operations. Following Mudarabah principles, there is
                   also a possibility of capital loss if the business underperforms.
@@ -237,8 +237,8 @@ export default function Investments() {
                     <li>Investment amount: Rs. 100,000</li>
                     <li>Total business profit (30-40%): Rs. 30,000 - 40,000</li>
                     <li>Your share (60%): Rs. 18,000 - 24,000</li>
-                    <li>Monthly profit: Rs. 6,000 - 8,000</li>
-                    <li>Total return after 3 months: Rs. 118,000 - 124,000</li>
+                    <li>Monthly profit: Rs. 3,000 - 4,000</li>
+                    <li>Total return after 6 months: Rs. 118,000 - 124,000</li>
                   </ul>
                 </div>
               </div>
