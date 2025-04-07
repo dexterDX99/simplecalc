@@ -239,7 +239,12 @@ export default function GoldCalculator() {
                     </Button>
                     <Button
                       onClick={() => {
-                        window.location.href = `/gold-deposits?amount=${calculationResult.finalPrice}&weight=${calculationResult.weightGramFloat}&purity=${calculationResult.purityFloat}`;
+                        const params = new URLSearchParams({
+                          amount: calculationResult.finalPrice.toString(),
+                          weight: calculationResult.weightGramFloat.toString(),
+                          purity: calculationResult.purityFloat.toString()
+                        });
+                        window.location.href = `/gold-deposits?${params.toString()}`;
                       }}
                       size="sm"
                       className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 transition-all"

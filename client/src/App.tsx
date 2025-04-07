@@ -8,6 +8,7 @@ import Calculator from "@/pages/Calculator";
 import Investments from "@/pages/Investments";
 import Profile from "@/pages/Profile";
 import CompanyProfiles from "@/pages/CompanyProfiles";
+import GoldDeposits from "@/pages/GoldDeposits";
 import BottomNavigation from "./components/BottomNavigation";
 
 function Router() {
@@ -18,8 +19,9 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/calculator" component={Calculator} />
           <Route path="/company-profiles" component={CompanyProfiles} />
-          <Route path="/my-investments" component={Investments} /> {/* Updated route */}
+          <Route path="/investments" component={Investments} />
           <Route path="/profile" component={Profile} />
+          <Route path="/gold-deposits" component={GoldDeposits} />
           {/* Fallback to 404 */}
           <Route component={NotFound} />
         </Switch>

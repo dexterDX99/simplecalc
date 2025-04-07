@@ -1,124 +1,147 @@
-
-import React from 'react';
+import { useLocation } from 'wouter';
 import { Card, CardContent } from "@/components/ui/card";
-import { useQuery } from '@tanstack/react-query';
-import { GoldCalculator } from "@/components/GoldCalculator";
-import type { Investment, Pool } from '../../shared/schema';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
-export default function MyInvestments() {
-  const { data: userInvestments = [] } = useQuery<Investment[]>({
-    queryKey: ['/api/users/1/investments'],
+interface GoldDeposit {
+  id: number;
+  userId: number;
+  weight: number;
+  purity: number;
+  value: number;
+  depositDate: string;
+}
+
+export default function GoldDeposits() {
+  const [location] = useLocation();
+  const queryString = location.includes('?') ? location.split('?')[1] : '';
+  const params = new URLSearchParams(queryString);
+  const amount = params.get('amount') ? parseFloat(params.get('amount')) : null;
+  const weight = params.get('weight') ? parseFloat(params.get('weight')) : null;
+  const purity = params.get('purity') ? parseFloat(params.get('purity')) : null;
+
+  const { data: deposits = [] } = useQuery<GoldDeposit[]>({
+    queryKey: ['gold-deposits'],
+    queryFn: async () => {
+      const response = await fetch('/api/gold-deposits');
+      if (!response.ok) {
+        throw new Error('Failed to fetch deposits');
+      }
+      return response.json();
+    },
   });
 
-  const { data: pools = [] } = useQuery<Pool[]>({
-    queryKey: ['/api/pools'],
+  const saveDeposit = useMutation({
+    mutationFn: async (deposit: Omit<GoldDeposit, 'id' | 'depositDate'>) => {
+      const response = await fetch('/api/gold-deposits', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(deposit),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save deposit');
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['gold-deposits'] });
+      toast({
+        title: "Success",
+        description: "Gold deposit saved successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to save deposit",
+        variant: "destructive",
+      });
+    },
   });
 
-  const totalInvested = userInvestments.reduce((acc, inv) => acc + Number(inv.amount), 0);
-  const minProfitRate = 0.3;
-  const maxProfitRate = 0.4;
-  const investorShare = 0.6;
-
-  const minTotalExpectedProfit = totalInvested * minProfitRate * investorShare;
-  const maxTotalExpectedProfit = totalInvested * maxProfitRate * investorShare;
-  const minMonthlyProfit = minTotalExpectedProfit / 3;
-  const maxMonthlyProfit = maxTotalExpectedProfit / 3;
-  const minTotalReturn = totalInvested + minTotalExpectedProfit;
-  const maxTotalReturn = totalInvested + maxTotalExpectedProfit;
+  const handleConfirmDeposit = () => {
+    if (amount && weight && purity) {
+      saveDeposit.mutate({
+        userId: 1, // TODO: Replace with actual user ID from auth
+        weight,
+        purity,
+        value: amount,
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Investments</h1>
-      
-      <Card className="mb-6">
-        <CardContent className="p-6">
-          <GoldCalculator />
-        </CardContent>
-      </Card>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Gold Deposits</h1>
 
-      {userInvestments && userInvestments.length > 0 && (
-        <Card className="mt-8">
+      {amount && weight && purity && (
+        <Card className="mb-6 border-green-100">
           <CardContent className="p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Investment History</h2>
-            <div className="space-y-4">
-              {userInvestments.map((userInvestment) => {
-                const investmentPool = pools && pools.find((p) => p.id === userInvestment.poolId);
-                const investmentAmount = Number(userInvestment.amount);
-                const minExpectedProfit = investmentAmount * minProfitRate * investorShare;
-                const maxExpectedProfit = investmentAmount * maxProfitRate * investorShare;
-
-                return investmentPool ? (
-                  <div key={userInvestment.id} className="border-b border-gray-100 pb-4 last:border-0">
-                    <h3 className="font-medium text-gray-800">{investmentPool.name}</h3>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                      <div>
-                        <p className="text-xs text-gray-500">Amount Invested</p>
-                        <p className="text-sm font-medium">Rs. {investmentAmount.toLocaleString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Investment Date</p>
-                        <p className="text-sm font-medium">{new Date(userInvestment.createdAt).toLocaleDateString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Expected Profit (3 Months)</p>
-                        <p className="text-sm font-medium text-green-600">
-                          Rs. {minExpectedProfit.toLocaleString()} - {maxExpectedProfit.toLocaleString()}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Maturity Date</p>
-                        <p className="text-sm font-medium text-amber-600">{investmentPool.endDate}</p>
-                      </div>
-                      <div className="col-span-2 mt-1 pt-1 border-t border-gray-100">
-                        <p className="text-xs text-gray-500">Total Return (Capital + Profit)</p>
-                        <p className="text-sm font-medium text-primary-600">
-                          Rs. {(investmentAmount + minExpectedProfit).toLocaleString()} - {(investmentAmount + maxExpectedProfit).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ) : null;
-              })}
-            </div>
-
-            <div className="mt-6 pt-4 border-t-2 border-green-100">
-              <h3 className="text-base font-semibold text-gray-800 mb-3">Investment Summary</h3>
-              <div className="bg-green-50 rounded-lg p-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs text-gray-600">Total Invested Capital</p>
-                    <p className="text-base font-semibold text-gray-800">Rs. {totalInvested.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-600">Number of Investments</p>
-                    <p className="text-base font-semibold text-gray-800">{userInvestments.length}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-600">Total Expected Profit</p>
-                    <p className="text-base font-semibold text-green-600">
-                      Rs. {minTotalExpectedProfit.toLocaleString()} - {maxTotalExpectedProfit.toLocaleString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-600">Monthly Profit (Estimated)</p>
-                    <p className="text-base font-semibold text-amber-600">
-                      Rs. {minMonthlyProfit.toLocaleString()} - {maxMonthlyProfit.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-3 pt-3 border-t border-green-200">
-                  <div className="flex justify-between items-center">
-                    <p className="text-sm text-gray-700">Total Return (Capital + Profit)</p>
-                    <p className="text-lg font-bold text-primary-600">
-                      Rs. {minTotalReturn.toLocaleString()} - {maxTotalReturn.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
+            <h2 className="text-lg font-semibold text-green-700 mb-4">New Jewelry Deposit</h2>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <p className="text-sm text-gray-500">Jewelry Weight</p>
+                <p className="text-base font-semibold">{weight} grams</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Purity</p>
+                <p className="text-base font-semibold">{purity}K</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Value</p>
+                <p className="text-base font-semibold">Rs. {parseFloat(amount.toString()).toLocaleString()}</p>
               </div>
             </div>
+            <Button 
+              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700"
+              onClick={handleConfirmDeposit}
+              disabled={saveDeposit.isPending}
+            >
+              {saveDeposit.isPending ? 'Saving...' : 'Confirm Deposit'}
+            </Button>
           </CardContent>
         </Card>
       )}
+
+      <div className="space-y-4">
+        {deposits.map((deposit) => (
+          <Card key={deposit.id} className="border-green-100">
+            <CardContent className="p-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500">Deposit Date</p>
+                  <p className="text-base font-semibold">
+                    {new Date(deposit.depositDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Weight</p>
+                  <p className="text-base font-semibold">{deposit.weight} grams</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Purity</p>
+                  <p className="text-base font-semibold">{deposit.purity}K</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Value</p>
+                  <p className="text-base font-semibold text-green-600">
+                    Rs. {deposit.value.toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+
+        {deposits.length === 0 && !amount && (
+          <div className="text-center py-8 text-gray-500">
+            No gold deposits found. Use the jewelry calculator to deposit your gold.
+          </div>
+        )}
+      </div>
     </div>
   );
 }
