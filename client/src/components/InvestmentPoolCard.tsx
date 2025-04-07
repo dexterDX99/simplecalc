@@ -50,6 +50,12 @@ export default function InvestmentPoolCard({
               <p className="text-xs text-gray-500">
                 {pool.startDate} - {pool.endDate} (6 months)
               </p>
+              <p className="text-xs text-green-600 mt-1">
+                Target Production: {Math.floor((Number(pool.target) / 1500000) * 12500)} bulbs
+              </p>
+              <p className="text-xs text-blue-600">
+                Current Production: {Math.floor((Number(pool.total) / 1500000) * 12500)} bulbs
+              </p>
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
               </p>
