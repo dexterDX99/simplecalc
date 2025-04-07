@@ -48,7 +48,7 @@ export default function InvestmentPoolCard({
             <div>
               <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
               <p className="text-xs text-gray-500">
-                {pool.startDate} - {pool.endDate} ({pool.duration})
+                {pool.startDate} - {pool.endDate} ({pool.duration === '3 months' ? '6 months' : pool.duration})
               </p>
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
@@ -152,7 +152,7 @@ export default function InvestmentPoolCard({
                   </div>
                   <div className="flex justify-between">
                     <span>Investment Duration:</span>
-                    <span className="font-medium">{pool.duration}</span>
+                    <span className="font-medium">{pool.duration === '3 months' ? '6 months' : pool.duration}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Profit Sharing Ratio:</span>
@@ -181,7 +181,7 @@ export default function InvestmentPoolCard({
                   <div className="flex justify-between">
                     <span>Monthly Expected Profit:</span>
                     <span className="font-medium text-amber-600">
-                      Rs. {Math.floor((Number(investment) / 1500000) * 825000 / 3).toLocaleString()}
+                      Rs. {Math.floor((Number(investment) / 1500000) * 825000 / 6).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
