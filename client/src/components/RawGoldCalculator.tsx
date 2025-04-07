@@ -18,12 +18,15 @@ export default function RawGoldCalculator() {
   useEffect(() => {
     const fetchGoldPrice = async () => {
       try {
-        const response = await fetch('https://api.metals.live/v1/spot/gold', {
-          method: 'GET'
+        const response = await fetch('https://www.goldapi.io/api/XAU/USD', {
+          method: 'GET',
+          headers: {
+            'x-access-token': 'goldapi-2cetbk8gkl7dz9-io'
+          }
         });
         const data = await response.json();
         // Convert USD/oz to PKR/tola
-        const pricePerOunce = data[0].price;
+        const pricePerOunce = data.price;
         const pricePerTola = ((pricePerOunce * PKR_TO_USD) / 31.1035) * 11.664;
         setPricePerTola(pricePerTola.toFixed(2));
       } catch (error) {
