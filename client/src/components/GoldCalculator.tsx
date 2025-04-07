@@ -3,9 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useQuery } from '@tanstack/react-query';
-// @ts-ignore - Import types directly from shared schema
-import type { Pool } from '../../../shared/schema';
 
 export default function GoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>("");
@@ -14,29 +11,7 @@ export default function GoldCalculator() {
   const [purity, setPurity] = useState<string>("22");
   const [wastage, setWastage] = useState<string>("");
   const [makingCut, setMakingCut] = useState<string>("");
-  const [selectedPoolId, setSelectedPoolId] = useState<string>("");
   const [calculationResult, setCalculationResult] = useState<any>(null);
-
-  const { data: pools = [] } = useQuery<Pool[]>({
-    queryKey: ['/api/pools'],
-  });
-
-  const calculatePoolInvestment = (amount: number, pool: Pool | undefined) => {
-    if (!amount || !pool) return;
-    
-    // Calculate investment metrics based on pool type
-    if (pool.name.includes('LED')) {
-      const bulbsShare = Math.floor((amount / 1500000) * 12500);
-      const totalProfit = Math.floor((amount / 1500000) * 825000);
-      
-      setProfit({
-        bulbsShare,
-        profitPerBulb: 110,
-        totalProfit,
-        finalPayout: amount + totalProfit
-      });
-    }
-  };
 
   const convertGramToTola = (value: string) => {
     if (!value) {
@@ -266,82 +241,6 @@ export default function GoldCalculator() {
           </Card>
         )}
       </div>
-
-      {calculationResult && (
-        <div className="mt-10 bg-gray-50 p-6 rounded-lg border border-gray-100">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">Available Investment Pools</h3>
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Select Investment Pool</label>
-              <Select 
-                value={selectedPoolId} 
-                onValueChange={(value) => {
-                  setSelectedPoolId(value);
-                  if (calculationResult?.finalPrice) {
-                    calculatePoolInvestment(calculationResult.finalPrice, pools.find(pool => pool.id === Number(value)));
-                  }
-                }}
-              >
-                <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
-                  <SelectValue placeholder="Select an investment pool" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border border-green-100 shadow-md rounded-md">
-                  {pools.map((pool) => (
-                    <SelectItem 
-                      key={pool.id} 
-                      value={String(pool.id)} 
-                      className="hover:bg-green-50 cursor-pointer transition-colors"
-                    >
-                      {pool.name}
-                      {pool.slots > 0 && (
-                        <span className="ml-2 text-green-600 text-xs">({pool.slots} slots available)</span>
-                      )}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {selectedPoolId && calculationResult && (
-              <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
-                <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-3 px-4">
-                  <h3 className="text-white font-medium">Pool Investment Summary</h3>
-                </div>
-                <CardContent className="py-6">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                    <div>
-                      <p className="text-xs text-gray-500">Gold Value for Investment</p>
-                      <p className="text-sm font-semibold">Rs. {calculationResult.finalPrice.toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Selected Pool</p>
-                      <p className="text-sm font-semibold">{pools.find(p => p.id === Number(selectedPoolId))?.name}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Investment Duration</p>
-                      <p className="text-sm font-semibold">3 months</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Expected Returns</p>
-                      <p className="text-sm font-semibold text-green-600">30-40% (potential loss possible)</p>
-                    </div>
-                    <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
-                      <Button 
-                        onClick={() => {
-                          window.location.href = `/investments?investment=${calculationResult.finalPrice}&poolId=${selectedPoolId}`;
-                        }}
-                        className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
-                      >
-                        Proceed with Investment
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
