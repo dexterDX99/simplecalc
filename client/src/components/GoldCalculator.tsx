@@ -32,7 +32,7 @@ export default function GoldCalculator() {
   };
 
   const calculatePrice = () => {
-    if (!pricePerTola || (!weightGram && !weightTola) || !purity) {
+    if (!pricePerTola || (!weightGram && !weightTola) || !purity || !wastage || !makingCut) {
       return;
     }
 
@@ -130,23 +130,25 @@ export default function GoldCalculator() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Wastage (Grams)</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Wastage (Grams)<span className="text-red-500 ml-1">*</span></label>
             <Input 
               type="number" 
               placeholder="Enter wastage" 
               className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={wastage}
               onChange={(e) => setWastage(e.target.value)}
+              required
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Making Charges (%)</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Making Charges (%)<span className="text-red-500 ml-1">*</span></label>
             <Input 
               type="number" 
               placeholder="Enter making charges" 
               className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={makingCut}
               onChange={(e) => setMakingCut(e.target.value)}
+              required
             />
           </div>
         </div>
