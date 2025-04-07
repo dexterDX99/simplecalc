@@ -222,12 +222,12 @@ export default function GoldCalculator() {
                     </p>
                     <Button 
                       onClick={() => {
-                        window.location.href = `/investments?investment=${calculationResult.finalPrice}`;
+                        window.location.href = `/calculator?tab=investment&amount=${calculationResult.finalPrice}`;
                       }}
                       size="sm"
                       className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
                     >
-                      Invest
+                      Calculate Investment
                     </Button>
                   </div>
                 </div>

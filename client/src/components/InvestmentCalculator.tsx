@@ -9,7 +9,10 @@ import type { Pool } from '../../shared/schema';
 import { MIN_PROFIT_RATE, MAX_PROFIT_RATE, INVESTOR_SHARE } from "@/shared/constants";
 
 export default function InvestmentCalculator() { // Cash Investment Calculator
-  const [investmentAmount, setInvestmentAmount] = useState<string>("");
+  const [investmentAmount, setInvestmentAmount] = useState<string>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('amount') || "";
+  });
   const [selectedPoolId, setSelectedPoolId] = useState<string>("");
   const [profit, setProfit] = useState<{min: number, max: number} | null>(null);
 
