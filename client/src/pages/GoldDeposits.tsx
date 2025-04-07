@@ -1,8 +1,9 @@
 
 import { useLocation } from 'wouter';
 import { Card, CardContent } from "@/components/ui/card";
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 interface GoldDeposit {
   id: number;
@@ -15,6 +16,8 @@ interface GoldDeposit {
 
 export default function GoldDeposits() {
   const [location] = useLocation();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
   const params = new URLSearchParams(location.split('?')[1] || '');
   const amount = params.get('amount') ? parseFloat(params.get('amount')!) : null;
   const weight = params.get('weight') ? parseFloat(params.get('weight')!) : null;
@@ -23,6 +26,47 @@ export default function GoldDeposits() {
   const { data: deposits = [] } = useQuery<GoldDeposit[]>({
     queryKey: ['/api/gold-deposits'],
   });
+
+  const saveDeposit = useMutation({
+    mutationFn: async (deposit: Omit<GoldDeposit, 'id' | 'depositDate'>) => {
+      const response = await fetch('/api/gold-deposits', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(deposit),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save deposit');
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/gold-deposits'] });
+      toast({
+        title: "Success",
+        description: "Gold deposit saved successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to save deposit",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleConfirmDeposit = () => {
+    if (amount && weight && purity) {
+      saveDeposit.mutate({
+        userId: 1, // TODO: Replace with actual user ID from auth
+        weight,
+        purity,
+        value: amount,
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -43,13 +87,15 @@ export default function GoldDeposits() {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Value</p>
-                <p className="text-base font-semibold">Rs. {parseFloat(amount).toLocaleString()}</p>
+                <p className="text-base font-semibold">Rs. {parseFloat(amount.toString()).toLocaleString()}</p>
               </div>
             </div>
             <Button 
               className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700"
+              onClick={handleConfirmDeposit}
+              disabled={saveDeposit.isPending}
             >
-              Confirm Deposit
+              {saveDeposit.isPending ? 'Saving...' : 'Confirm Deposit'}
             </Button>
           </CardContent>
         </Card>
