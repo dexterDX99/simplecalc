@@ -21,6 +21,23 @@ export default function GoldCalculator() {
     queryKey: ['/api/pools'],
   });
 
+  const calculatePoolInvestment = (amount: number, pool: Pool | undefined) => {
+    if (!amount || !pool) return;
+    
+    // Calculate investment metrics based on pool type
+    if (pool.name.includes('LED')) {
+      const bulbsShare = Math.floor((amount / 1500000) * 12500);
+      const totalProfit = Math.floor((amount / 1500000) * 825000);
+      
+      setProfit({
+        bulbsShare,
+        profitPerBulb: 110,
+        totalProfit,
+        finalPayout: amount + totalProfit
+      });
+    }
+  };
+
   const convertGramToTola = (value: string) => {
     if (!value) {
       setWeightTola("");
