@@ -1,5 +1,5 @@
 
-import { useSearchParams } from 'wouter';
+import { useLocation } from 'wouter';
 import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
@@ -14,10 +14,11 @@ interface GoldDeposit {
 }
 
 export default function GoldDeposits() {
-  const [searchParams] = useSearchParams();
-  const amount = searchParams.get('amount');
-  const weight = searchParams.get('weight');
-  const purity = searchParams.get('purity');
+  const [location] = useLocation();
+  const params = new URLSearchParams(location.split('?')[1]);
+  const amount = params.get('amount');
+  const weight = params.get('weight');
+  const purity = params.get('purity');
 
   const { data: deposits = [] } = useQuery<GoldDeposit[]>({
     queryKey: ['/api/gold-deposits'],
