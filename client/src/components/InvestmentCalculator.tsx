@@ -29,22 +29,23 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
 
   const selectedPool = pools.find(pool => pool.id === Number(selectedPoolId));
 
-  const handleCalculateProfit = () => {
-    if (!investmentAmount || Number(investmentAmount) <= 0 || !selectedPool) {
+  const calculateProfit = (amount: string, pool: Pool | undefined) => {
+    if (!amount || Number(amount) <= 0 || !pool) {
+      setProfit(null);
       return;
     }
 
     // Calculate number of bulbs based on investment proportion
-    const bulbsShare = Math.floor((Number(investmentAmount) / 1500000) * 12500);
+    const bulbsShare = Math.floor((Number(amount) / 1500000) * 12500);
     
     // Calculate profit using Rs. 110 profit per bulb
-    const totalProfit = Math.floor((Number(investmentAmount) / 1500000) * 825000);
+    const totalProfit = Math.floor((Number(amount) / 1500000) * 825000);
 
     setProfit({
       bulbsShare,
       profitPerBulb: 110,
       totalProfit,
-      finalPayout: Number(investmentAmount) + totalProfit
+      finalPayout: Number(amount) + totalProfit
     });
   };
 
@@ -63,6 +64,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               onChange={(e) => {
                 const value = e.target.value.replace(/\D/g, '');
                 setInvestmentAmount(value);
+                calculateProfit(value, selectedPool);
               }}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -120,13 +122,7 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
           </div>
         )}
 
-        <Button 
-          onClick={handleCalculateProfit} 
-          className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          disabled={!investmentAmount || Number(investmentAmount) <= 0 || !selectedPool}
-        >
-          Calculate Potential Returns
-        </Button>
+        
 
         {profit !== null && selectedPool && (
           <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
