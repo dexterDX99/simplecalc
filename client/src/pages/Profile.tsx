@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function Profile() {
   const [isResetting, setIsResetting] = useState(false);
   const [resetSuccess, setResetSuccess] = useState(false);
+  const [goldPrice, setGoldPrice] = useState(localStorage.getItem('goldPrice24K') || '');
   const { toast } = useToast();
 
   const handleReset = async () => {
@@ -218,9 +219,11 @@ export default function Profile() {
                     type="number" 
                     placeholder="Enter current gold price" 
                     className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-                    value={localStorage.getItem('goldPrice24K') || ''}
+                    value={goldPrice}
                     onChange={(e) => {
-                      localStorage.setItem('goldPrice24K', e.target.value);
+                      const newValue = e.target.value;
+                      setGoldPrice(newValue);
+                      localStorage.setItem('goldPrice24K', newValue);
                       window.dispatchEvent(new Event('storage'));
                     }}
                   />
