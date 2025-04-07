@@ -201,6 +201,38 @@ export default function Profile() {
           </CardContent>
         </Card>
 
+        {/* Gold Price Controls */}
+        <Card className="bg-white shadow-md border border-gray-100 mb-4">
+          <CardContent className="p-5">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Gold Price Controls</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Set the current market price for 24K gold. This will be used as reference across all calculators.
+            </p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-gray-700 mb-1 block">24K Gold Price per Tola (PKR)</label>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
+                  <Input 
+                    type="number" 
+                    placeholder="Enter current gold price" 
+                    className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+                    value={localStorage.getItem('goldPrice24K') || ''}
+                    onChange={(e) => {
+                      localStorage.setItem('goldPrice24K', e.target.value);
+                      window.dispatchEvent(new Event('storage'));
+                    }}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Last updated: {new Date().toLocaleString()}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Testing Controls */}
         <Card className="bg-white shadow-md border border-gray-100">
           <CardContent className="p-5">

@@ -5,7 +5,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function RawGoldCalculator() {
-  const [pricePerTola, setPricePerTola] = useState<string>("");
+  const [pricePerTola, setPricePerTola] = useState<string>(localStorage.getItem('goldPrice24K') || "");
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setPricePerTola(localStorage.getItem('goldPrice24K') || "");
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
   const [weightGram, setWeightGram] = useState<string>("");
   const [weightTola, setWeightTola] = useState<string>("");
   const [purity, setPurity] = useState<string>("24");
