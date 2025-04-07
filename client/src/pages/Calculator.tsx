@@ -6,11 +6,11 @@ import RawGoldCalculator from "../components/RawGoldCalculator";
 
 export default function Calculator() {
   // Default to showing the Halal Investment Calculator without dropdown functionality
-  const [activeTab, setActiveTab] = useState("investment");
+  const [activeTab, setActiveTab] = useState("gold");
 
   useEffect(() => {
-    // Set investment calculator as default when component mounts
-    setActiveTab("investment");
+    // Set gold calculator as default when component mounts
+    setActiveTab("gold");
   }, []);
 
   return (
