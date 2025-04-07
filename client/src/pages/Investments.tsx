@@ -155,7 +155,7 @@ export default function Investments() {
                   return investmentPool ? (
                     <AccordionItem key={userInvestment.id} value={`investment-${userInvestment.id}`} className="border-b border-gray-100 last:border-0">
                       <AccordionTrigger className="hover:no-underline">
-                        <h3 className="font-medium text-gray-800 text-left">{investmentPool.name}</h3>
+                        <h3 className="font-medium text-gray-800 text-left">Investment #{userInvestments.indexOf(userInvestment) + 1}: {investmentPool.name}</h3>
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="grid grid-cols-2 gap-2 mt-2">
