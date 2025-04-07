@@ -240,15 +240,18 @@ export default function GoldCalculator() {
                     <p className="text-base font-semibold text-primary-600">
                       Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </p>
-                    <Button 
-                      onClick={() => {
-                        window.location.href = `/calculator?tab=investment&amount=${calculationResult.finalPrice}`;
-                      }}
-                      size="sm"
-                      className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
-                    >
-                      Calculate Investment
-                    </Button>
+                    <div className="space-y-2">
+                      <Button 
+                        onClick={() => {
+                          window.location.href = `/calculator?tab=investment&amount=${calculationResult.finalPrice}`;
+                        }}
+                        size="sm"
+                        className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
+                      >
+                        Calculate Investment
+                      </Button>
+                      <p className="text-xs text-gray-500">Calculate estimated returns and explore investment opportunities based on current gold value</p>
+                    </div>
                   </div>
                 </div>
               </div>
