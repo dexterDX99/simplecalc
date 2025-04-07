@@ -75,7 +75,7 @@ export default function GoldDeposits() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Gold Deposits</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Investments</h1>
 
       {amount && weight && purity && (
         <Card className="mb-6 border-green-100">
