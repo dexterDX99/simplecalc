@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export default function GoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>(localStorage.getItem('goldPrice24K') || "");
+  const [buyingPrice, setBuyingPrice] = useState<string>("");
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -90,6 +91,21 @@ export default function GoldCalculator() {
               value={pricePerTola}
               disabled
               readOnly
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
+          <div className="relative mt-2">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
+            <Input 
+              type="number" 
+              placeholder="Enter your buying price" 
+              className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={buyingPrice}
+              onChange={(e) => setBuyingPrice(e.target.value)}
               required
             />
           </div>
