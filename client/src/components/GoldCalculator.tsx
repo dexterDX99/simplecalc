@@ -315,12 +315,6 @@ export default function GoldCalculator() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Loss Due to Wastage</p>
-                      <p className="text-sm font-semibold text-red-600">
-                        Rs. {Math.max(0, calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      </p>
-                    </div>
-                    <div className="col-span-2">
                       <p className="text-xs text-gray-500">Net Value Change</p>
                       <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
