@@ -77,7 +77,7 @@ export default function GoldCalculator() {
     <div className="mt-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">24K Gold Price per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Today's 24K Gold Price per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
           <div className="relative">
             <p className="text-xs text-gray-500 mt-1">
               Last updated: {new Date().toLocaleString()}
