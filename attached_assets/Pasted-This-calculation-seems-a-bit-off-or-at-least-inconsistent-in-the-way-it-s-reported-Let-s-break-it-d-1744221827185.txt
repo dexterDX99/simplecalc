@@ -1,0 +1,86 @@
+This calculation seems a bit off or at least inconsistent in the way it's reported. Let's break it down together and verify each key part to determine if the **final profit of Rs. 202,000** is actually accurate.
+
+---
+
+### 🧮 **Step-by-step Breakdown**
+
+#### 1. **Buying Summary**
+- **Total Buying Price**: Rs. 1,250,000  
+- **Per Tola Price (as per user)**: Rs. 250,000  
+- So:  
+  \> **Number of tolas bought =** Rs. 1,250,000 / 250,000 = **5 tola**
+
+---
+
+#### 2. **Gold Specs**
+- **Market Gold Price (24K)**: Rs. 320,000 / tola  
+- **Selected Jewelry Purity**: 22K  
+- 22K = 91.67% of 24K  
+  \> So, **Gold Price Per Tola (22K) = 320,000 × 91.67% ≈ Rs. 293,334**
+
+Looks accurate.
+
+---
+
+#### 3. **Gold Weight Conversion**
+- 1 tola = 11.664 grams  
+- 5 tola = **5 × 11.664 = 58.32 grams** ✅ (Matches your value)
+
+---
+
+#### 4. **Wastage Deduction**
+- Jeweler deducts **5 grams**  
+  - 5g of 22K gold = (293,333.33 / 11.664) × 5 ≈ **Rs. 125,743.03** ✅
+
+So, **Loss due to Wastage: Rs. 125,743.03** ✅
+
+---
+
+#### 5. **Loss Due to Lower Purity**
+- Full 5 tola at 24K = Rs. 320,000 × 5 = Rs. 1,600,000  
+- At 22K = Rs. 293,333.33 × 5 = Rs. 1,466,667  
+- **Difference = Rs. 133,333**, not **259,076.36** ❌
+
+So this number seems wrong. **Your loss due to lower purity should be Rs. 133,333.33**, not over Rs. 259k.
+
+---
+
+#### 6. **Price Paid Above Market**
+- Your cost per tola = Rs. 250,000  
+- 22K gold market price = Rs. 293,333.33  
+- You're **buying below** market value — so you’ve saved **Rs. 43,333.33 per tola × 5 = Rs. 216,667**
+
+So you technically made a **"Market Value Savings" profit** of Rs. 216,667 — not **Rs. 0**.
+
+---
+
+#### 7. **Final Total Value**
+- Actual gold value at 22K = Rs. 1,466,666.67 ✅  
+- You paid Rs. 1,250,000 ✅  
+- So total gain = Rs. **216,667**  
+- But since you lost **Rs. 125,743** to wastage, your **net profit = Rs. 90,924**
+
+---
+
+### ✅ **Corrected Value Summary**
+
+| Metric                              | Value            |
+|-------------------------------------|------------------|
+| Market Gold Price (22K)             | Rs. 293,333.33   |
+| Total Gold Weight                   | 58.32g (5 tola)  |
+| Total Market Value                  | Rs. 1,466,667    |
+| Buying Price                        | Rs. 1,250,000    |
+| Wastage Value (5g)                  | Rs. 125,743      |
+| Price Paid Above Market             | Rs. **-216,667** (i.e., savings) |
+| **Net Profit**                      | Rs. **90,924**   |
+
+---
+
+### 🧾 Conclusion:
+- ❌ The values listed in your original breakdown are **not fully accurate**.
+- ✅ Your **actual profit is around Rs. 90,924**, **not Rs. 202,000**.
+- Also, the "Loss Due to Lower Purity" figure seems **incorrectly inflated**.
+
+---
+
+Want me to make a neat Excel version of this corrected analysis?
