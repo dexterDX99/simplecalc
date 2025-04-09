@@ -264,7 +264,7 @@ export default function GoldCalculator() {
                         <p className="text-[10px] sm:text-xs text-gray-500">Total Value Loss</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {(
-                            Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)) +
+                            Math.max(0, (calculationResult.buyingPrice - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)))) +
                             Math.max(0, calculationResult.wastageValue)
                           ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
