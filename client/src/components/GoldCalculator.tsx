@@ -308,16 +308,16 @@ export default function GoldCalculator() {
                   <p className="text-xs font-medium text-gray-700 mb-2">Total Value Analysis</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs text-gray-500">Your Total Gold Value</p>
-                      <p className="text-sm font-semibold text-primary-600">
-                        Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                      </p>
-                    </div>
-                    <div>
                       <p className="text-xs text-gray-500">Net Value Change</p>
                       <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         {(calculationResult.finalPrice - calculationResult.buyingPrice) >= 0 ? ' (Profit)' : ' (Loss)'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Your Total Gold Value</p>
+                      <p className="text-sm font-semibold text-primary-600">
+                        Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>
