@@ -230,13 +230,6 @@ export default function GoldCalculator() {
                     {calculationResult.weightGramFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams ({(calculationResult.weightGramFloat / 11.664).toLocaleString(undefined, { maximumFractionDigits: 3 })} tola)
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500">Total Gold Value</p>
-                  <p className="text-sm font-semibold text-green-600">
-                    Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
-                </div>
-
                 {calculationResult.wastageFloat > 0 && (
                   <div>
                     <p className="text-xs text-gray-500">Wastage Value (Deducted by your Jeweler)</p>
@@ -245,6 +238,13 @@ export default function GoldCalculator() {
                     </p>
                   </div>
                 )}
+
+                <div>
+                  <p className="text-xs text-gray-500">Your Total Gold Value</p>
+                  <p className="text-sm font-semibold text-green-600">
+                    Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  </p>
+                </div>
 
                 {calculationResult.makingChargesDeduction > 0 && (
                   <div>
