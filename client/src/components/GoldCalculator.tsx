@@ -246,32 +246,32 @@ export default function GoldCalculator() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+                <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-1 pt-2 border-t border-gray-100">
                   {/* Value Loss Analysis */}
                   <div>
-                    <p className="text-xs font-medium text-red-500 mb-2">Value Loss Analysis</p>
-                    <div className="space-y-2">
+                    <p className="text-[10px] sm:text-xs font-medium text-red-500 mb-1">Value Loss Analysis</p>
+                    <div className="space-y-1 sm:space-y-2">
                       <div>
-                        <p className="text-xs text-gray-500">Price Paid Above Market Value</p>
-                        <p className="text-sm font-semibold text-red-600">
+                        <p className="text-[10px] sm:text-xs text-gray-500">Price Paid Above Market Value</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Loss Due to Lower Purity (24K vs 22K)</p>
-                        <p className="text-sm font-semibold text-red-600">
+                        <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Lower Purity (24K vs 22K)</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Loss Due to Wastage</p>
-                        <p className="text-sm font-semibold text-red-600">
+                        <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Wastage</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {Math.max(0, calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Total Value Loss</p>
-                        <p className="text-sm font-semibold text-red-600">
+                        <p className="text-[10px] sm:text-xs text-gray-500">Total Value Loss</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {(
                             Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)) + 
                             Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue)) +
