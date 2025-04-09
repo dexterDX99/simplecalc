@@ -233,13 +233,6 @@ export default function GoldCalculator() {
                   </div>
                 )}
 
-                <div>
-                  <p className="text-xs text-gray-500">Your Total Gold Value</p>
-                  <p className="text-sm font-semibold text-green-600">
-                    Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
-                </div>
-
                 <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-1 pt-2 border-t border-gray-100">
                   {/* Value Loss Analysis */}
                   <div>
