@@ -219,12 +219,6 @@ export default function GoldCalculator() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Gold Price Per Gram ({calculationResult.purityFloat}K)</p>
-                  <p className="text-sm font-semibold">
-                    Rs. {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
-                </div>
-                <div>
                   <p className="text-xs text-gray-500">Total Gold Weight</p>
                   <p className="text-sm font-semibold">
                     {calculationResult.weightGramFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams ({(calculationResult.weightGramFloat / 11.664).toLocaleString(undefined, { maximumFractionDigits: 3 })} tola)
