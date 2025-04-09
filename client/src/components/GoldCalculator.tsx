@@ -239,7 +239,7 @@ export default function GoldCalculator() {
 
                 {calculationResult.wastageFloat > 0 && (
                   <div>
-                    <p className="text-xs text-gray-500">Wastage Value Charged by your Jewler Not Us !</p>
+                    <p className="text-xs text-gray-500">Wastage Value (Deducted by your Jeweler)</p>
                     <p className="text-sm font-semibold">
                       {calculationResult.wastageFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams (Rs. {calculationResult.wastageValue.toLocaleString(undefined, { maximumFractionDigits: 2 })})
                     </p>
@@ -248,7 +248,7 @@ export default function GoldCalculator() {
 
                 {calculationResult.makingChargesDeduction > 0 && (
                   <div>
-                    <p className="text-xs text-gray-500">Making Charges Deduction</p>
+                    <p className="text-xs text-gray-500">Making Charges (Deducted by Halal Tajir)</p>
                     <p className="text-sm font-semibold">
                       {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
                     </p>
