@@ -257,23 +257,13 @@ export default function GoldCalculator() {
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Total Value Loss</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Total Value Loss</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {(
                             Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)) + 
                             Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue)) +
                             Math.max(0, calculationResult.wastageValue)
                           ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        </p>
-                      </div>
-                      <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
-                        <p className="text-xs text-gray-500">Your Buying Price After Total Loss</p>
-                        <p className="text-sm font-semibold text-red-600">
-                          Rs. {(calculationResult.buyingPrice - (
-                            Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)) + 
-                            Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue)) +
-                            Math.max(0, calculationResult.wastageValue)
-                          )).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                     </div>
@@ -289,17 +279,11 @@ export default function GoldCalculator() {
                           Rs. {Math.max(0, (calculationResult.pricePerTolaFloat - calculationResult.buyingPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
-
+                      
                       <div>
                         <p className="text-xs text-gray-500">Total Value Profit</p>
                         <p className="text-sm font-semibold text-green-600">
                           Rs. {Math.max(0, (calculationResult.finalPrice - calculationResult.buyingPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        </p>
-                      </div>
-                      <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
-                        <p className="text-xs text-gray-500">Your Buying Price After Total Profit</p>
-                        <p className="text-sm font-semibold text-green-600">
-                          Rs. {(calculationResult.buyingPrice + Math.max(0, (calculationResult.finalPrice - calculationResult.buyingPrice))).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                     </div>
