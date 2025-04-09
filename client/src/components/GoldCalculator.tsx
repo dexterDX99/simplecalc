@@ -307,7 +307,7 @@ export default function GoldCalculator() {
                     <div>
                       <p className="text-xs text-gray-500">Your Total Gold Value</p>
                       <p className="text-sm font-semibold text-primary-600">
-                        Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        Rs. {(calculationResult.totalGoldValue - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>
