@@ -184,6 +184,10 @@ export default function GoldCalculator() {
             <CardContent className="py-6">
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
+                  <p className="text-xs text-gray-500">Your Buying Price</p>
+                  <p className="text-sm font-semibold">Rs. {calculationResult.buyingPrice?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'N/A'}</p>
+                </div>
+                <div>
                   <p className="text-xs text-gray-500">Market Gold Price (Pure 24K Reference)</p>
                   <p className="text-sm font-semibold">Rs. {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                 </div>
