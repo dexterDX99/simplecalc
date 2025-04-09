@@ -279,7 +279,7 @@ export default function GoldCalculator() {
                           Rs. {Math.max(0, (calculationResult.pricePerTolaFloat - calculationResult.buyingPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
-
+                      
                       <div>
                         <p className="text-xs text-gray-500">Total Value Profit</p>
                         <p className="text-sm font-semibold text-green-600">
