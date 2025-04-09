@@ -299,9 +299,9 @@ export default function GoldCalculator() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-gray-500">Net Value Change</p>
-                      <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        {(calculationResult.finalPrice - calculationResult.buyingPrice) >= 0 ? ' (Profit)' : ' (Loss)'}
+                      <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        {(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit)' : ' (Loss)'}
                       </p>
                     </div>
                     <div>
