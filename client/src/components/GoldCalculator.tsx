@@ -249,23 +249,23 @@ export default function GoldCalculator() {
                     <p className="text-[10px] sm:text-xs font-medium text-red-500 mb-1">Value Loss Analysis</p>
                     <div className="space-y-1 sm:space-y-2">
                       <div>
-                        <p className="text-[10px] sm:text-xs text-gray-500">Price Paid Above Market Value</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Lower Purity</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
-                          Rs. {Math.max(0, (calculationResult.buyingPrice - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)))).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {(calculationResult.pricePerTolaFloat * (calculationResult.weightGramFloat / 11.664) - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664))).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
                         <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Wastage</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
-                          Rs. {Math.max(0, calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {calculationResult.wastageValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
                         <p className="text-[10px] sm:text-xs text-gray-500">Total Value Loss</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {(
-                            Math.max(0, (calculationResult.buyingPrice - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)))) +
-                            Math.max(0, calculationResult.wastageValue)
+                            (calculationResult.pricePerTolaFloat * (calculationResult.weightGramFloat / 11.664) - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664))) +
+                            calculationResult.wastageValue
                           ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
@@ -279,14 +279,14 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-xs text-gray-500">Market Value Savings</p>
                         <p className="text-sm font-semibold text-green-600">
-                          Rs. {Math.max(0, (calculationResult.pricePerTolaFloat - calculationResult.buyingPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
 
                       <div>
-                        <p className="text-xs text-gray-500">Total Value Profit</p>
+                        <p className="text-xs text-gray-500">Net Profit</p>
                         <p className="text-sm font-semibold text-green-600">
-                          Rs. {Math.max(0, (calculationResult.finalPrice - calculationResult.buyingPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                     </div>
