@@ -228,12 +228,6 @@ export default function GoldCalculator() {
                     {calculationResult.weightGramFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams ({(calculationResult.weightGramFloat / 11.664).toLocaleString(undefined, { maximumFractionDigits: 3 })} tola)
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500">Loss Due to Lower Purity (24K vs 22K)</p>
-                  <p className="text-[11px] sm:text-sm font-semibold text-red-600">
-                    Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - (calculationResult.totalGoldValue - calculationResult.wastageValue))).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
-                </div>
                 {calculationResult.wastageFloat > 0 && (
                   <div>
                     <p className="text-xs text-gray-500">Wastage Value (Deducted by your Jeweler)</p>
@@ -298,7 +292,7 @@ export default function GoldCalculator() {
                   <p className="text-xs font-medium text-gray-700 mb-2">Total Value Analysis</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs text-gray-500">Net Value Change</p>
+                      <p className="text-xs text-gray-500">Total Net Profit/Loss</p>
                       <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         {(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit)' : ' (Loss)'}
