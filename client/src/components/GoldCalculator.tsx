@@ -75,11 +75,11 @@ export default function GoldCalculator() {
 
   return (
     <div className="mt-2">
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Today's 24K Gold Price per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
+          <label className="text-xs sm:text-sm font-medium text-gray-700 mb-1 block flex items-center">Today's 24K Gold Price per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
           <div className="relative">
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
               Last updated: {new Date().toLocaleString()}
             </p>
           </div>
@@ -194,15 +194,15 @@ export default function GoldCalculator() {
         </Button>
 
         {calculationResult && (
-          <Card className="mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-3 px-4">
-              <h3 className="text-white font-medium">Gold Investment Summary</h3>
+          <Card className="mt-3 sm:mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-2 sm:py-3 px-3 sm:px-4">
+              <h3 className="text-white text-sm sm:text-base font-medium">Gold Investment Summary</h3>
             </div>
-            <CardContent className="py-6">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+            <CardContent className="py-4 sm:py-6 px-2 sm:px-4">
+              <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-2">
                 <div>
-                  <p className="text-xs text-gray-500">Your Buying Price</p>
-                  <p className="text-sm font-semibold">Rs. {calculationResult.buyingPrice?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'N/A'}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-500">Your Buying Price</p>
+                  <p className="text-xs sm:text-sm font-semibold">Rs. {calculationResult.buyingPrice?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Market Gold Price (Pure 24K Reference)</p>
