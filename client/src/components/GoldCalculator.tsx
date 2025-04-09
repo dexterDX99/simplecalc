@@ -322,7 +322,7 @@ export default function GoldCalculator() {
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
                   <div className="flex flex-col gap-2">
                     <p className="text-lg font-semibold text-primary-600">
-                      Rs. {(calculationResult.finalPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      Rs. {(calculationResult.totalGoldValue - calculationResult.makingChargesAmount).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </p>
                     <div>
                       <Button 
