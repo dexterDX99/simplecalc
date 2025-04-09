@@ -246,15 +246,6 @@ export default function GoldCalculator() {
                   </p>
                 </div>
 
-                {calculationResult.makingChargesDeduction > 0 && (
-                  <div className="border-t border-gray-100 pt-2 mt-2">
-                    <p className="text-xs text-gray-500">Making Charges (Deducted by Halal Tajir)</p>
-                    <p className="text-sm font-semibold">
-                      {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
-                    </p>
-                  </div>
-                )}
-
                 <div className="grid grid-cols-2 gap-4 pt-2 border-t border-gray-100">
                   {/* Value Loss Analysis */}
                   <div>
@@ -312,6 +303,15 @@ export default function GoldCalculator() {
                     </div>
                   </div>
                 </div>
+
+                {calculationResult.makingChargesDeduction > 0 && (
+                  <div className="mt-2 pt-2 border-t border-gray-100">
+                    <p className="text-xs text-gray-500">Making Charges (Deducted by Halal Tajir)</p>
+                    <p className="text-sm font-semibold">
+                      {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
+                    </p>
+                  </div>
+                )}
 
                 <div className="mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
