@@ -196,7 +196,7 @@ export default function GoldCalculator() {
         {calculationResult && (
           <Card className="mt-3 sm:mt-4 border border-green-100 shadow-md rounded-lg overflow-hidden">
             <div className="bg-gradient-to-r from-emerald-500 to-green-600 py-2 sm:py-3 px-3 sm:px-4">
-              <h3 className="text-white text-sm sm:text-base font-medium">Gold Investment Summary</h3>
+              <h3 className="text-white text-sm sm:text-base font-medium">Your Jewelry's Current Valuation</h3>
             </div>
             <CardContent className="py-4 sm:py-6 px-2 sm:px-4">
               <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-2">
