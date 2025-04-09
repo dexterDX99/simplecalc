@@ -272,7 +272,7 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-xs text-gray-500">Total Value Loss</p>
                         <p className="text-sm font-semibold text-red-600">
-                          Rs. {Math.max(0, (calculationResult.buyingPrice - calculationResult.finalPrice)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, (calculationResult.buyingPrice - calculationResult.finalPrice + calculationResult.makingChargesAmount)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                     </div>
