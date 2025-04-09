@@ -261,7 +261,7 @@ export default function GoldCalculator() {
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
                           Rs. {(
                             Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)) + 
-                            Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue)) +
+                            Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - (calculationResult.totalGoldValue - calculationResult.wastageValue))) +
                             Math.max(0, calculationResult.wastageValue)
                           ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
@@ -323,7 +323,7 @@ export default function GoldCalculator() {
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
                   <div className="flex flex-col gap-2">
                     <p className="text-lg font-semibold text-primary-600">
-                      Rs. {calculationResult.finalPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      Rs. {(calculationResult.finalPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </p>
                     <div>
                       <Button 
