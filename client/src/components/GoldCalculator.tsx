@@ -251,7 +251,7 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-[10px] sm:text-xs text-gray-500">Price Paid Above Market Value</p>
                         <p className="text-[11px] sm:text-sm font-semibold text-red-600">
-                          Rs. {Math.max(0, (calculationResult.buyingPrice - calculationResult.pricePerTolaFloat)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, (calculationResult.buyingPrice - ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)))).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
