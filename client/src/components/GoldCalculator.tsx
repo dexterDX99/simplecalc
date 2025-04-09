@@ -275,6 +275,31 @@ export default function GoldCalculator() {
                     </div>
                   </div>
                 </div>
+
+                {/* Value Loss Analysis */}
+                <div className="col-span-2 mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-xs font-medium text-red-500 mb-2">Value Loss Analysis</p>
+                  <div className="space-y-2">
+                    <div>
+                      <p className="text-xs text-gray-500">Price Paid Above Market Value</p>
+                      <p className="text-sm font-semibold text-red-600">
+                        Rs. {(calculationResult.buyingPrice - calculationResult.pricePerTolaFloat).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Loss Due to Lower Purity (24K vs 22K)</p>
+                      <p className="text-sm font-semibold text-red-600">
+                        Rs. {((calculationResult.pricePerTolaFloat * calculationResult.weightGramFloat / 11.664) - calculationResult.totalGoldValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Total Value Loss</p>
+                      <p className="text-sm font-semibold text-red-600">
+                        Rs. {(calculationResult.buyingPrice - calculationResult.finalPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
