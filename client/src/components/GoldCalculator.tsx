@@ -239,6 +239,31 @@ export default function GoldCalculator() {
                 )}
 
                 <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-1 pt-2 border-t border-gray-100">
+                  {/* Weight Loss Analysis */}
+                  <div>
+                    <p className="text-[10px] sm:text-xs font-medium text-amber-600 mb-1">Weight Loss Analysis</p>
+                    <div className="space-y-1 sm:space-y-2">
+                      <div>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Purity (24K to {calculationResult.purityFloat}K)</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-amber-600">
+                          {(calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24).toFixed(3)} grams
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Loss Due to Wastage</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-amber-600">
+                          {calculationResult.wastageFloat.toFixed(3)} grams
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Total Weight Loss</p>
+                        <p className="text-[11px] sm:text-sm font-semibold text-amber-600">
+                          {(calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)).toFixed(3)} grams ({((calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)) / calculationResult.weightGramFloat * 100).toFixed(2)}%)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Value Loss Analysis */}
                   <div>
                     <p className="text-[10px] sm:text-xs font-medium text-red-500 mb-1">Value Loss Analysis</p>
