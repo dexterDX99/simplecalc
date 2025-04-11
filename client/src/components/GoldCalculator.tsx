@@ -100,6 +100,37 @@ export default function GoldCalculator() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Tola)<span className="text-red-500 ml-1">*</span></label>
+            <Input 
+              type="number" 
+              placeholder="Enter tola weight" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={weightTola}
+              onChange={(e) => {
+                setWeightTola(e.target.value);
+                convertTolaToGram(e.target.value);
+              }}
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Grams)<span className="text-red-500 ml-1">*</span></label>
+            <Input 
+              type="number" 
+              placeholder="Enter gram weight" 
+              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+              value={weightGram}
+              onChange={(e) => {
+                setWeightGram(e.target.value);
+                convertGramToTola(e.target.value);
+              }}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Total Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
             <div className="relative mt-2">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
@@ -148,37 +179,6 @@ export default function GoldCalculator() {
                 required
               />
             </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Tola)<span className="text-red-500 ml-1">*</span></label>
-            <Input 
-              type="number" 
-              placeholder="Enter tola weight" 
-              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-              value={weightTola}
-              onChange={(e) => {
-                setWeightTola(e.target.value);
-                convertTolaToGram(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Grams)<span className="text-red-500 ml-1">*</span></label>
-            <Input 
-              type="number" 
-              placeholder="Enter gram weight" 
-              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-              value={weightGram}
-              onChange={(e) => {
-                setWeightGram(e.target.value);
-                convertGramToTola(e.target.value);
-              }}
-              required
-            />
           </div>
         </div>
 
