@@ -321,7 +321,7 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-xs text-gray-500">Total Weight Loss</p>
                         <p className="text-sm font-semibold text-amber-600">
-                          {(calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)).toFixed(3)} grams
+                          {(calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)).toFixed(3)} grams ({((calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)) / 11.664).toFixed(3)} tola)
                         </p>
                         <p className="text-[10px] text-gray-500">
                           Including purity reduction and wastage
@@ -330,7 +330,7 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-xs text-gray-500">Remaining Pure 24K Weight</p>
                         <p className="text-sm font-semibold text-emerald-600">
-                          {(calculationResult.weightGramFloat * (calculationResult.purityFloat / 24) - calculationResult.wastageFloat).toFixed(3)} grams
+                          {(calculationResult.weightGramFloat * (calculationResult.purityFloat / 24) - calculationResult.wastageFloat).toFixed(3)} grams ({((calculationResult.weightGramFloat * (calculationResult.purityFloat / 24) - calculationResult.wastageFloat) / 11.664).toFixed(3)} tola)
                         </p>
                         <p className="text-[10px] text-gray-500">
                           After all deductions
