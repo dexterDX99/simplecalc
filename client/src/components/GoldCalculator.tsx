@@ -173,15 +173,16 @@ export default function GoldCalculator() {
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Making Charges (%)<span className="text-red-500 ml-1">*</span></label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Loss Percentage (%)<span className="text-red-500 ml-1">*</span></label>
             <Input 
               type="number" 
-              placeholder="Enter making charges" 
+              placeholder="Enter loss percentage (15-16% recommended)" 
               className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
               value={makingCut}
               onChange={(e) => setMakingCut(e.target.value)}
               required
             />
+            <p className="text-xs text-gray-500 mt-1">Typical market loss ranges from 15-16% of total value</p>
           </div>
         </div>
 
@@ -309,10 +310,11 @@ export default function GoldCalculator() {
 
                 {calculationResult.makingChargesDeduction > 0 && (
                   <div className="mt-2 pt-2 border-t border-gray-100">
-                    <p className="text-xs text-gray-500">Making Charges (Deducted by Halal Tajir)</p>
+                    <p className="text-xs text-gray-500">Total Loss Percentage</p>
                     <p className="text-sm font-semibold">
                       {calculationResult.makingChargesDeduction}% (Rs. {calculationResult.makingChargesAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })})
                     </p>
+                    <p className="text-xs text-gray-500 mt-1">Based on typical market loss rate</p>
                   </div>
                 )}
 
