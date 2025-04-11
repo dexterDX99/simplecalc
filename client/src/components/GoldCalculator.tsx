@@ -295,7 +295,7 @@ export default function GoldCalculator() {
                       <p className="text-xs text-gray-500">Total Net Profit/Loss</p>
                       <p className={`text-sm font-semibold ${(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Rs. {Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        {(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit)' : ' (Loss)'}
+                        {(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit' : ' (Loss'} - {((Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) / calculationResult.buyingPrice) * 100).toFixed(2)}%)
                       </p>
                     </div>
                     <div>
