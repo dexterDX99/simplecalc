@@ -98,6 +98,8 @@ export default function GoldCalculator() {
           </div>
         </div>
 
+        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Total Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
@@ -151,7 +153,7 @@ export default function GoldCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div>
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Tola)<span className="text-red-500 ml-1">*</span></label>
             <Input 
