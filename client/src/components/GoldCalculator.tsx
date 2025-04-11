@@ -315,6 +315,30 @@ export default function GoldCalculator() {
 
                 {/* Combined Analysis Summary */}
                 <div className="col-span-2 mt-4 pt-4 border-t border-gray-100">
+                  <div className="mb-4">
+                    <p className="text-xs font-medium text-gray-700 mb-2">Total Weight Analysis</p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-xs text-gray-500">Total Weight Loss</p>
+                        <p className="text-sm font-semibold text-amber-600">
+                          {(calculationResult.wastageFloat + (calculationResult.weightGramFloat * (24 - calculationResult.purityFloat) / 24)).toFixed(3)} grams
+                        </p>
+                        <p className="text-[10px] text-gray-500">
+                          Including purity reduction and wastage
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500">Remaining Pure 24K Weight</p>
+                        <p className="text-sm font-semibold text-emerald-600">
+                          {(calculationResult.weightGramFloat * (calculationResult.purityFloat / 24) - calculationResult.wastageFloat).toFixed(3)} grams
+                        </p>
+                        <p className="text-[10px] text-gray-500">
+                          After all deductions
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   <p className="text-xs font-medium text-gray-700 mb-2">Total Value Analysis</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
