@@ -114,6 +114,8 @@ export default function GoldCalculator() {
                   if (weightTola && newValue) {
                     const perTolaPrice = (parseFloat(newValue) / parseFloat(weightTola)).toFixed(2);
                     setBuyingPricePerTola(perTolaPrice);
+                  } else if (newValue && !weightTola) {
+                    setBuyingPricePerTola("");
                   }
                 }}
                 required
@@ -135,6 +137,8 @@ export default function GoldCalculator() {
                   if (weightTola && newValue) {
                     const totalPrice = (parseFloat(newValue) * parseFloat(weightTola)).toFixed(2);
                     setBuyingPrice(totalPrice);
+                  } else if (newValue && !weightTola) {
+                    setBuyingPrice("");
                   }
                 }}
                 required
