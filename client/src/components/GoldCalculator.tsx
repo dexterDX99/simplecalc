@@ -293,9 +293,9 @@ export default function GoldCalculator() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-gray-500">Total Net Profit/Loss</p>
-                      <p className={`text-sm font-semibold ${(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        Rs. {Math.abs(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        {(calculationResult.finalPrice - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit)' : ' (Loss)'}
+                      <p className={`text-sm font-semibold ${(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        Rs. {Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        {(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit)' : ' (Loss)'}
                       </p>
                     </div>
                     <div>
@@ -320,7 +320,7 @@ export default function GoldCalculator() {
                   <p className="text-xs text-gray-500">Final Price After Deductions</p>
                   <div className="flex flex-col gap-2">
                     <p className="text-lg font-semibold text-primary-600">
-                      Rs. {(calculationResult.totalGoldValue - calculationResult.makingChargesAmount).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      Rs. {((calculationResult.totalGoldValue - calculationResult.wastageValue) - calculationResult.makingChargesAmount).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </p>
                     <div>
                       <Button 
