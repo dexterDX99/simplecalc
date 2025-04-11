@@ -19,7 +19,7 @@ export default function GoldCalculator() {
   }, []);
   const [weightGram, setWeightGram] = useState<string>("");
   const [weightTola, setWeightTola] = useState<string>("");
-  const [purity, setPurity] = useState<string>("22");
+  const [purity, setPurity] = useState<string>("");
   const [wastage, setWastage] = useState<string>("");
   const [makingCut, setMakingCut] = useState<string>("");
   const [calculationResult, setCalculationResult] = useState<any>(null);
@@ -184,9 +184,9 @@ export default function GoldCalculator() {
 
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Purity<span className="text-red-500 ml-1">*</span></label>
-          <Select value={purity} onValueChange={setPurity}>
+          <Select value={purity} onValueChange={setPurity} required>
             <SelectTrigger className="w-full border border-green-100 focus:ring-green-200 transition-all rounded-md">
-              <SelectValue placeholder="Select purity" />
+              <SelectValue placeholder="Please select gold purity" />
             </SelectTrigger>
             <SelectContent className="bg-white border border-green-100 shadow-md rounded-md">
               <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="22">22K <span className="ml-2 text-amber-600 text-xs">(Standard)</span></SelectItem>
