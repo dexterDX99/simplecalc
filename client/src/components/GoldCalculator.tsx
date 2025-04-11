@@ -384,16 +384,22 @@ export default function GoldCalculator() {
                   <p className="text-xs font-medium text-gray-700 mb-2">Total Value Analysis</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs text-gray-500">Total Net Profit/Loss</p>
-                      <p className={`text-sm font-semibold ${(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        Rs. {Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        {(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit' : ' (Loss'} - {((Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) / calculationResult.buyingPrice) * 100).toFixed(2)}%)
+                      <p className="text-xs text-gray-500">Original Buying Price</p>
+                      <p className="text-sm font-semibold text-gray-700">
+                        Rs. {calculationResult.buyingPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Your Pure 24K Gold Value</p>
                       <p className="text-sm font-semibold text-primary-600">
                         Rs. {(calculationResult.totalGoldValue - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Total Net Profit/Loss</p>
+                      <p className={`text-sm font-semibold ${(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        Rs. {Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        {(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) >= 0 ? ' (Profit' : ' (Loss'} - {((Math.abs(calculationResult.totalGoldValue - calculationResult.buyingPrice - calculationResult.wastageValue) / calculationResult.buyingPrice) * 100).toFixed(2)}%)
                       </p>
                     </div>
                   </div>
