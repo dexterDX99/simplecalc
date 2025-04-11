@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export default function GoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>(localStorage.getItem('goldPrice24K') || "");
   const [buyingPrice, setBuyingPrice] = useState<string>("");
+  const [buyingPricePerTola, setBuyingPricePerTola] = useState<string>("");
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -97,18 +98,48 @@ export default function GoldCalculator() {
           </div>
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
-          <div className="relative mt-2">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
-            <Input 
-              type="number" 
-              placeholder="Enter your buying price" 
-              className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-              value={buyingPrice}
-              onChange={(e) => setBuyingPrice(e.target.value)}
-              required
-            />
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Total Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
+            <div className="relative mt-2">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
+              <Input 
+                type="number" 
+                placeholder="Enter total buying price" 
+                className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+                value={buyingPrice}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setBuyingPrice(newValue);
+                  if (weightTola && newValue) {
+                    const perTolaPrice = (parseFloat(newValue) / parseFloat(weightTola)).toFixed(2);
+                    setBuyingPricePerTola(perTolaPrice);
+                  }
+                }}
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Buying Price Per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
+            <div className="relative mt-2">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
+              <Input 
+                type="number" 
+                placeholder="Enter price per tola" 
+                className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
+                value={buyingPricePerTola}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setBuyingPricePerTola(newValue);
+                  if (weightTola && newValue) {
+                    const totalPrice = (parseFloat(newValue) * parseFloat(weightTola)).toFixed(2);
+                    setBuyingPrice(totalPrice);
+                  }
+                }}
+                required
+              />
+            </div>
           </div>
         </div>
 
