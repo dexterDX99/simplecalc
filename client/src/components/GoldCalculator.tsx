@@ -189,11 +189,11 @@ export default function GoldCalculator() {
               <SelectValue placeholder="Please select gold purity" />
             </SelectTrigger>
             <SelectContent className="bg-white border border-green-100 shadow-md rounded-md">
-              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="22">22K <span className="ml-2 text-amber-600 text-xs">(Standard)</span></SelectItem>
-              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="21">21K</SelectItem>
-              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="20">20K</SelectItem>
-              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="18">18K</SelectItem>
-              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="14">14K</SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="22">22K <span className="ml-2 text-amber-600 text-xs">(Purity: 91.67% gold)</span></SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="21">21K <span className="ml-2 text-amber-600 text-xs">(Purity: 87.5% gold)</span></SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="20">20K <span className="ml-2 text-amber-600 text-xs">(Purity: 83.33% gold)</span></SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="18">18K <span className="ml-2 text-amber-600 text-xs">(Purity: 75% gold)</span></SelectItem>
+              <SelectItem className="hover:bg-green-50 cursor-pointer transition-colors" value="14">14K <span className="ml-2 text-amber-600 text-xs">(Purity: 58.33% gold)</span></SelectItem>
             </SelectContent>
           </Select>
           <p className="text-xs text-gray-500 mt-1">Note: Jewelry cannot be made from pure 24K gold as it's too soft. Gold jewelry typically uses 22K or lower purity mixed with other metals for durability.</p>
