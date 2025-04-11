@@ -391,7 +391,7 @@ export default function GoldCalculator() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Your Total Gold Value</p>
+                      <p className="text-xs text-gray-500">Your Pure 24K Gold Value</p>
                       <p className="text-sm font-semibold text-primary-600">
                         Rs. {(calculationResult.totalGoldValue - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                       </p>
