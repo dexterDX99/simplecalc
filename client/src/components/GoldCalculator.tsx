@@ -325,7 +325,10 @@ export default function GoldCalculator() {
                           Rs. {(
                             ((calculationResult.pricePerTolaFloat * (calculationResult.weightGramFloat / 11.664)) * ((24 - calculationResult.purityFloat) / 24)) +
                             calculationResult.wastageValue
-                          ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          ).toLocaleString(undefined, { maximumFractionDigits: 2 })} ({(
+                            (((calculationResult.pricePerTolaFloat * (calculationResult.weightGramFloat / 11.664)) * ((24 - calculationResult.purityFloat) / 24)) +
+                            calculationResult.wastageValue) / (calculationResult.pricePerTolaFloat * (calculationResult.weightGramFloat / 11.664)) * 100
+                          ).toFixed(2)}%)
                         </p>
                       </div>
                     </div>
@@ -338,14 +341,14 @@ export default function GoldCalculator() {
                       <div>
                         <p className="text-xs text-gray-500">Market Value Savings</p>
                         <p className="text-sm font-semibold text-green-600">
-                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })} ({(Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice) / calculationResult.buyingPrice * 100).toFixed(2)}%)
                         </p>
                       </div>
 
                       <div>
                         <p className="text-xs text-gray-500">Net Profit</p>
                         <p className="text-sm font-semibold text-green-600">
-                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                          Rs. {Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice - calculationResult.wastageValue).toLocaleString(undefined, { maximumFractionDigits: 2 })} ({(Math.max(0, ((calculationResult.pricePerTolaFloat * calculationResult.purityFloat / 24) * (calculationResult.weightGramFloat / 11.664)) - calculationResult.buyingPrice - calculationResult.wastageValue) / calculationResult.buyingPrice * 100).toFixed(2)}%)
                         </p>
                       </div>
                     </div>
