@@ -263,7 +263,7 @@ export default function GoldCalculator() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Total Gold Weight</p>
+                  <p className="text-xs text-gray-500">Your Total Jewelry Weight</p>
                   <p className="text-sm font-semibold">
                     {calculationResult.weightGramFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })} grams ({(calculationResult.weightGramFloat / 11.664).toLocaleString(undefined, { maximumFractionDigits: 3 })} tola)
                   </p>
