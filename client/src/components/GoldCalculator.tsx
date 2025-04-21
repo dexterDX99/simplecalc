@@ -414,7 +414,8 @@ export default function GoldCalculator() {
                     <div>
                       <Button 
                         onClick={() => {
-                          window.location.href = `/calculator?tab=investment&amount=${calculationResult.finalPrice}`;
+                          const finalValue = (calculationResult.totalGoldValue - calculationResult.wastageValue) - calculationResult.makingChargesAmount;
+                          window.location.href = `/calculator?tab=investment&amount=${finalValue}`;
                         }}
                         size="sm"
                         className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all"
