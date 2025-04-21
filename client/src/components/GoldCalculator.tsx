@@ -92,7 +92,7 @@ export default function GoldCalculator() {
             <Input 
               type="number" 
               placeholder="Enter current gold price" 
-              className="pl-12 w-full border border-green-100 bg-gray-50 cursor-not-allowed font-semibold text-red-600"
+              className="pl-12 w-[300px] border border-green-100 font-semibold text-red-600"
               value={pricePerTola}
               disabled
               readOnly
