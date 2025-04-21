@@ -154,10 +154,22 @@ export default function GoldCalculator() {
               onChange={(e) => {
                 if (isWeightInGrams) {
                   setWeightGram(e.target.value);
-                  convertGramToTola(e.target.value);
+                  const newTolaWeight = (parseFloat(e.target.value) / 11.664).toFixed(3);
+                  setWeightTola(newTolaWeight);
+                  if (isPricePerTola && buyingPricePerTola) {
+                    setBuyingPrice((parseFloat(buyingPricePerTola) * parseFloat(newTolaWeight)).toFixed(2));
+                  } else if (!isPricePerTola && buyingPrice) {
+                    setBuyingPricePerTola((parseFloat(buyingPrice) / parseFloat(newTolaWeight)).toFixed(2));
+                  }
                 } else {
                   setWeightTola(e.target.value);
-                  convertTolaToGram(e.target.value);
+                  const newGramWeight = (parseFloat(e.target.value) * 11.664).toFixed(2);
+                  setWeightGram(newGramWeight);
+                  if (isPricePerTola && buyingPricePerTola) {
+                    setBuyingPrice((parseFloat(buyingPricePerTola) * parseFloat(e.target.value)).toFixed(2));
+                  } else if (!isPricePerTola && buyingPrice) {
+                    setBuyingPricePerTola((parseFloat(buyingPrice) / parseFloat(e.target.value)).toFixed(2));
+                  }
                 }
               }}
               required
