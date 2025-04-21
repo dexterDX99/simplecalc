@@ -98,21 +98,39 @@ export default function InvestmentPoolCard({
           </div>
         </div>
 
-        <div className="mt-3">
-          <div className="flex justify-between text-xs text-gray-500 mb-1">
-            <span>Investors: {pool.investors}</span>
-            <span>Remaining Slots: {pool.slots}</span>
+        <div className="mt-3 space-y-4">
+          {/* Section 1 Progress */}
+          <div>
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>Section 1 Investors: {pool.section1Investors}</span>
+              <span>Available Slots: {pool.section1Slots}/300</span>
+            </div>
+            <Progress value={(Number(pool.section1Total) / (Number(pool.target) / 2)) * 100} className="h-3 bg-emerald-100" />
+            <div className="flex justify-between mt-1">
+              <span className="text-xs font-medium">
+                Needed: <span className="text-red-600">Rs. {(Number(pool.target) / 2 - Number(pool.section1Total)).toLocaleString()}</span>
+              </span>
+              <span className="text-xs font-medium">
+                Target: Rs. {(Number(pool.target) / 2).toLocaleString()}
+              </span>
+            </div>
           </div>
 
-          <Progress value={fundingPercentage} className="h-3" />
-
-          <div className="flex justify-between mt-2">
-            <span className="text-xs font-medium">
-              Needed: <span className="text-red-600">Rs. {remainingAmount.toLocaleString()}</span>
-            </span>
-            <span className="text-xs font-medium">
-              Target: Rs. {Number(pool.target).toLocaleString()}
-            </span>
+          {/* Section 2 Progress */}
+          <div>
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>Section 2 Investors: {pool.section2Investors}</span>
+              <span>Available Slots: {pool.section2Slots}/300</span>
+            </div>
+            <Progress value={(Number(pool.section2Total) / (Number(pool.target) / 2)) * 100} className="h-3 bg-blue-100" />
+            <div className="flex justify-between mt-1">
+              <span className="text-xs font-medium">
+                Needed: <span className="text-red-600">Rs. {(Number(pool.target) / 2 - Number(pool.section2Total)).toLocaleString()}</span>
+              </span>
+              <span className="text-xs font-medium">
+                Target: Rs. {(Number(pool.target) / 2).toLocaleString()}
+              </span>
+            </div>
           </div>
 
           <div className="flex justify-between mt-3 items-center">
