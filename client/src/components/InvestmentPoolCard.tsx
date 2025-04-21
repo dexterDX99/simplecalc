@@ -47,15 +47,34 @@ export default function InvestmentPoolCard({
           <div className="flex items-start gap-2">
             <div>
               <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
-              <p className="text-xs text-gray-500">
-                {pool.startDate} - {pool.endDate} (6 months)
-              </p>
-              <p className="text-xs text-green-600 mt-1">
-                Target Production: {Math.floor((Number(pool.target) / 1500000) * 12500)} bulbs
-              </p>
-              <p className="text-xs text-blue-600">
-                Current Production: {Math.floor((Number(pool.total) / 1500000) * 12500)} bulbs
-              </p>
+              <div className="space-y-2 mt-1">
+                <div className="bg-emerald-50 p-2 rounded">
+                  <p className="text-xs font-medium text-emerald-800">Section 1</p>
+                  <p className="text-xs text-gray-500">
+                    {pool.section1StartDate} - {pool.section1EndDate}
+                  </p>
+                  <p className="text-xs text-green-600">
+                    Target Production: {Math.floor((Number(pool.target) / 2 / 1500000) * 12500)} bulbs
+                  </p>
+                  <p className="text-xs text-blue-600">
+                    Current Production: {Math.floor((Number(pool.section1Total) / 1500000) * 12500)} bulbs
+                  </p>
+                  <p className="text-xs text-amber-600">Available Slots: {pool.section1Slots}/300</p>
+                </div>
+                <div className="bg-blue-50 p-2 rounded">
+                  <p className="text-xs font-medium text-blue-800">Section 2</p>
+                  <p className="text-xs text-gray-500">
+                    {pool.section2StartDate} - {pool.section2EndDate}
+                  </p>
+                  <p className="text-xs text-green-600">
+                    Target Production: {Math.floor((Number(pool.target) / 2 / 1500000) * 12500)} bulbs
+                  </p>
+                  <p className="text-xs text-blue-600">
+                    Current Production: {Math.floor((Number(pool.section2Total) / 1500000) * 12500)} bulbs
+                  </p>
+                  <p className="text-xs text-amber-600">Available Slots: {pool.section2Slots}/300</p>
+                </div>
+              </div>
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
               </p>
