@@ -43,8 +43,8 @@ export default function GoldCalculator() {
   };
 
   const calculatePrice = () => {
-    if (!pricePerTola || (!weightGram && !weightTola) || !purity) {
-      console.log("Missing required fields:", { pricePerTola, weightGram, weightTola, purity });
+    if (!pricePerTola || (!weightGram && !weightTola) || !purity || !wastage || !buyingPrice || !buyingPricePerTola) {
+      console.log("Missing required fields:", { pricePerTola, weightGram, weightTola, purity, wastage, buyingPrice, buyingPricePerTola });
       return;
     }
 
@@ -218,7 +218,7 @@ export default function GoldCalculator() {
         <Button 
           onClick={calculatePrice} 
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-          disabled={!pricePerTola || (!weightGram && !weightTola) || !purity || !buyingPrice}
+          disabled={!pricePerTola || (!weightGram && !weightTola) || !purity || !wastage || !buyingPrice || !buyingPricePerTola}
         >
           Generate Estimate
         </Button>
