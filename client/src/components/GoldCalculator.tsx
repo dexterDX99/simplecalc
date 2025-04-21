@@ -159,7 +159,21 @@ export default function GoldCalculator() {
           
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">
-              {isPricePerTola ? "Your Buying Price Per Tola (Rs.)" : "Your Total Buying Price (Rs.)"}
+              {isPricePerTola ? (
+                <>
+                  Your Buying Price Per Tola (Rs.)
+                  {buyingPrice && weightTola && (
+                    <span className="ml-2 text-gray-500 text-xs">(Total: Rs. {buyingPrice})</span>
+                  )}
+                </>
+              ) : (
+                <>
+                  Your Total Buying Price (Rs.)
+                  {buyingPricePerTola && (
+                    <span className="ml-2 text-gray-500 text-xs">(Per Tola: Rs. {buyingPricePerTola})</span>
+                  )}
+                </>
+              )}
               <span className="text-red-500 ml-1">*</span>
             </label>
             <div className="relative mt-2">
