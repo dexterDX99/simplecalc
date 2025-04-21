@@ -130,43 +130,53 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
                   <p className="text-xs text-gray-500">Investment Amount</p>
-                  <p className="text-sm font-semibold">Rs. {Number(investmentAmount).toLocaleString()}</p>
+                  <p className="text-sm font-semibold">Rs. {Number(investmentAmount).toLocaleString()} ({Math.floor(Number(investmentAmount) / 5000)} slots)</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Investment Pool</p>
                   <p className="text-sm font-semibold">{selectedPool.name}</p>
                 </div>
                 <div>
+                  <p className="text-xs text-gray-500">Investment Duration</p>
+                  <p className="text-sm font-semibold">6 months</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Profit Sharing Ratio</p>
+                  <p className="text-sm font-semibold">
+                    Investors {INVESTOR_SHARE * 100}% - Manager {(1 - INVESTOR_SHARE) * 100}%
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Business Type</p>
+                  <p className="text-sm font-semibold">LED Bulb Manufacturing</p>
+                </div>
+                <div>
                   <p className="text-xs text-gray-500">Number of Bulbs (Your Share)</p>
-                  <p className="text-sm font-semibold">{profit.bulbsShare} bulbs</p>
+                  <p className="text-sm font-semibold">
+                    {Math.floor((Number(investmentAmount) / 1500000) * 12500)} bulbs
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Expected Profit Per Bulb</p>
-                  <p className="text-sm font-semibold">Rs. {profit.profitPerBulb}</p>
+                  <p className="text-sm font-semibold">Rs. 110</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Your Total Profit - 6 months (60% Share)</p>
+                  <p className="text-xs text-gray-500">Expected Total Profit (60%)</p>
                   <p className="text-sm font-semibold text-green-600">
-                    Rs. {profit.totalProfit.toLocaleString()}
+                    Rs. {Math.floor(Number(investmentAmount) * 0.6).toLocaleString()}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Monthly Profit</p>
+                  <p className="text-xs text-gray-500">Monthly Expected Profit</p>
                   <p className="text-sm font-semibold text-amber-600">
-                    Rs. {Math.floor(profit.totalProfit / 6).toLocaleString()}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Profit Sharing Split</p>
-                  <p className="text-sm font-semibold">
-                    Investor {INVESTOR_SHARE * 100}% | Manager {(1 - INVESTOR_SHARE) * 100}%
+                    Rs. {Math.floor((Number(investmentAmount) * 0.6) / 6).toLocaleString()}
                   </p>
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Payout After 6 Months (Capital + Profit)</p>
                   <div className="flex items-center gap-2">
                     <p className="text-base font-semibold text-primary-600">
-                      Rs. {profit.finalPayout.toLocaleString()}
+                      Rs. {(Number(investmentAmount) + Math.floor(Number(investmentAmount) * 0.6)).toLocaleString()}
                     </p>
 
                   </div>
