@@ -8,6 +8,7 @@ export default function GoldCalculator() {
   const [pricePerTola, setPricePerTola] = useState<string>(localStorage.getItem('goldPrice24K') || "");
   const [buyingPrice, setBuyingPrice] = useState<string>("");
   const [buyingPricePerTola, setBuyingPricePerTola] = useState<string>("");
+  const [isPricePerTola, setIsPricePerTola] = useState<boolean>(false);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -130,51 +131,66 @@ export default function GoldCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Total Buying Price (Rs.)<span className="text-red-500 ml-1">*</span></label>
-            <div className="relative mt-2">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
-              <Input 
-                type="number" 
-                placeholder="Enter total buying price" 
-                className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-                value={buyingPrice}
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setBuyingPrice(newValue);
-                  if (weightTola && newValue) {
-                    const perTolaPrice = (parseFloat(newValue) / parseFloat(weightTola)).toFixed(2);
-                    setBuyingPricePerTola(perTolaPrice);
-                  } else if (newValue && !weightTola && weightGram) {
-                    const tolaWeight = (parseFloat(weightGram) / 11.664).toFixed(3);
-                    const perTolaPrice = (parseFloat(newValue) / parseFloat(tolaWeight)).toFixed(2);
-                    setBuyingPricePerTola(perTolaPrice);
-                  }
-                }}
-                required
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="priceType"
+                value="total"
+                checked={!isPricePerTola}
+                onChange={() => setIsPricePerTola(false)}
+                className="mr-2"
               />
-            </div>
+              Total Price
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="priceType"
+                value="perTola"
+                checked={isPricePerTola}
+                onChange={() => setIsPricePerTola(true)}
+                className="mr-2"
+              />
+              Price Per Tola
+            </label>
           </div>
+          
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Your Buying Price Per Tola (Rs.)<span className="text-red-500 ml-1">*</span></label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">
+              {isPricePerTola ? "Your Buying Price Per Tola (Rs.)" : "Your Total Buying Price (Rs.)"}
+              <span className="text-red-500 ml-1">*</span>
+            </label>
             <div className="relative mt-2">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
               <Input 
                 type="number" 
-                placeholder="Enter price per tola" 
+                placeholder={isPricePerTola ? "Enter price per tola" : "Enter total buying price"}
                 className="pl-12 w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-                value={buyingPricePerTola}
+                value={isPricePerTola ? buyingPricePerTola : buyingPrice}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setBuyingPricePerTola(newValue);
-                  if (weightTola && newValue) {
-                    const totalPrice = (parseFloat(newValue) * parseFloat(weightTola)).toFixed(2);
-                    setBuyingPrice(totalPrice);
-                  } else if (newValue && !weightTola && weightGram) {
-                    const tolaWeight = (parseFloat(weightGram) / 11.664).toFixed(3);
-                    const totalPrice = (parseFloat(newValue) * parseFloat(tolaWeight)).toFixed(2);
-                    setBuyingPrice(totalPrice);
+                  if (isPricePerTola) {
+                    setBuyingPricePerTola(newValue);
+                    if (weightTola && newValue) {
+                      const totalPrice = (parseFloat(newValue) * parseFloat(weightTola)).toFixed(2);
+                      setBuyingPrice(totalPrice);
+                    } else if (newValue && !weightTola && weightGram) {
+                      const tolaWeight = (parseFloat(weightGram) / 11.664).toFixed(3);
+                      const totalPrice = (parseFloat(newValue) * parseFloat(tolaWeight)).toFixed(2);
+                      setBuyingPrice(totalPrice);
+                    }
+                  } else {
+                    setBuyingPrice(newValue);
+                    if (weightTola && newValue) {
+                      const perTolaPrice = (parseFloat(newValue) / parseFloat(weightTola)).toFixed(2);
+                      setBuyingPricePerTola(perTolaPrice);
+                    } else if (newValue && !weightTola && weightGram) {
+                      const tolaWeight = (parseFloat(weightGram) / 11.664).toFixed(3);
+                      const perTolaPrice = (parseFloat(newValue) / parseFloat(tolaWeight)).toFixed(2);
+                      setBuyingPricePerTola(perTolaPrice);
+                    }
                   }
                 }}
                 required
