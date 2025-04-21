@@ -47,34 +47,15 @@ export default function InvestmentPoolCard({
           <div className="flex items-start gap-2">
             <div>
               <h3 className="text-sm font-semibold text-gray-900">{pool.name} Pool</h3>
-              <div className="space-y-2 mt-1">
-                <div className="bg-emerald-50 p-2 rounded">
-                  <p className="text-xs font-medium text-emerald-800">Section 1</p>
-                  <p className="text-xs text-gray-500">
-                    {pool.section1StartDate} - {pool.section1EndDate}
-                  </p>
-                  <p className="text-xs text-green-600">
-                    Target Production: {Math.floor((Number(pool.target) / 2 / 1500000) * 12500)} bulbs
-                  </p>
-                  <p className="text-xs text-blue-600">
-                    Current Production: {Math.floor((Number(pool.section1Total) / 1500000) * 12500)} bulbs
-                  </p>
-                  <p className="text-xs text-amber-600">Available Slots: {pool.section1Slots}/300</p>
-                </div>
-                <div className="bg-blue-50 p-2 rounded">
-                  <p className="text-xs font-medium text-blue-800">Section 2</p>
-                  <p className="text-xs text-gray-500">
-                    {pool.section2StartDate} - {pool.section2EndDate}
-                  </p>
-                  <p className="text-xs text-green-600">
-                    Target Production: {Math.floor((Number(pool.target) / 2 / 1500000) * 12500)} bulbs
-                  </p>
-                  <p className="text-xs text-blue-600">
-                    Current Production: {Math.floor((Number(pool.section2Total) / 1500000) * 12500)} bulbs
-                  </p>
-                  <p className="text-xs text-amber-600">Available Slots: {pool.section2Slots}/300</p>
-                </div>
-              </div>
+              <p className="text-xs text-gray-500">
+                {pool.startDate} - {pool.endDate} (6 months)
+              </p>
+              <p className="text-xs text-green-600 mt-1">
+                Target Production: {Math.floor((Number(pool.target) / 1500000) * 12500)} bulbs
+              </p>
+              <p className="text-xs text-blue-600">
+                Current Production: {Math.floor((Number(pool.total) / 1500000) * 12500)} bulbs
+              </p>
               <p className="text-xs text-red-500 mt-1">
                 Last Date to Invest: {pool.closeDate}
               </p>
@@ -98,39 +79,21 @@ export default function InvestmentPoolCard({
           </div>
         </div>
 
-        <div className="mt-3 space-y-4">
-          {/* Section 1 Progress */}
-          <div>
-            <div className="flex justify-between text-xs text-gray-500 mb-1">
-              <span>Section 1 Investors: {pool.section1Investors}</span>
-              <span>Available Slots: {pool.section1Slots}/300</span>
-            </div>
-            <Progress value={(Number(pool.section1Total) / (Number(pool.target) / 2)) * 100} className="h-3 bg-emerald-100" />
-            <div className="flex justify-between mt-1">
-              <span className="text-xs font-medium">
-                Needed: <span className="text-red-600">Rs. {(Number(pool.target) / 2 - Number(pool.section1Total)).toLocaleString()}</span>
-              </span>
-              <span className="text-xs font-medium">
-                Target: Rs. {(Number(pool.target) / 2).toLocaleString()}
-              </span>
-            </div>
+        <div className="mt-3">
+          <div className="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Investors: {pool.investors}</span>
+            <span>Remaining Slots: {pool.slots}</span>
           </div>
 
-          {/* Section 2 Progress */}
-          <div>
-            <div className="flex justify-between text-xs text-gray-500 mb-1">
-              <span>Section 2 Investors: {pool.section2Investors}</span>
-              <span>Available Slots: {pool.section2Slots}/300</span>
-            </div>
-            <Progress value={(Number(pool.section2Total) / (Number(pool.target) / 2)) * 100} className="h-3 bg-blue-100" />
-            <div className="flex justify-between mt-1">
-              <span className="text-xs font-medium">
-                Needed: <span className="text-red-600">Rs. {(Number(pool.target) / 2 - Number(pool.section2Total)).toLocaleString()}</span>
-              </span>
-              <span className="text-xs font-medium">
-                Target: Rs. {(Number(pool.target) / 2).toLocaleString()}
-              </span>
-            </div>
+          <Progress value={fundingPercentage} className="h-3" />
+
+          <div className="flex justify-between mt-2">
+            <span className="text-xs font-medium">
+              Needed: <span className="text-red-600">Rs. {remainingAmount.toLocaleString()}</span>
+            </span>
+            <span className="text-xs font-medium">
+              Target: Rs. {Number(pool.target).toLocaleString()}
+            </span>
           </div>
 
           <div className="flex justify-between mt-3 items-center">
