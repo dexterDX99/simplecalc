@@ -64,14 +64,14 @@ export default function RawGoldCalculator() {
     <div className="mt-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-gray-700 mb-1 block">24K Gold Price per Tola (PKR)</label>
+          <label className="text-sm font-medium text-gray-700 mb-1 block">24K Gold Price per Tola (Rs.)</label>
           <div className="relative">
             <p className="text-xs text-gray-500 mt-1">
               Last updated: {new Date().toLocaleString()}
             </p>
           </div>
           <div className="relative mt-2">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">PKR</span>
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-600 font-medium">Rs.</span>
             <Input 
               type="number" 
               placeholder="Enter current gold price" 
@@ -136,7 +136,7 @@ export default function RawGoldCalculator() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div>
                   <p className="text-xs text-gray-500">Market Gold Price (24K)</p>
-                  <p className="text-sm font-semibold">PKR {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+                  <p className="text-sm font-semibold">Rs. {calculationResult.pricePerTolaFloat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Selected Gold Purity</p>
@@ -145,13 +145,13 @@ export default function RawGoldCalculator() {
                 <div>
                   <p className="text-xs text-gray-500">Gold Price Per Tola ({calculationResult.purityFloat}K)</p>
                   <p className="text-sm font-semibold">
-                    PKR {(calculationResult.pricePerTolaFloat * (calculationResult.purityFloat / 24)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {(calculationResult.pricePerTolaFloat * (calculationResult.purityFloat / 24)).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Gold Price Per Gram ({calculationResult.purityFloat}K)</p>
                   <p className="text-sm font-semibold">
-                    PKR {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    Rs. {calculationResult.pricePerGram.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div>
@@ -165,7 +165,7 @@ export default function RawGoldCalculator() {
                   <p className="text-xs text-gray-500">Total Raw Gold Value</p>
                   <div className="flex items-center gap-2">
                     <p className="text-base font-semibold text-primary-600">
-                      PKR {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                      Rs. {calculationResult.totalGoldValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                     </p>
                     <div>
                       <Button 

@@ -110,7 +110,7 @@ export default function GoldCalculator() {
                 value="tola"
                 checked={!isWeightInGrams}
                 onChange={() => setIsWeightInGrams(false)}
-                className="mr-2"
+                className="mr-2 text-emerald-600 focus:ring-emerald-600"
               />
               Weight in Tola
             </label>
@@ -121,7 +121,7 @@ export default function GoldCalculator() {
                 value="grams"
                 checked={isWeightInGrams}
                 onChange={() => setIsWeightInGrams(true)}
-                className="mr-2"
+                className="mr-2 text-emerald-600 focus:ring-emerald-600"
               />
               Weight in Grams
             </label>
