@@ -190,12 +190,14 @@ export default function InvestmentPoolCard({
                       Rs. {Math.floor(Number(investment) * 0.6 * 0.02).toLocaleString()}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Monthly Expected Profit (After Fee):</span>
-                    <span className="font-medium text-amber-600">
-                      Rs. {Math.floor((Number(investment) * 0.6 * 0.98) / 6).toLocaleString()}
-                    </span>
-                    <p className="text-[10px] text-gray-500 mt-0.5">
+                  <div className="space-y-1">
+                    <div className="flex justify-between">
+                      <span>Monthly Expected Profit (After Fee):</span>
+                      <span className="font-medium text-amber-600">
+                        Rs. {Math.floor((Number(investment) * 0.6 * 0.98) / 6).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-gray-500 text-center">
                       *Monthly profit shown for calculation only. Profit payout occurs after completion of 6-month term
                     </p>
                   </div>
