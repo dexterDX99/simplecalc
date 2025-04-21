@@ -195,6 +195,9 @@ export default function InvestmentPoolCard({
                     <span className="font-medium text-amber-600">
                       Rs. {Math.floor((Number(investment) * 0.6 * 0.98) / 6).toLocaleString()}
                     </span>
+                    <p className="text-[10px] text-gray-500 mt-0.5">
+                      *Monthly profit shown for calculation only. Profit payout occurs after completion of 6-month term
+                    </p>
                   </div>
                   <div className="flex justify-between">
                     <span>Total Payout (Capital + Profit after Fee):</span>

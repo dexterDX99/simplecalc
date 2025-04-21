@@ -177,6 +177,9 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                   <p className="text-sm font-semibold text-amber-600">
                     Rs. {Math.floor((Number(investmentAmount) * 0.6 * 0.98) / 6).toLocaleString()}
                   </p>
+                  <p className="text-[10px] text-gray-500 mt-0.5">
+                    *Monthly profit shown for calculation only. Profit payout occurs after completion of 6-month term
+                  </p>
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">
                   <p className="text-xs text-gray-500">Total Payout After 6 Months (Capital + Profit)</p>
