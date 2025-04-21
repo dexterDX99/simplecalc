@@ -167,9 +167,15 @@ export default function InvestmentCalculator() { // Cash Investment Calculator
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Monthly Expected Profit</p>
+                  <p className="text-xs text-gray-500">Management Fee (2% of Profit)</p>
+                  <p className="text-sm font-semibold text-red-600">
+                    Rs. {Math.floor(Number(investmentAmount) * 0.6 * 0.02).toLocaleString()}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Monthly Expected Profit (After Fee)</p>
                   <p className="text-sm font-semibold text-amber-600">
-                    Rs. {Math.floor((Number(investmentAmount) * 0.6) / 6).toLocaleString()}
+                    Rs. {Math.floor((Number(investmentAmount) * 0.6 * 0.98) / 6).toLocaleString()}
                   </p>
                 </div>
                 <div className="col-span-2 mt-2 pt-2 border-t border-gray-100">

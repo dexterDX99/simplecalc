@@ -185,9 +185,15 @@ export default function InvestmentPoolCard({
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Monthly Expected Profit:</span>
+                    <span>Management Fee (2% of Profit):</span>
+                    <span className="font-medium text-red-600">
+                      Rs. {Math.floor(Number(investment) * 0.6 * 0.02).toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Monthly Expected Profit (After Fee):</span>
                     <span className="font-medium text-amber-600">
-                      Rs. {Math.floor((Number(investment) * 0.6) / 6).toLocaleString()}
+                      Rs. {Math.floor((Number(investment) * 0.6 * 0.98) / 6).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
