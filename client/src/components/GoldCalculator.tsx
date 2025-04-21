@@ -9,6 +9,7 @@ export default function GoldCalculator() {
   const [buyingPrice, setBuyingPrice] = useState<string>("");
   const [buyingPricePerTola, setBuyingPricePerTola] = useState<string>("");
   const [isPricePerTola, setIsPricePerTola] = useState<boolean>(false);
+  const [isWeightInGrams, setIsWeightInGrams] = useState<boolean>(false);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -100,31 +101,64 @@ export default function GoldCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Tola)<span className="text-red-500 ml-1">*</span></label>
-            <Input 
-              type="number" 
-              placeholder="Enter tola weight" 
-              className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-              value={weightTola}
-              onChange={(e) => {
-                setWeightTola(e.target.value);
-                convertTolaToGram(e.target.value);
-              }}
-              required
-            />
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="weightType"
+                value="tola"
+                checked={!isWeightInGrams}
+                onChange={() => setIsWeightInGrams(false)}
+                className="mr-2"
+              />
+              Weight in Tola
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="weightType"
+                value="grams"
+                checked={isWeightInGrams}
+                onChange={() => setIsWeightInGrams(true)}
+                className="mr-2"
+              />
+              Weight in Grams
+            </label>
           </div>
+          
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">Gold Weight (Grams)<span className="text-red-500 ml-1">*</span></label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block flex items-center">
+              {isWeightInGrams ? (
+                <>
+                  Gold Weight (Grams)
+                  {weightGram && (
+                    <span className="ml-2 text-gray-500 text-xs">(In Tola: {weightTola})</span>
+                  )}
+                </>
+              ) : (
+                <>
+                  Gold Weight (Tola)
+                  {weightTola && (
+                    <span className="ml-2 text-gray-500 text-xs">(In Grams: {weightGram})</span>
+                  )}
+                </>
+              )}
+              <span className="text-red-500 ml-1">*</span>
+            </label>
             <Input 
               type="number" 
-              placeholder="Enter gram weight" 
+              placeholder={isWeightInGrams ? "Enter weight in grams" : "Enter weight in tola"}
               className="w-full border border-green-100 focus:border-green-200 focus:ring-green-200 rounded-md transition-all"
-              value={weightGram}
+              value={isWeightInGrams ? weightGram : weightTola}
               onChange={(e) => {
-                setWeightGram(e.target.value);
-                convertGramToTola(e.target.value);
+                if (isWeightInGrams) {
+                  setWeightGram(e.target.value);
+                  convertGramToTola(e.target.value);
+                } else {
+                  setWeightTola(e.target.value);
+                  convertTolaToGram(e.target.value);
+                }
               }}
               required
             />
