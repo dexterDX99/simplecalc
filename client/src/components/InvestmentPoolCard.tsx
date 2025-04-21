@@ -179,21 +179,21 @@ export default function InvestmentPoolCard({
                     <span className="font-medium">Rs. 110</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Expected Total Profit:</span>
+                    <span>Expected Total Profit (60%):</span>
                     <span className="font-medium text-green-600">
-                      Rs. {Math.floor((Number(investment) / 1500000) * 825000).toLocaleString()}
+                      Rs. {Math.floor(Number(investment) * 0.6).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Monthly Expected Profit:</span>
                     <span className="font-medium text-amber-600">
-                      Rs. {Math.floor((Number(investment) / 1500000) * 825000 / 6).toLocaleString()}
+                      Rs. {Math.floor((Number(investment) * 0.6) / 6).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Total Payout (Capital + Profit):</span>
                     <span className="font-medium text-primary-600">
-                      Rs. {(Number(investment) + Math.floor((Number(investment) / 1500000) * 825000)).toLocaleString()}
+                      Rs. {(Number(investment) + Math.floor(Number(investment) * 0.6)).toLocaleString()}
                     </span>
                   </div>
                 </div>
